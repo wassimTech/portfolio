@@ -5,10 +5,10 @@ Implement the continuous deployment workflow to Cloudflare Pages that automatica
 
 **Blocked by:** 02: GitHub Actions Parallel CI Workflow Architecture
 
-**Status:** ready-for-agent
+**Status:** completed
 
-- [ ] Create `.github/workflows/deploy.yml` (or integrated `deploy` job in pipeline) dependent on CI jobs (`needs: [code-quality, test-suite, build]`).
-- [ ] Configure deployment triggers for PR preview deployments vs `main` production deployments.
-- [ ] Implement Cloudflare Wrangler / Pages deployment action using `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
-- [ ] Pass environment variables (`GEMINI_API_KEY`) safely into the deployment build step.
-- [ ] Ensure deployment output exports deployment status and preview URL for downstream consumption.
+- [x] Create `.github/workflows/deploy.yml` (or integrated `deploy` job in pipeline) dependent on CI jobs (`needs: [code-quality, test-suite, build]`).
+- [x] Configure deployment triggers for PR preview deployments vs `main` production deployments.
+- [x] Implement Cloudflare Wrangler / Pages deployment action using `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+- [x] Pass environment variables (`GEMINI_API_KEY`) safely into the deployment build step.
+- [x] Ensure deployment output exports deployment status and preview URL for downstream consumption.

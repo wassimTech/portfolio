@@ -1,0 +1,115 @@
+name: CD - Cloudflare Pages Deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target deployment environment"
+        required: true
+        default: "preview"
+        type: choice
+        options:
+          - preview
+          - production
+
+concurrency:
+  group: deploy-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+jobs:
+  validate:
+    name: Pre-Deployment Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate code quality, types, and tests
+        run: |
+          npm run format:check
+          npm run lint
+          npm run typecheck
+          npm run test:coverage
+
+  deploy:
+    name: Deploy to Cloudflare Pages
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      deployment-url: ${{ steps.cloudflare_deploy.outputs.url || steps.cloudflare_deploy.outputs.deployment-url }}
+      environment: ${{ (github.ref == 'refs/heads/main' || github.event.inputs.environment == 'production') && 'production' || 'preview' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Restore Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js application
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          NODE_ENV: production
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Determine Cloudflare Pages Branch
+        id: branch_info
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ] || [ "${{ github.event.inputs.environment }}" = "production" ]; then
+            echo "branch=main" >> $GITHUB_OUTPUT
+            echo "is_production=true" >> $GITHUB_OUTPUT
+          else
+            BRANCH_NAME="${{ github.head_ref || github.ref_name }}"
+            # Sanitize branch name for Cloudflare Pages
+            CLEAN_BRANCH=$(echo "$BRANCH_NAME" | tr '/' '-' | tr '_' '-' | tr -cd '[:alnum:]-')
+            echo "branch=${CLEAN_BRANCH}" >> $GITHUB_OUTPUT
+            echo "is_production=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy to Cloudflare Pages
+        id: cloudflare_deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy .next --project-name=wassim-ahmed-portfolio --branch=${{ steps.branch_info.outputs.branch }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
