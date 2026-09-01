@@ -1,13 +1,12 @@
 import { describe, it, expect } from "vitest";
-import { NextRequest } from "next/server";
-import { GET } from "@/app/api/download/route";
+import { onRequestGet } from "../functions/api/download";
 
-describe("GET /api/download", () => {
+describe("GET /api/download (Cloudflare Pages Function)", () => {
   it("redirects to French CV for ?file=cv-fr", async () => {
-    const req = new NextRequest(
-      "http://localhost:3000/api/download?file=cv-fr"
+    const request = new Request(
+      "https://wassim-ahmed-portfolio.pages.dev/api/download?file=cv-fr"
     );
-    const response = await GET(req);
+    const response = await onRequestGet({ request });
 
     expect(response.status).toBe(307);
     const location = response.headers.get("location");
@@ -15,10 +14,10 @@ describe("GET /api/download", () => {
   });
 
   it("redirects to English CV for ?file=cv-en", async () => {
-    const req = new NextRequest(
-      "http://localhost:3000/api/download?file=cv-en"
+    const request = new Request(
+      "https://wassim-ahmed-portfolio.pages.dev/api/download?file=cv-en"
     );
-    const response = await GET(req);
+    const response = await onRequestGet({ request });
 
     expect(response.status).toBe(307);
     const location = response.headers.get("location");
@@ -26,10 +25,10 @@ describe("GET /api/download", () => {
   });
 
   it("redirects to Markdown CV for ?file=cv-md", async () => {
-    const req = new NextRequest(
-      "http://localhost:3000/api/download?file=cv-md"
+    const request = new Request(
+      "https://wassim-ahmed-portfolio.pages.dev/api/download?file=cv-md"
     );
-    const response = await GET(req);
+    const response = await onRequestGet({ request });
 
     expect(response.status).toBe(307);
     const location = response.headers.get("location");
@@ -37,8 +36,10 @@ describe("GET /api/download", () => {
   });
 
   it("defaults to French CV when no file param is provided", async () => {
-    const req = new NextRequest("http://localhost:3000/api/download");
-    const response = await GET(req);
+    const request = new Request(
+      "https://wassim-ahmed-portfolio.pages.dev/api/download"
+    );
+    const response = await onRequestGet({ request });
 
     expect(response.status).toBe(307);
     const location = response.headers.get("location");
@@ -46,10 +47,10 @@ describe("GET /api/download", () => {
   });
 
   it("defaults to French CV for unknown file key", async () => {
-    const req = new NextRequest(
-      "http://localhost:3000/api/download?file=unknown-key"
+    const request = new Request(
+      "https://wassim-ahmed-portfolio.pages.dev/api/download?file=unknown-key"
     );
-    const response = await GET(req);
+    const response = await onRequestGet({ request });
 
     expect(response.status).toBe(307);
     const location = response.headers.get("location");

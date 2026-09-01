@@ -1,25 +1,30 @@
-import { NextRequest, NextResponse } from "next/server";
-import { generateLocalChatResponse } from "@/lib/chat-engine";
-import { Locale } from "@/types/cv";
+import { generateLocalChatResponse } from "../../lib/chat-engine";
+import type { Locale } from "../../types/cv";
 
-export const runtime = "edge";
+interface Env {
+  GEMINI_API_KEY?: string;
+}
 
-export async function POST(req: NextRequest) {
+export async function onRequestPost(context: {
+  request: Request;
+  env: Env;
+}): Promise<Response> {
   try {
-    const body = await req.json();
+    const body = (await context.request.json()) as {
+      message?: string;
+      locale?: string;
+    };
     const { message, locale = "fr" } = body;
 
     if (!message || typeof message !== "string" || message.trim() === "") {
-      return NextResponse.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
+      return new Response(JSON.stringify({ error: "Message is required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
     const safeLocale: Locale = locale === "en" ? "en" : "fr";
-
-    // Check if external LLM API key (e.g., GEMINI_API_KEY) is available
-    const rawApiKey = process.env.GEMINI_API_KEY;
+    const rawApiKey = context.env?.GEMINI_API_KEY;
     const geminiApiKey = rawApiKey?.replace(/^["']|["']$/g, "").trim();
 
     if (geminiApiKey) {
@@ -36,8 +41,7 @@ Answer user questions accurately, engagingly, and professionally based on his ve
 - Email: wassim.ahmed.tech@gmail.com, Phone: +216 23 579 414, Sfax Tunisia.
 Respond in ${langName} with clean markdown formatting.`;
 
-        // Fast, high-throughput models
-        const modelsToTry = ["gemini-3.5-flash-lite", "gemini-3.5-flash"];
+        const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash"];
 
         for (const model of modelsToTry) {
           try {
@@ -66,15 +70,27 @@ Respond in ${langName} with clean markdown formatting.`;
             );
 
             if (geminiRes.ok) {
-              const geminiData = await geminiRes.json();
+              const geminiData = (await geminiRes.json()) as {
+                candidates?: Array<{
+                  content?: {
+                    parts?: Array<{ text?: string }>;
+                  };
+                }>;
+              };
               const replyText =
                 geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
               if (replyText) {
                 const fallback = generateLocalChatResponse(message, safeLocale);
-                return NextResponse.json({
-                  response: replyText.trim(),
-                  suggestions: fallback.suggestions,
-                });
+                return new Response(
+                  JSON.stringify({
+                    response: replyText.trim(),
+                    suggestions: fallback.suggestions,
+                  }),
+                  {
+                    status: 200,
+                    headers: { "Content-Type": "application/json" },
+                  }
+                );
               }
             }
           } catch (modelErr) {
@@ -89,14 +105,21 @@ Respond in ${langName} with clean markdown formatting.`;
       }
     }
 
-    // Fallback to local intelligent CV knowledge engine
     const result = generateLocalChatResponse(message, safeLocale);
-    return NextResponse.json(result);
+    return new Response(JSON.stringify(result), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Chat API error:", error);
-    return NextResponse.json(
-      { error: "Internal server error processing chat request" },
-      { status: 500 }
+    return new Response(
+      JSON.stringify({
+        error: "Internal server error processing chat request",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }
