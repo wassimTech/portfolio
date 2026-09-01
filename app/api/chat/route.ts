@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { generateLocalChatResponse } from "@/lib/chat-engine";
 import { Locale } from "@/types/cv";
 
+export const runtime = "edge";
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();

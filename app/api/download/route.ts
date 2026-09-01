@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+
+export const runtime = "edge";
 
 const fileMap: Record<
   string,
@@ -60,24 +60,9 @@ export async function GET(req: NextRequest) {
 
     const target = fileMap[fileKey] || fileMap["cv-fr"];
 
-    const filePath = path.join(process.cwd(), "public", target.filename);
-    if (!fs.existsSync(filePath)) {
-      return new NextResponse("File not found on server", { status: 404 });
-    }
-
-    const fileBuffer = fs.readFileSync(filePath);
-
-    return new NextResponse(new Uint8Array(fileBuffer), {
-      status: 200,
-      headers: {
-        "Content-Type": target.contentType,
-        "Content-Disposition": `attachment; filename="${target.downloadName}"`,
-        "Content-Length": fileBuffer.byteLength.toString(),
-        "Cache-Control": "no-cache, no-store, must-revalidate",
-        Pragma: "no-cache",
-        Expires: "0",
-      },
-    });
+    // Edge-compatible redirect to the static asset in public/
+    const staticUrl = new URL(`/${target.filename}`, req.url);
+    return NextResponse.redirect(staticUrl, 307);
   } catch (error) {
     console.error("Download route error:", error);
     return new NextResponse("Error downloading file", { status: 500 });
