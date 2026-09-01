@@ -1,0 +1,80 @@
+{
+  "nav": {
+    "about": "نبذة عني",
+    "projects": "المشاريع",
+    "experience": "الخبرة المهنية",
+    "skills": "المهارات",
+    "contact": "تواصل معي",
+    "downloadCv": "تحميل السيرة الذاتية"
+  },
+  "hero": {
+    "badge": "متاح لفرص ومشاريع جديدة",
+    "greeting": "مرحباً، أنا",
+    "punchlineMain": "أصمم وأطور أنظمة",
+    "punchlineHighlight": "تترك أثراً استثنائياً.",
+    "role": "مطور فول ستاك",
+    "subtitle": "تصميم وتطوير تطبيقات ويب حديثة، تطبيقات جوال React Native، وحلول سحابية عالية الأداء عبر Cloudflare.",
+    "viewProjects": "استعراض المشاريع",
+    "contactMe": "تواصل معي",
+    "experienceYears": "5+ سنوات خبرة",
+    "projectsDelivered": "6+ مشاريع رئيسية",
+    "techQuality": "100% كود حديث ومتقن",
+    "cloudPlatform": "كلاود فلير و APIs"
+  },
+  "sections": {
+    "projectsTitle": "المشاريع المنجزة",
+    "projectsSubtitle": "مجموعة مختارة من تطبيقات الويب المتكاملة، وبنيات كلاود فلير الحديثة، وتطبيقات الجوال.",
+    "allProjects": "الكل",
+    "fullstackProjects": "تطبيقات الويب",
+    "mobileProjects": "تطبيقات الجوال",
+    "frontendProjects": "واجهات المستخدم",
+    "experienceTitle": "الخبرة والمسار المهني",
+    "experienceSubtitle": "مسيرتي المهنية كمطور، قائد فريق، ومدرّب في مجال التكنولوجيا.",
+    "skillsTitle": "مصفوفة المهارات التقنية",
+    "skillsSubtitle": "التقنيات والأدوات التي أتقنها عبر مشاريعي المختلفة.",
+    "contactTitle": "تواصل معي",
+    "contactSubtitle": "لنناقش مشاريعك، وبنية الويب والسحابة، وفرص التعاون والشراكة.",
+    "viewOnGithub": "الرمز المصدري",
+    "liveDemo": "معاينة مباشرة",
+    "viewProjectDetails": "التفاصيل والإنجازات",
+    "closeModal": "إغلاق",
+    "projectOverview": "نظرة عامة على المشروع",
+    "keyTasks": "أبرز الإنجازات والمهام:",
+    "keyAccomplishments": "أبرز الإنجازات والمسؤوليات:",
+    "roleLabel": "الدور والمسؤولية:",
+    "periodLabel": "الفترة:",
+    "teamLabel": "الفريق:",
+    "techStack": "التقنيات المستعملة:"
+  },
+
+  "skills": {
+    "searchPlaceholder": "البحث في المهارات (مثال: Next.js, Cloudflare, NestJS)...",
+    "allCategories": "الكل",
+    "experience": "الخبرة"
+  },
+  "chatbot": {
+    "open": "اسأل المساعد الذكي",
+    "title": "مساعد السيرة الذاتية الذكي",
+    "subtitle": "إجابات فورية حول مسار Wassim وماريعه",
+    "placeholder": "اطرح سؤالك هنا...",
+    "send": "إرسال",
+    "clear": "مسح المحادثة",
+    "close": "إغلاق",
+    "welcome": "مرحباً! أنا المساعد الذكي الخاص بـ Wassim AHMED. كيف يمكنني مساعدتك في استكشاف خبراته وماريعه؟",
+    "error": "عذراً، حدث خطأ أثناء معالجة طلبك.",
+    "suggestionsTitle": "أسئلة مقترحة:"
+  },
+  "contact": {
+    "emailLabel": "البريد الإلكتروني",
+    "phoneLabel": "الهاتف",
+    "locationLabel": "الموقع",
+    "copyEmail": "نسخ البريد",
+    "emailCopied": "تم نسخ البريد الإلكتروني!",
+    "copyPhone": "نسخ رقم الهاتف",
+    "phoneCopied": "تم نسخ رقم الهاتف!"
+  },
+  "footer": {
+    "rights": "جميع الحقوق محفوظة.",
+    "builtWith": "تم التطوير باستخدام Next.js و Tailwind CSS و Cloudflare Pages"
+  }
+}

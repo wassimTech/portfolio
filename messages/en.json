@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "skills": "Skills",
+    "contact": "Contact",
+    "downloadCv": "Download CV",
+    "askAi": "AI Assistant"
+  },
+  "hero": {
+    "badge": "Available for new opportunities",
+    "greeting": "Hi, I am",
+    "punchlineMain": "I build systems",
+    "punchlineHighlight": "people remember.",
+    "role": "Full Stack Developer",
+    "subtitle": "Architecting modern web platforms, high-performance React Native mobile apps, and scalable Cloudflare edge solutions.",
+    "viewProjects": "Explore Projects",
+    "contactMe": "Contact Me",
+    "askAi": "Ask AI Assistant",
+    "experienceYears": "5+ Years Experience",
+    "projectsDelivered": "6+ Key Projects",
+    "techQuality": "100% Modern Code",
+    "cloudPlatform": "Cloudflare & APIs"
+  },
+  "sections": {
+    "projectsTitle": "Featured Projects",
+    "projectsSubtitle": "A curated selection of modern web platforms, serverless Cloudflare architectures, and mobile applications.",
+    "allProjects": "All",
+    "fullstackProjects": "Fullstack Web",
+    "mobileProjects": "Mobile Apps",
+    "frontendProjects": "Frontend",
+    "experienceTitle": "Career & Experience",
+    "experienceSubtitle": "My professional journey as a developer, engineering team leader, and instructor.",
+    "skillsTitle": "Skills Matrix",
+    "skillsSubtitle": "Technologies, frameworks, and cloud tools mastered across engineering projects with official SVG logos.",
+    "contactTitle": "Get In Touch",
+    "contactSubtitle": "Let's discuss your projects, web & cloud architecture, or collaboration opportunities.",
+    "viewOnGithub": "Source Code",
+    "liveDemo": "Live Demo",
+    "viewProjectDetails": "Details & Accomplishments",
+    "closeModal": "Close",
+    "projectOverview": "Project Overview",
+    "keyTasks": "Key Accomplishments:",
+    "keyAccomplishments": "Key Accomplishments & Responsibilities:",
+    "roleLabel": "Role & Responsibility:",
+    "periodLabel": "Period:",
+    "teamLabel": "Team:",
+    "techStack": "Technologies Used:"
+  },
+
+  "skills": {
+    "searchPlaceholder": "Filter skill (e.g. Next.js, Cloudflare, NestJS)...",
+    "allCategories": "All",
+    "experience": "Experience"
+  },
+  "chatbot": {
+    "open": "Ask AI Assistant",
+    "title": "AI Resume Assistant",
+    "subtitle": "Ask anything about Wassim AHMED's profile & projects",
+    "welcome": "Hello! I am Wassim AHMED's AI Resume Assistant. Ask me anything about his projects (AI Workflow, URJOB, ZorLife, Bloom), Cloudflare & Next.js stack, or leadership background!",
+    "placeholder": "e.g. What are his skills in Cloudflare and Next.js?",
+    "send": "Send",
+    "close": "Close assistant",
+    "suggestionsTitle": "Quick suggestions:",
+    "thinking": "AI is analyzing resume data...",
+    "error": "Sorry, an error occurred. Please try again.",
+    "badge": "Online",
+    "clear": "Clear",
+    "heroCta": "Ask AI about my profile"
+  },
+  "downloads": {
+    "title": "Download Full Resume & CV (Wassim AHMED)",
+    "subtitle": "Official formats available: English Resume PDF, French CV PDF & Technical Markdown",
+    "frenchPdf": "French CV (PDF)",
+    "englishPdf": "English Resume (PDF)",
+    "viewOnline": "View in Browser",
+    "markdown": "Markdown Format (.md)"
+  },
+  "contact": {
+    "emailLabel": "Work Email",
+    "phoneLabel": "Phone Number",
+    "locationLabel": "Location",
+    "copyEmail": "Copy Email",
+    "emailCopied": "Email copied to clipboard!",
+    "copyPhone": "Copy Phone",
+    "phoneCopied": "Phone number copied!"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js, Tailwind CSS & Cloudflare Pages"
+  }
+}

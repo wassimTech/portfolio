@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "about": "À propos",
+    "projects": "Projets",
+    "experience": "Parcours",
+    "skills": "Compétences",
+    "contact": "Contact",
+    "downloadCv": "Télécharger CV",
+    "askAi": "Assistant IA"
+  },
+  "hero": {
+    "badge": "Disponible pour de nouvelles opportunités",
+    "greeting": "Bonjour, je suis",
+    "punchlineMain": "Je conçois des applications",
+    "punchlineHighlight": "qui marquent les esprits.",
+    "role": "Développeur Full Stack",
+    "subtitle": "Conception et développement d'architectures web modernes, d'applications mobiles React Native et de services Cloudflare haute performance.",
+    "viewProjects": "Explorer les projets",
+    "contactMe": "Me contacter",
+    "askAi": "Interroger l'IA",
+    "experienceYears": "5+ Ans d'Expérience",
+    "projectsDelivered": "6+ Projets Majeurs",
+    "techQuality": "100% Code Moderne",
+    "cloudPlatform": "Cloudflare & APIs"
+  },
+  "sections": {
+    "projectsTitle": "Projets Réalisés",
+    "projectsSubtitle": "Une sélection d'applications web modernes, architectures Cloudflare serverless et applications mobiles.",
+    "allProjects": "Tous",
+    "fullstackProjects": "Fullstack Web",
+    "mobileProjects": "Applications Mobiles",
+    "frontendProjects": "Frontend",
+    "experienceTitle": "Parcours & Expériences",
+    "experienceSubtitle": "Mon cheminement professionnel en tant que développeur, chef d'équipe et instructeur.",
+    "skillsTitle": "Matrice de Compétences",
+    "skillsSubtitle": "Technologies et outils maîtrisés au fil de mes projets avec logos officiels.",
+    "contactTitle": "Prenons Contact",
+    "contactSubtitle": "Discutons de vos projets, d'architecture web & Cloud, ou d'opportunités de collaboration.",
+    "viewOnGithub": "Code Source",
+    "liveDemo": "Démo En Ligne",
+    "viewProjectDetails": "Détails & Réalisations",
+    "closeModal": "Fermer",
+    "projectOverview": "Aperçu du Projet",
+    "keyTasks": "Réalisations clés :",
+    "keyAccomplishments": "Réalisations clés & Responsabilités :",
+    "roleLabel": "Rôle & Responsabilité :",
+    "periodLabel": "Période :",
+    "teamLabel": "Équipe :",
+    "techStack": "Technologies utilisées :"
+  },
+
+  "skills": {
+    "searchPlaceholder": "Filtrer une compétence (ex: Next.js, Cloudflare, NestJS)...",
+    "allCategories": "Toutes",
+    "experience": "Expérience"
+  },
+  "chatbot": {
+    "open": "Poser une question à l'IA",
+    "title": "Assistant CV IA",
+    "subtitle": "Posez vos questions sur le parcours de Wassim AHMED",
+    "welcome": "Bonjour ! Je suis l'assistant IA dédié au CV de Wassim AHMED. Posez-moi n'importe quelle question sur ses projets (Workflow IA, URJOB, ZorLife, Bloom), ses compétences Cloudflare/Next.js ou son expérience de Team Leader !",
+    "placeholder": "Ex: Quelles sont ses compétences en Cloudflare et Next.js ?",
+    "send": "Envoyer",
+    "close": "Fermer l'assistant",
+    "suggestionsTitle": "Suggestions rapides :",
+    "thinking": "L'assistant analyse le CV...",
+    "error": "Désolé, une erreur est survenue. Veuillez réessayer.",
+    "badge": "En ligne",
+    "clear": "Effacer",
+    "heroCta": "Poser une question à l'IA sur mon profil"
+  },
+  "downloads": {
+    "title": "Télécharger le CV Complet (Wassim AHMED)",
+    "subtitle": "Formats officiels disponibles : PDF en français, Resume en anglais & Markdown technique",
+    "frenchPdf": "CV Français (PDF)",
+    "englishPdf": "Resume Anglais (PDF)",
+    "viewOnline": "Visualiser dans le navigateur",
+    "markdown": "Format Markdown (.md)"
+  },
+
+  "contact": {
+    "emailLabel": "Email professionnel",
+    "phoneLabel": "Téléphone",
+    "locationLabel": "Localisation",
+    "copyEmail": "Copier l'email",
+    "emailCopied": "Email copié dans le presse-papier !",
+    "copyPhone": "Copier le téléphone",
+    "phoneCopied": "Numéro copié !"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "builtWith": "Conçu avec Next.js, Tailwind CSS & Cloudflare Pages"
+  }
+}
