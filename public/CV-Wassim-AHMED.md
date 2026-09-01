@@ -2,7 +2,7 @@
 
 ## **Wassim AHMED**
 
-tél: +216 23 579 414 email: wassim.ahmed.tech@gmail.com - - - linkedin: https://www.linkedin.com/in/ <u>wassim ahmed /</u> Adresse: Agareb Sfax Tunisie
+tél: +216 23 579 414 email: wassim.ahmed.tech@gmail.com - - - linkedin: https://www.linkedin.com/in/-wassim-ahmed-/ - - - github: https://github.com/wassimTech Adresse: Agareb Sfax Tunisie
 
 ### **EXPÉRIENCE PROFESSIONNELLE**
 

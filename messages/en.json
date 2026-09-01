@@ -4,6 +4,7 @@
     "projects": "Projects",
     "experience": "Experience",
     "skills": "Skills",
+    "assistant": "AI Assistant",
     "contact": "Contact",
     "downloadCv": "Download CV",
     "askAi": "AI Assistant"
@@ -34,6 +35,8 @@
     "experienceSubtitle": "My professional journey as a developer, engineering team leader, and instructor.",
     "skillsTitle": "Skills Matrix",
     "skillsSubtitle": "Technologies, frameworks, and cloud tools mastered across engineering projects with official SVG logos.",
+    "assistantTitle": "Interactive AI Assistant",
+    "assistantSubtitle": "Ask the AI assistant about my skills, project achievements, and Cloudflare / Next.js engineering experience.",
     "contactTitle": "Get In Touch",
     "contactSubtitle": "Let's discuss your projects, web & cloud architecture, or collaboration opportunities.",
     "viewOnGithub": "Source Code",

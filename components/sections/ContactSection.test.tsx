@@ -5,7 +5,7 @@ import { personalInfo } from "@/data/cv";
 import { ContactSection } from "./ContactSection";
 
 describe("ContactSection", () => {
-  it("renders contact section with email, phone, and social links", () => {
+  it("renders contact section with email, phone, location, and social links", () => {
     render(<ContactSection />);
 
     expect(screen.getByRole("heading", { level: 2 })).toBeInTheDocument();

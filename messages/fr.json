@@ -4,6 +4,7 @@
     "projects": "Projets",
     "experience": "Parcours",
     "skills": "Compétences",
+    "assistant": "Assistant IA",
     "contact": "Contact",
     "downloadCv": "Télécharger CV",
     "askAi": "Assistant IA"
@@ -34,6 +35,8 @@
     "experienceSubtitle": "Mon cheminement professionnel en tant que développeur, chef d'équipe et instructeur.",
     "skillsTitle": "Matrice de Compétences",
     "skillsSubtitle": "Technologies et outils maîtrisés au fil de mes projets avec logos officiels.",
+    "assistantTitle": "Assistant Virtuel IA",
+    "assistantSubtitle": "Interrogez l'intelligence artificielle sur mes compétences, mes réalisations et mes architectures Cloudflare & Next.js.",
     "contactTitle": "Prenons Contact",
     "contactSubtitle": "Discutons de vos projets, d'architecture web & Cloud, ou d'opportunités de collaboration.",
     "viewOnGithub": "Code Source",

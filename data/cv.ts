@@ -20,8 +20,8 @@ export const personalInfo: PersonalInfo = {
     ar: "عقارب، صفاقس، تونس",
     en: "Agareb, Sfax, Tunisia",
   },
-  linkedin: "https://www.linkedin.com/in/wassim-ahmed",
-  github: "https://github.com/wassimahmed",
+  linkedin: "https://www.linkedin.com/in/-wassim-ahmed-/",
+  github: "https://github.com/wassimTech",
   bio: {
     fr: "Développeur Full Stack avec plus de 5 ans d’expérience dans la conception et le développement d’applications web et mobiles modernes (Next.js, Vue.js, React Native, NestJS, Hono.js, Cloudflare).",
     ar: "مطور فول ستاك بخبرة تتجاوز 5 سنوات في تصميم وتطوير تطبيقات الويب والجوال الحديثة (Next.js, Vue.js, React Native, NestJS, Hono.js, Cloudflare).",

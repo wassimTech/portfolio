@@ -11,7 +11,25 @@ function normalizeText(text: string): string {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,/#!$%^&*;:{}=\-_`~()?'"«»]/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
+}
+
+/**
+ * Checks if the normalized text contains any of the target words/phrases as whole words
+ */
+function hasWord(text: string, patterns: string[]): boolean {
+  const words = text.split(" ");
+  for (const pattern of patterns) {
+    const normPattern = normalizeText(pattern);
+    if (normPattern.includes(" ")) {
+      if (text.includes(normPattern)) return true;
+    } else {
+      if (words.includes(normPattern)) return true;
+    }
+  }
+  return false;
 }
 
 export function generateLocalChatResponse(
@@ -21,23 +39,155 @@ export function generateLocalChatResponse(
   const query = normalizeText(userMessage);
   const isEn = locale === "en";
 
-  // 1. Contact / Info / Availability / Location
+  // 1. Greetings & Salutations (Hello / Bonjour / Salut)
   if (
-    query.includes("contact") ||
-    query.includes("email") ||
-    query.includes("mail") ||
-    query.includes("telephone") ||
-    query.includes("phone") ||
-    query.includes("numero") ||
-    query.includes("adresse") ||
-    query.includes("location") ||
-    query.includes("ou") ||
-    query.includes("where") ||
-    query.includes("disponible") ||
-    query.includes("available") ||
-    query.includes("disponibilite") ||
-    query.includes("hire") ||
-    query.includes("recruter")
+    hasWord(query, [
+      "hello",
+      "hi",
+      "hey",
+      "bonjour",
+      "salut",
+      "coucou",
+      "bonsoir",
+      "yo",
+      "marhaba",
+      "ahlan",
+      "salam",
+    ])
+  ) {
+    if (isEn) {
+      return {
+        response:
+          `Hello! 👋 I am **Wassim AHMED's AI Resume Assistant**.\n\n` +
+          `I can help you explore his **5+ years of engineering experience**, key projects (Cloudflare, AI Workflow, React Native), and technical stack.\n\n` +
+          `What would you like to know?`,
+        suggestions: [
+          "What are his key AI and Cloudflare projects?",
+          "Tell me about his role as Team Leader",
+          "What is his full tech stack?",
+          "How can I contact Wassim?",
+        ],
+      };
+    }
+
+    return {
+      response:
+        `Bonjour ! 👋 Je suis l'**Assistant IA du CV de Wassim AHMED**.\n\n` +
+        `Je suis à votre disposition pour vous renseigner sur ses **5+ années d'expérience**, ses projets majeurs (Cloudflare, Plateforme IA, React Native) et ses compétences techniques.\n\n` +
+        `Que souhaitez-vous découvrir ?`,
+      suggestions: [
+        "Quels sont ses projets IA et Cloudflare ?",
+        "Parle-moi de ses rôles de Team Leader",
+        "Quelle est sa stack technique complète ?",
+        "Comment contacter Wassim ?",
+      ],
+    };
+  }
+
+  // 2. Identity & Capabilities (Who are you / Qui es-tu)
+  if (
+    hasWord(query, [
+      "qui es tu",
+      "qui est tu",
+      "qui vous etes",
+      "t es qui",
+      "who are you",
+      "who are u",
+      "what are you",
+      "c est quoi ton role",
+      "ton role",
+      "man anta",
+    ])
+  ) {
+    if (isEn) {
+      return {
+        response:
+          `I am an interactive AI assistant dedicated to **Wassim AHMED's professional portfolio**.\n\n` +
+          `I am trained on his verified background: engineering degree (ENIS), 5+ years building full-stack platforms, leading mobile teams (ZorLife, Bloom), and deploying Cloudflare serverless architectures.\n\n` +
+          `Feel free to ask about any project, skill, or collaboration opportunity!`,
+        suggestions: [
+          "What are his main achievements at TEKAB.DEV?",
+          "What mobile apps has he published?",
+          "What are his contact details?",
+        ],
+      };
+    }
+
+    return {
+      response:
+        `Je suis l'assistant IA interactif dédié au **portfolio professionnel de Wassim AHMED**.\n\n` +
+        `J'ai été conçu pour répondre précisément à toutes vos questions sur son parcours : son diplôme d'ingénieur à l'ENIS, ses 5+ ans d'expérience, son leadership sur des projets mobiles (ZorLife, Bloom) et ses architectures Cloudflare / Next.js.\n\n` +
+        `N'hésitez pas à me poser des questions sur ses réalisations ou sa disponibilité !`,
+      suggestions: [
+        "Quelles sont ses réalisations chez TEKAB.DEV ?",
+        "Quelles applications mobiles a-t-il publiées ?",
+        "Quelles sont ses coordonnées de contact ?",
+      ],
+    };
+  }
+
+  // 3. Politeness / Gratitude / Goodbye
+  if (
+    hasWord(query, [
+      "merci",
+      "merci beaucoup",
+      "thanks",
+      "thank you",
+      "thx",
+      "au revoir",
+      "bye",
+      "goodbye",
+      "a bientot",
+      "shukran",
+    ])
+  ) {
+    if (isEn) {
+      return {
+        response: `You're very welcome! Feel free to explore the interactive project showcase or download Wassim's CV. Have a wonderful day!`,
+        suggestions: [
+          "Download official Resume",
+          "Explore Featured Projects",
+          "Contact Wassim",
+        ],
+      };
+    }
+
+    return {
+      response: `Avec grand plaisir ! N'hésitez pas à explorer la section des projets ou à télécharger le CV complet de Wassim. Bonne visite !`,
+      suggestions: [
+        "Télécharger le CV officiel",
+        "Explorer les projets détaillés",
+        "Contacter Wassim",
+      ],
+    };
+  }
+
+  // 4. Contact / Info / Availability / Location
+  if (
+    hasWord(query, [
+      "contact",
+      "contacter",
+      "email",
+      "mail",
+      "telephone",
+      "phone",
+      "tel",
+      "numero",
+      "adresse",
+      "location",
+      "localisation",
+      "ville",
+      "ou habite",
+      "disponible",
+      "disponibilite",
+      "available",
+      "availability",
+      "hire",
+      "recruter",
+      "embaucher",
+      "linkedin",
+      "github",
+    ])
   ) {
     if (isEn) {
       return {
@@ -46,9 +196,9 @@ export function generateLocalChatResponse(
           `- **Email**: [${personalInfo.email}](mailto:${personalInfo.email})\n` +
           `- **Phone**: \`${personalInfo.phone}\`\n` +
           `- **Location**: ${personalInfo.location.en}\n` +
-          `- **LinkedIn**: [linkedin.com/in/wassim-ahmed](${personalInfo.linkedin})\n` +
-          `- **GitHub**: [github.com/wassimahmed](${personalInfo.github})\n\n` +
-          `Wassim is currently open to full stack, cloud architecture, and technical leadership opportunities.`,
+          `- **LinkedIn**: [linkedin.com/in/-wassim-ahmed-](${personalInfo.linkedin})\n` +
+          `- **GitHub**: [github.com/wassimTech](${personalInfo.github})\n\n` +
+          `Wassim is open to full stack, cloud architecture, and technical leadership opportunities.`,
         suggestions: [
           "What are his key AI and Cloudflare projects?",
           "Tell me about his experience at TEKAB.DEV",
@@ -63,9 +213,9 @@ export function generateLocalChatResponse(
         `- **Email** : [${personalInfo.email}](mailto:${personalInfo.email})\n` +
         `- **Téléphone** : \`${personalInfo.phone}\`\n` +
         `- **Localisation** : ${personalInfo.location.fr}\n` +
-        `- **LinkedIn** : [linkedin.com/in/wassim-ahmed](${personalInfo.linkedin})\n` +
-        `- **GitHub** : [github.com/wassimahmed](${personalInfo.github})\n\n` +
-        `Wassim est actuellement disponible pour de nouveaux projets innovants, missions d'architecture Cloud / Fullstack ou rôles de Team Lead.`,
+        `- **LinkedIn** : [linkedin.com/in/-wassim-ahmed-](${personalInfo.linkedin})\n` +
+        `- **GitHub** : [github.com/wassimTech](${personalInfo.github})\n\n` +
+        `Wassim est actuellement disponible pour des missions d'architecture Cloud, rôles Fullstack Senior ou Team Lead.`,
       suggestions: [
         "Quels sont ses projets IA et Cloudflare ?",
         "Parle-moi de son expérience chez TEKAB.DEV",
@@ -74,15 +224,19 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 2. AI / Agent / Workflow / Devfactory-cli
+  // 5. AI / Agent / Workflow / Devfactory-cli
   if (
-    query.includes("ia") ||
-    query.includes("ai") ||
-    query.includes("agent") ||
-    query.includes("workflow") ||
-    query.includes("devfactory") ||
-    query.includes("cli") ||
-    query.includes("chatbot")
+    hasWord(query, [
+      "ia",
+      "ai",
+      "agent",
+      "agents",
+      "workflow",
+      "devfactory",
+      "cli",
+      "npm",
+      "tekab",
+    ])
   ) {
     if (isEn) {
       return {
@@ -115,12 +269,16 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 3. URJOB Project
+  // 6. URJOB Project
   if (
-    query.includes("urjob") ||
-    query.includes("recrutement") ||
-    query.includes("recruitment") ||
-    query.includes("matching")
+    hasWord(query, [
+      "urjob",
+      "recrutement",
+      "recruitment",
+      "matching",
+      "cvs",
+      "candidats",
+    ])
   ) {
     if (isEn) {
       return {
@@ -153,16 +311,26 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 4. ZorLife & Bloom / Team Leader / Mobile
+  // 7. ZorLife & Bloom / Team Leader / Mobile
   if (
-    query.includes("zorlife") ||
-    query.includes("bloom") ||
-    query.includes("team lead") ||
-    query.includes("leader") ||
-    query.includes("management") ||
-    query.includes("mobile") ||
-    query.includes("react native") ||
-    query.includes("3d")
+    hasWord(query, [
+      "zorlife",
+      "bloom",
+      "team lead",
+      "team leader",
+      "leader",
+      "leadership",
+      "management",
+      "manager",
+      "mobile",
+      "react native",
+      "3d",
+      "ios",
+      "android",
+      "filament",
+      "app store",
+      "play store",
+    ])
   ) {
     if (isEn) {
       return {
@@ -203,13 +371,18 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 5. Obydo & Webinarplease / Sastec
+  // 8. Obydo & Webinarplease / Sastec
   if (
-    query.includes("obydo") ||
-    query.includes("webinarplease") ||
-    query.includes("sastec") ||
-    query.includes("webrtc") ||
-    query.includes("visio")
+    hasWord(query, [
+      "obydo",
+      "webinarplease",
+      "sastec",
+      "webrtc",
+      "visio",
+      "videoconference",
+      "invendus",
+      "enchere",
+    ])
   ) {
     if (isEn) {
       return {
@@ -238,13 +411,17 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 6. GoMyCode / Instructor
+  // 9. GoMyCode / Instructor
   if (
-    query.includes("gomycode") ||
-    query.includes("instructeur") ||
-    query.includes("instructor") ||
-    query.includes("enseignant") ||
-    query.includes("pedagogie")
+    hasWord(query, [
+      "gomycode",
+      "instructeur",
+      "instructor",
+      "enseignant",
+      "formateur",
+      "pedagogie",
+      "mentor",
+    ])
   ) {
     if (isEn) {
       return {
@@ -275,18 +452,25 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 7. Education / Degrees / ENIS
+  // 10. Education / Degrees / ENIS
   if (
-    query.includes("formation") ||
-    query.includes("diplome") ||
-    query.includes("degree") ||
-    query.includes("education") ||
-    query.includes("enis") ||
-    query.includes("ecole") ||
-    query.includes("universite") ||
-    query.includes("university") ||
-    query.includes("bac") ||
-    query.includes("etudes")
+    hasWord(query, [
+      "formation",
+      "diplome",
+      "diplomes",
+      "degree",
+      "degrees",
+      "education",
+      "enis",
+      "ecole",
+      "universite",
+      "university",
+      "bac",
+      "baccalaureat",
+      "etudes",
+      "fss",
+      "prepa",
+    ])
   ) {
     if (isEn) {
       return {
@@ -319,23 +503,35 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 8. Skills / Technologies / Stack
+  // 11. Skills / Technologies / Stack
   if (
-    query.includes("stack") ||
-    query.includes("competence") ||
-    query.includes("skills") ||
-    query.includes("techno") ||
-    query.includes("langage") ||
-    query.includes("framework") ||
-    query.includes("react") ||
-    query.includes("next") ||
-    query.includes("vue") ||
-    query.includes("nest") ||
-    query.includes("hono") ||
-    query.includes("cloudflare") ||
-    query.includes("docker") ||
-    query.includes("prisma") ||
-    query.includes("postgres")
+    hasWord(query, [
+      "stack",
+      "competence",
+      "competences",
+      "skills",
+      "techno",
+      "technologies",
+      "langage",
+      "langages",
+      "framework",
+      "frameworks",
+      "react",
+      "next",
+      "nextjs",
+      "vue",
+      "vuejs",
+      "nest",
+      "nestjs",
+      "hono",
+      "cloudflare",
+      "docker",
+      "prisma",
+      "postgres",
+      "postgresql",
+      "tailwind",
+      "typescript",
+    ])
   ) {
     if (isEn) {
       return {
@@ -370,7 +566,7 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 9. Default / General Overview
+  // 12. Default / General Overview
   if (isEn) {
     return {
       response:

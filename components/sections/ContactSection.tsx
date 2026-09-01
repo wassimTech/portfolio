@@ -5,7 +5,6 @@ import { useI18n } from "@/context/I18nContext";
 import { personalInfo } from "@/data/cv";
 import { Mail, Phone, MapPin, Copy, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
-import { CliTerminal } from "@/components/ui/CliTerminal";
 
 export function ContactSection() {
   const { locale, t } = useI18n();
@@ -34,11 +33,6 @@ export function ContactSection() {
           <p className="text-base text-muted-foreground">
             {t("sections.contactSubtitle")}
           </p>
-        </div>
-
-        {/* CLI Terminal Showcase */}
-        <div className="max-w-4xl mx-auto">
-          <CliTerminal />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">

@@ -118,10 +118,10 @@ export function HeroSection() {
               <div className="relative w-full h-full rounded-2xl overflow-hidden bg-card">
                 <Image
                   src="/avatar.jpg"
-                  alt="Wassim AHMED - Développeur Full Stack"
+                  alt={`${personalInfo.name} - ${title}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 320px"
-                  className="object-cover object-top filter brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-500"
                   priority
                 />
 
