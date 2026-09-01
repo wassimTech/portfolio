@@ -5,12 +5,12 @@ Create the primary GitHub Actions CI workflow (`.github/workflows/ci.yml`) featu
 
 **Blocked by:** 01: Edge Runtime Compatibility & Local CI Script Suite
 
-**Status:** ready-for-agent
+**Status:** completed
 
-- [ ] Create `.github/workflows/ci.yml` triggered on push to `main`, pull_request to `main`, and `workflow_dispatch`.
-- [ ] Configure concurrency grouping with `cancel-in-progress: true` to prevent resource waste.
-- [ ] Implement `security-audit` job running `npm audit --audit-level=high`.
-- [ ] Implement `code-quality` job running `npm run format:check`, `npm run lint`, and `npm run typecheck` in parallel or fast-fail sequence.
-- [ ] Implement `test-suite` job running `npm run test:coverage` and generating/saving test artifacts and LCOV coverage files.
-- [ ] Implement `build` job restoring `.next/cache` and running `npm run build` to verify production bundling.
-- [ ] Verify GitHub workflow syntax and validate action versions.
+- [x] Create `.github/workflows/ci.yml` triggered on push to `main`, pull_request to `main`, and `workflow_dispatch`.
+- [x] Configure concurrency grouping with `cancel-in-progress: true` to prevent resource waste.
+- [x] Implement `security-audit` job running `npm audit --audit-level=high`.
+- [x] Implement `code-quality` job running `npm run format:check`, `npm run lint`, and `npm run typecheck` in parallel or fast-fail sequence.
+- [x] Implement `test-suite` job running `npm run test:coverage` and generating/saving test artifacts and LCOV coverage files.
+- [x] Implement `build` job restoring `.next/cache` and running `npm run build` to verify production bundling.
+- [x] Verify GitHub workflow syntax and validate action versions.
