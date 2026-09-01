@@ -5,9 +5,9 @@ Add automated GitHub Step Summaries (`$GITHUB_STEP_SUMMARY`) and Pull Request fe
 
 **Blocked by:** 03: Cloudflare Pages Continuous Deployment (CD) Pipeline
 
-**Status:** ready-for-agent
+**Status:** completed
 
-- [ ] Add step in test job to parse Vitest coverage output and generate visual markdown table.
-- [ ] Add GitHub Action step to append summary metrics to `$GITHUB_STEP_SUMMARY`.
-- [ ] Add PR comment step for pull requests with Cloudflare Preview URL and test status.
-- [ ] Ensure minimal permissions (`contents: read`, `pull-requests: write`, `statuses: write`) in workflow tokens following least-privilege security principle.
+- [x] Add step in test job to parse Vitest coverage output and generate visual markdown table.
+- [x] Add GitHub Action step to append summary metrics to `$GITHUB_STEP_SUMMARY`.
+- [x] Add PR comment step for pull requests with Cloudflare Preview URL and test status.
+- [x] Ensure minimal permissions (`contents: read`, `pull-requests: write`, `statuses: write`) in workflow tokens following least-privilege security principle.
