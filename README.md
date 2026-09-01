@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Wassim AHMED — Full Stack & Cloud Developer Portfolio
 
-## Getting Started
+[![CI - Continuous Integration](https://github.com/wassimTech/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/wassimTech/portfolio/actions/workflows/ci.yml)
+[![CD - Cloudflare Pages Deployment](https://github.com/wassimTech/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/wassimTech/portfolio/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-First, run the development server:
+A production-grade, trilingual (**Arabic, French & English**) developer portfolio web application built with **Next.js (App Router, Turbopack)**, **Tailwind CSS**, and **Cloudflare Edge Runtime**.
+
+---
+
+## 🌟 Key Features
+
+- **Trilingual Internationalization (i18n)**: Seamless language toggle between Arabic (`ar` RTL), French (`fr` LTR), and English (`en` LTR) with automatic layout flipping.
+- **Interactive Project Showcase**: Deep-dive modals, category filters, tech stack tags, and architecture summaries.
+- **Interactive AI Portfolio Assistant**: Embedded chatbot and floating widget powered by local knowledge engine and optional Gemini LLM integration.
+- **Dark & Light Mode**: Accessible theme tokens with glassmorphic aesthetic and WCAG 2.2 AA contrast compliance.
+- **Cloudflare Edge Ready**: 100% Edge-compatible API routes and static asset optimization for Cloudflare Pages / Workers.
+- **Enterprise CI/CD**: Automated GitHub Actions pipeline for linting, typechecking, test coverage reporting, and preview/production deployments.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, Turbopack) & [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Lucide React](https://lucide.dev/), and [Framer Motion](https://www.framer.com/motion/)
+- **Testing**: [Vitest](https://vitest.dev/), [@testing-library/react](https://testing-library.com/), [MSW](https://mswjs.io/), and V8 Coverage
+- **Linting & Code Quality**: [ESLint](https://eslint.org/), `eslint-plugin-jsx-a11y`, [Prettier](https://prettier.io/), and [Husky](https://typicode.github.io/husky/)
+- **Deployment**: [Cloudflare Pages](https://pages.cloudflare.com/) & GitHub Actions
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js >= 20.x
+- npm >= 10.x
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/wassimTech/portfolio.git
+cd portfolio
+
+# Install dependencies
+npm install
+```
+
+### Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the live application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧪 Testing & Code Quality
 
-## Learn More
+```bash
+# Run full local CI verification compound suite
+npm run ci
 
-To learn more about Next.js, take a look at the following resources:
+# Run Vitest test suite
+npm test
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Run tests with code coverage report
+npm run test:coverage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# TypeScript strict type checking
+npm run typecheck
 
-## Deploy on Vercel
+# Linting with JSX accessibility rules
+npm run lint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Prettier format check
+npm run format:check
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📖 CI/CD & Deployment Guide
+
+For full details on the GitHub Actions pipeline, secrets configuration (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`), and branch protection rules, refer to the [CI/CD Deployment Documentation](docs/CICD.md).
+
+---
+
+## 👤 Author
+
+**Wassim AHMED**
+
+- **Email**: [wassim.ahmed.tech@gmail.com](mailto:wassim.ahmed.tech@gmail.com)
+- **LinkedIn**: [linkedin.com/in/-wassim-ahmed-](https://www.linkedin.com/in/-wassim-ahmed-/)
+- **GitHub**: [github.com/wassimTech](https://github.com/wassimTech)
