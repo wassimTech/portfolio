@@ -92,15 +92,26 @@ sequenceDiagram
 
 ---
 
-## 🔑 GitHub Secrets Configuration
+## 🔑 Secrets & Environment Architecture (Single Source of Truth)
 
-To enable automated deployments to Cloudflare Pages, configure the following **Repository Secrets** in GitHub (`Settings -> Secrets and variables -> Actions`):
+To follow security best practices and prevent redundant configuration across multiple platforms:
 
-| Secret Name             |  Required  | Description                                            | Where to Find / Create                                                  |
-| :---------------------- | :--------: | :----------------------------------------------------- | :---------------------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`  |  **Yes**   | API token with Cloudflare Pages deployment permissions | Cloudflare Dashboard -> My Profile -> API Tokens -> Create Custom Token |
-| `CLOUDFLARE_ACCOUNT_ID` |  **Yes**   | Your Cloudflare Account identifier                     | Cloudflare Dashboard -> Workers & Pages (right sidebar)                 |
-| `GEMINI_API_KEY`        | _Optional_ | API key for external LLM fallback in chatbot           | [Google AI Studio](https://aistudio.google.com/)                        |
+### 1. DevOps Infrastructure Secrets (GitHub Secrets)
+
+_Configured in GitHub (`Settings -> Secrets and variables -> Actions -> Repository secrets`)_
+
+| Secret Name             | Required | Purpose                                                 |
+| :---------------------- | :------: | :------------------------------------------------------ |
+| `CLOUDFLARE_API_TOKEN`  | **Yes**  | Authenticates GitHub Actions with Cloudflare Pages API. |
+| `CLOUDFLARE_ACCOUNT_ID` | **Yes**  | Identifies your Cloudflare account for deployment.      |
+
+### 2. Application Runtime Secrets (Cloudflare Dashboard — SSOT)
+
+_Configured exclusively in Cloudflare Dashboard (`Workers & Pages -> wassim-ahmed-portfolio -> Settings -> Environment variables`)_
+
+| Variable Name    |  Encryption   | Purpose                                                                                                                  |
+| :--------------- | :-----------: | :----------------------------------------------------------------------------------------------------------------------- |
+| `GEMINI_API_KEY` | **Encrypted** | Runtime API key for the `/api/chat` Edge route. Handled centrally in Cloudflare without duplicate declaration in GitHub. |
 
 ### Step-by-Step: Creating the Cloudflare API Token
 
