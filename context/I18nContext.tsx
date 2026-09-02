@@ -67,12 +67,12 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     listeners.forEach((listener) => listener());
   }, []);
 
-  const dir = "ltr";
+  const dir: "ltr" | "rtl" = "ltr";
 
   useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.dir = dir;
-  }, [locale]);
+  }, [locale, dir]);
 
   const t = useCallback(
     (keyPath: string): string => {
