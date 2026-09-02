@@ -106,37 +106,29 @@ export function HeroSection() {
               <span>{t("hero.badge")}</span>
             </div>
 
-            {/* Greeting & Giant Name */}
-            <div className="space-y-1.5">
-              <p className="text-xl sm:text-2xl font-bold text-foreground">
+            {/* Greeting, Name & Role as semantic H1 landmark (WCAG 1.3.1 / 2.4.6) */}
+            <h1 className="space-y-1.5">
+              <span className="block text-xl sm:text-2xl font-bold text-foreground">
                 {t("hero.greeting")}{" "}
                 <span className="text-primary">{personalInfo.name}</span>
-              </p>
+              </span>
 
               {/* Typewriter Dynamic Title */}
-              <div className="min-h-[2.5rem] sm:min-h-[3.2rem] flex items-center">
-                {/*
-                  aria-label provides the full stable role text to screen readers.
-                  The visual spans are aria-hidden so ATs don't announce each character
-                  as the typewriter animation progresses (WCAG 4.1.3 / 1.3.1).
-                */}
-                <h1
-                  aria-label={roles[currentRoleIndex]}
+              <span className="min-h-[2.5rem] sm:min-h-[3.2rem] flex items-center">
+                {/* Accessible screen reader announcement for current role */}
+                <span className="sr-only"> - {roles[currentRoleIndex]}</span>
+                {/* Visual animated typewriter */}
+                <span
+                  aria-hidden="true"
                   className="text-3xl sm:text-5xl lg:text-6xl font-black text-foreground tracking-tight"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-accent-foreground"
-                  >
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-accent-foreground">
                     {displayText}
                   </span>
-                  <span
-                    aria-hidden="true"
-                    className="inline-block w-0.5 h-8 sm:h-11 bg-primary ms-1 animate-pulse"
-                  />
-                </h1>
-              </div>
-            </div>
+                  <span className="inline-block w-0.5 h-8 sm:h-11 bg-primary ms-1 animate-pulse" />
+                </span>
+              </span>
+            </h1>
 
             {/* Subtitle / Bio summary */}
             <p className="text-sm sm:text-base text-muted-foreground max-w-xl leading-relaxed">
