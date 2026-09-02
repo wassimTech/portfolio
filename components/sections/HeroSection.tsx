@@ -6,22 +6,19 @@ import { useI18n } from "@/context/I18nContext";
 import { personalInfo } from "@/data/cv";
 import {
   ArrowRight,
-  Download,
   Mail,
   Layers,
   Code2,
   Cloud,
   CheckCircle,
+  Briefcase,
 } from "lucide-react";
-import { getCvDownloadInfo } from "@/lib/download";
 
 export function HeroSection() {
   const { locale, t } = useI18n();
 
   const title = personalInfo.title[locale] || personalInfo.title.fr;
   const bio = personalInfo.bio[locale] || personalInfo.bio.fr;
-
-  const cvInfo = getCvDownloadInfo(locale);
 
   const stats = [
     {
@@ -73,9 +70,9 @@ export function HeroSection() {
                   {t("hero.punchlineHighlight")}
                 </span>
               </h1>
-              <p className="text-lg sm:text-xl font-bold text-primary pt-2">
+              <h2 className="text-lg sm:text-xl font-bold text-primary pt-2">
                 {personalInfo.name} — {title}
-              </p>
+              </h2>
             </div>
 
             {/* Subtitle / Bio summary */}
@@ -102,12 +99,14 @@ export function HeroSection() {
               </a>
 
               <a
-                href={cvInfo.href}
-                download={cvInfo.filename}
+                href="#experience"
                 className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl bg-muted text-muted-foreground hover:text-foreground text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Download className="w-4 h-4" aria-hidden="true" />
-                <span>{t("nav.downloadCv")}</span>
+                <Briefcase
+                  className="w-4 h-4 text-primary"
+                  aria-hidden="true"
+                />
+                <span>{t("hero.viewExperience")}</span>
               </a>
             </div>
           </div>
@@ -135,7 +134,7 @@ export function HeroSection() {
                       <p className="text-xs font-extrabold text-foreground">
                         {personalInfo.name}
                       </p>
-                      <p className="text-[11px] font-medium text-primary">
+                      <p className="text-xs font-semibold text-primary">
                         {title}
                       </p>
                     </div>
@@ -177,9 +176,9 @@ export function HeroSection() {
         {/* Big Name & Biography Block */}
         <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-border grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-start">
           <div className="md:col-span-5 space-y-1">
-            <p className="text-xs font-extrabold uppercase tracking-widest text-primary">
+            <span className="inline-block text-xs font-bold uppercase tracking-wider text-primary">
               Full Stack Engineer
-            </p>
+            </span>
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
               Wassim AHMED
             </h2>

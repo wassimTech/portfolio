@@ -128,11 +128,14 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
       <div className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl bg-card border border-border shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-10">
           <div className="flex flex-wrap items-center gap-2.5">
-            <span className="px-3 py-1 rounded-lg bg-primary/10 border border-primary/25 text-primary text-xs font-bold uppercase tracking-wider">
+            <span className="px-3 py-1 rounded-lg bg-accent border border-primary/25 text-accent-foreground dark:bg-primary/15 dark:text-primary text-xs font-bold uppercase tracking-wider">
               {categoryLabel}
             </span>
-            <span className="px-3 py-1 rounded-lg bg-muted text-muted-foreground text-xs font-medium flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
+            <span className="px-3 py-1 rounded-lg bg-secondary text-secondary-foreground text-xs font-semibold flex items-center gap-1.5 border border-border/50">
+              <Calendar
+                className="w-3.5 h-3.5 text-primary"
+                aria-hidden="true"
+              />
               <span>{project.period}</span>
             </span>
           </div>

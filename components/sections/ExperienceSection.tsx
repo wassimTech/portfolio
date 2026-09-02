@@ -72,12 +72,12 @@ export function ExperienceSection() {
                   <div className="ms-12 sm:ms-0 sm:w-1/2 sm:px-8 w-full">
                     <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-border hover:border-primary/50 transition-all text-start space-y-3.5 group">
                       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
-                        <span className="text-xs font-extrabold text-primary uppercase tracking-wider">
+                        <span className="text-xs font-bold text-primary">
                           {exp.company}
                         </span>
-                        <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground font-medium bg-muted px-2.5 py-1 rounded-md">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-secondary-foreground font-semibold bg-secondary px-2.5 py-1 rounded-md border border-border/50">
                           <Calendar
-                            className="w-3 h-3 text-primary"
+                            className="w-3.5 h-3.5 text-primary"
                             aria-hidden="true"
                           />
                           <span>{exp.period}</span>
@@ -99,7 +99,7 @@ export function ExperienceSection() {
                           {exp.technologies.map((tech) => (
                             <span
                               key={tech}
-                              className="px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground text-[10px] font-medium border border-border/50"
+                              className="px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-medium border border-border/50"
                             >
                               {tech}
                             </span>

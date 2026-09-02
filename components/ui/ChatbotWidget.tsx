@@ -215,7 +215,7 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
             </span>
             <div className="flex items-center gap-2 font-bold text-sm">
               <Sparkles
-                className="w-5 h-5 text-amber-300 animate-pulse"
+                className="w-5 h-5 text-primary-foreground animate-pulse"
                 aria-hidden="true"
               />
               <span className="hidden sm:inline-block pe-1">
@@ -246,11 +246,11 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
                   <h3 className="text-sm font-extrabold text-foreground">
                     {t("chatbot.title")}
                   </h3>
-                  <span className="px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-500 text-[10px] font-bold">
+                  <span className="px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
                     {t("chatbot.badge")}
                   </span>
                 </div>
-                <p className="text-[11px] text-muted-foreground">
+                <p className="text-xs text-muted-foreground">
                   {t("chatbot.subtitle")}
                 </p>
               </div>
@@ -260,7 +260,6 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
               <button
                 type="button"
                 onClick={handleClearChat}
-                title={t("chatbot.clear")}
                 aria-label={t("chatbot.clear")}
                 className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
@@ -335,7 +334,7 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
           {/* Suggested Quick Prompts */}
           {activeSuggestions.length > 0 && (
             <div className="px-4 py-2 border-t border-border/50 bg-background/50">
-              <p className="text-[11px] font-bold text-muted-foreground text-start mb-1.5">
+              <p className="text-xs font-bold text-muted-foreground text-start mb-1.5">
                 {t("chatbot.suggestionsTitle")}
               </p>
               <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
@@ -344,7 +343,7 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
                     key={idx}
                     type="button"
                     onClick={() => handleSendMessage(sug)}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-muted text-[11px] font-medium transition-colors border border-border/50 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-muted text-xs font-medium transition-colors border border-border/50 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <MessageSquare
                       className="w-3 h-3 text-primary"

@@ -81,7 +81,7 @@ export function ProjectBanner({ projectId }: ProjectBannerProps) {
       </div>
 
       {/* Bottom Tag Badge */}
-      <div className="absolute bottom-3 start-3 px-2.5 py-1 rounded-lg bg-background/80 backdrop-blur-sm border border-border text-[11px] font-mono text-foreground flex items-center gap-1.5 shadow-xs">
+      <div className="absolute bottom-3 start-3 px-2.5 py-1 rounded-lg bg-background/80 backdrop-blur-sm border border-border text-xs font-mono text-foreground flex items-center gap-1.5 shadow-xs">
         <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
         <span>{config.tag}</span>
       </div>

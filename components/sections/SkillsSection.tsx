@@ -123,7 +123,7 @@ export function SkillsSection() {
                       {title}
                     </h3>
                   </div>
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-muted text-muted-foreground border border-border/50">
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border/50">
                     {category.skills.length}
                   </span>
                 </div>
@@ -143,7 +143,7 @@ export function SkillsSection() {
                       <div className="w-8 h-8 flex items-center justify-center text-foreground group-hover/item:scale-110 transition-transform duration-200">
                         <TechIcon name={skill.name} className="w-7 h-7" />
                       </div>
-                      <span className="text-[11px] font-semibold text-muted-foreground group-hover/item:text-foreground transition-colors truncate max-w-full">
+                      <span className="text-xs font-semibold text-muted-foreground group-hover/item:text-foreground transition-colors truncate max-w-full">
                         {skill.name}
                       </span>
                     </div>

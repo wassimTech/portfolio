@@ -201,7 +201,7 @@ export function EmbeddedChatbot() {
                 <Sparkles className="w-4 h-4 text-primary" aria-hidden="true" />
                 <span>{t("chatbot.title")}</span>
               </h3>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
                 {t("chatbot.badge")}
               </span>
             </div>
@@ -214,7 +214,6 @@ export function EmbeddedChatbot() {
         <button
           type="button"
           onClick={handleClearChat}
-          title={t("chatbot.clear")}
           aria-label={t("chatbot.clear")}
           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-background text-foreground border border-border text-xs font-semibold hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
@@ -285,7 +284,7 @@ export function EmbeddedChatbot() {
       {/* Suggested Quick Prompts */}
       {activeSuggestions.length > 0 && (
         <div className="px-5 py-3 border-t border-border/60 bg-muted/30">
-          <p className="text-[11px] font-bold text-muted-foreground text-start mb-2">
+          <p className="text-xs font-bold text-muted-foreground text-start mb-2">
             {t("chatbot.suggestionsTitle")}
           </p>
           <div className="flex flex-wrap gap-2">
