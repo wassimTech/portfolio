@@ -41,13 +41,16 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
   const [activeSuggestions, setActiveSuggestions] = useState<string[]>(() =>
     chatSuggestions.map((s) => s.query[locale] || s.query.fr)
   );
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const feedContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Scroll to bottom
-  const scrollToBottom = useCallback(() => {
-    if (typeof messagesEndRef.current?.scrollIntoView === "function") {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
+    if (feedContainerRef.current) {
+      feedContainerRef.current.scrollTo({
+        top: feedContainerRef.current.scrollHeight,
+        behavior,
+      });
     }
   }, []);
 
@@ -276,6 +279,7 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
 
           {/* Message Feed */}
           <div
+            ref={feedContainerRef}
             className="flex-1 p-4 overflow-y-auto space-y-4 text-start text-xs sm:text-sm"
             aria-live="polite"
           >
@@ -326,8 +330,6 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
                 </div>
               </div>
             )}
-
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Suggested Quick Prompts */}

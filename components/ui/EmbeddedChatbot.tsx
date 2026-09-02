@@ -36,16 +36,24 @@ export function EmbeddedChatbot() {
     chatSuggestions.map((s) => s.query[locale] || s.query.fr)
   );
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const feedContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isInitialMount = useRef(true);
 
-  const scrollToBottom = useCallback(() => {
-    if (typeof messagesEndRef.current?.scrollIntoView === "function") {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
+    if (feedContainerRef.current) {
+      feedContainerRef.current.scrollTo({
+        top: feedContainerRef.current.scrollHeight,
+        behavior,
+      });
     }
   }, []);
 
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
@@ -220,6 +228,7 @@ export function EmbeddedChatbot() {
 
       {/* Message Feed */}
       <div
+        ref={feedContainerRef}
         className="p-5 bg-card/60 text-foreground space-y-4 min-h-[220px] max-h-[360px] overflow-y-auto text-xs sm:text-sm"
         aria-live="polite"
         aria-busy={isLoading}
@@ -271,8 +280,6 @@ export function EmbeddedChatbot() {
             </div>
           </div>
         )}
-
-        <div ref={messagesEndRef} />
       </div>
 
       {/* Suggested Quick Prompts */}

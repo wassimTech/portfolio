@@ -80,6 +80,9 @@ if (!navigator.clipboard) {
 
 // Polyfill scrollTo and scrollIntoView
 window.scrollTo = vi.fn();
+if (typeof window.HTMLElement.prototype.scrollTo !== "function") {
+  window.HTMLElement.prototype.scrollTo = vi.fn();
+}
 if (typeof window.HTMLElement.prototype.scrollIntoView !== "function") {
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
 }
