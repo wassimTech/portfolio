@@ -27,6 +27,14 @@ export async function onRequestPost(context: {
     const rawApiKey = context.env?.GEMINI_API_KEY;
     const geminiApiKey = rawApiKey?.replace(/^["']|["']$/g, "").trim();
 
+    console.log(
+      `[Chat API] New request | locale: ${safeLocale} | key_present: ${Boolean(
+        geminiApiKey
+      )} | key_len: ${geminiApiKey ? geminiApiKey.length : 0}`
+    );
+
+    let lastErrorDetail = "";
+
     if (geminiApiKey) {
       try {
         const langName = safeLocale === "en" ? "English" : "French";
@@ -41,10 +49,15 @@ Answer user questions accurately, engagingly, and professionally based on his ve
 - Email: wassim.ahmed.tech@gmail.com, Phone: +216 23 579 414, Sfax Tunisia.
 Respond in ${langName} with clean markdown formatting.`;
 
-        const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash"];
+        const modelsToTry = [
+          "gemini-2.0-flash",
+          "gemini-1.5-flash",
+          "gemini-1.5-pro",
+        ];
 
         for (const model of modelsToTry) {
           try {
+            console.log(`[Chat API] Invoking Google Gemini model: ${model}`);
             const geminiRes = await fetch(
               `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiApiKey}`,
               {
@@ -80,6 +93,9 @@ Respond in ${langName} with clean markdown formatting.`;
               const replyText =
                 geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
               if (replyText) {
+                console.log(
+                  `[Chat API] Successfully generated dynamic response with ${model}`
+                );
                 const fallback = generateLocalChatResponse(message, safeLocale);
                 return new Response(
                   JSON.stringify({
@@ -88,27 +104,57 @@ Respond in ${langName} with clean markdown formatting.`;
                   }),
                   {
                     status: 200,
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                      "Content-Type": "application/json",
+                      "X-Chat-Source": model,
+                      "X-Key-Detected": "true",
+                    },
                   }
                 );
               }
+            } else {
+              const errorText = await geminiRes.text();
+              lastErrorDetail = `HTTP ${geminiRes.status}: ${errorText.slice(
+                0,
+                200
+              )}`;
+              console.error(
+                `[Chat API] Gemini model ${model} returned error status ${geminiRes.status}:`,
+                errorText
+              );
             }
           } catch (modelErr) {
-            console.warn(`Gemini model ${model} error:`, modelErr);
+            lastErrorDetail = String(modelErr);
+            console.warn(
+              `[Chat API] Gemini model ${model} threw error:`,
+              modelErr
+            );
           }
         }
       } catch (externalError) {
+        lastErrorDetail = String(externalError);
         console.warn(
-          "External LLM error, falling back to local engine:",
+          "[Chat API] External LLM error, falling back to local engine:",
           externalError
         );
       }
+    } else {
+      console.warn(
+        "[Chat API] No GEMINI_API_KEY found in context.env. Using local fallback."
+      );
     }
 
     const result = generateLocalChatResponse(message, safeLocale);
     return new Response(JSON.stringify(result), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-Chat-Source": "local-engine",
+        "X-Key-Detected": geminiApiKey ? "true" : "false",
+        "X-Debug-Detail": lastErrorDetail
+          ? encodeURIComponent(lastErrorDetail.slice(0, 100))
+          : "no-key-or-all-fallback",
+      },
     });
   } catch (error) {
     console.error("Chat API error:", error);

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useI18n } from "@/context/I18nContext";
 import { chatSuggestions } from "@/data/cv";
 import { ChatMessage } from "@/types/cv";
+import { generateLocalChatResponse } from "@/lib/chat-engine";
 import {
   Sparkles,
   Send,
@@ -84,30 +85,49 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: messageText,
-          locale,
-        }),
-      });
+      let replyContent = "";
+      let suggestions: string[] = [];
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch chat response");
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: messageText,
+            locale,
+          }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          replyContent = data.response;
+          suggestions = data.suggestions;
+        } else {
+          // In local dev (next dev) without Cloudflare Pages proxy or if endpoint returns non-200
+          const localFallback = generateLocalChatResponse(messageText, locale);
+          replyContent = localFallback.response;
+          suggestions = localFallback.suggestions;
+        }
+      } catch (fetchErr) {
+        console.warn(
+          "API unavailable, falling back to local chat engine:",
+          fetchErr
+        );
+        const localFallback = generateLocalChatResponse(messageText, locale);
+        replyContent = localFallback.response;
+        suggestions = localFallback.suggestions;
       }
 
-      const data = await response.json();
       const assistantMessage: ChatMessage = {
         id: createId("assistant"),
         role: "assistant",
-        content: data.response || t("chatbot.error"),
+        content: replyContent || t("chatbot.error"),
         timestamp: 3,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-      if (data.suggestions && Array.isArray(data.suggestions)) {
-        setActiveSuggestions(data.suggestions);
+      if (suggestions && Array.isArray(suggestions) && suggestions.length > 0) {
+        setActiveSuggestions(suggestions);
       }
     } catch (error) {
       console.error("Chat request error:", error);
