@@ -150,11 +150,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const current = getThemeSnapshot();
     const nextTheme: Theme = current === "dark" ? "light" : "dark";
     localStorage.setItem("portfolio_theme", nextTheme);
+    if (nextTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    }
     notifyThemeListeners();
   }, []);
 
   const setColorTheme = useCallback((nextColor: ColorTheme) => {
     localStorage.setItem("portfolio_color_theme", nextColor);
+    document.documentElement.setAttribute("data-color-theme", nextColor);
     notifyThemeListeners();
   }, []);
 

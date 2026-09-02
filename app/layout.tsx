@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   },
 };
 
+const themeScript = `(function(){try{var t=localStorage.getItem("portfolio_theme");var c=localStorage.getItem("portfolio_color_theme");var d=document.documentElement;if(t==="light"){d.classList.remove("dark");d.classList.add("light");}else{d.classList.add("dark");d.classList.remove("light");}if(c&&["orange","emerald","cyan","violet","rose","amber"].indexOf(c)!==-1){d.setAttribute("data-color-theme",c);}else{d.setAttribute("data-color-theme","orange");}var l=localStorage.getItem("portfolio_locale");if(l==="fr"||l==="en"){d.lang=l;}}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,9 +45,16 @@ export default function RootLayout({
     <html
       lang="fr"
       dir="ltr"
-      className={inter.variable}
+      className={`${inter.variable} dark`}
+      data-color-theme="orange"
       suppressHydrationWarning
     >
+      <head>
+        <script
+          id="theme-initializer"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
+      </head>
       <body className="font-sans antialiased min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/20 selection:text-primary">
         <ThemeProvider>
           <I18nProvider>{children}</I18nProvider>
