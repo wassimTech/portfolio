@@ -3,10 +3,7 @@
 
 import https from "node:https";
 
-const apiKey =
-  process.argv[2] ||
-  process.env.GEMINI_API_KEY ||
-  "";
+const apiKey = process.argv[2] || process.env.GEMINI_API_KEY || "";
 
 console.log("==========================================");
 console.log("   TEST DIAGNOSTIC GOOGLE GEMINI API      ");
@@ -20,9 +17,12 @@ if (!apiKey || apiKey.trim() === "") {
 }
 
 const cleanKey = apiKey.trim().replace(/^["']|["']$/g, "");
-console.log(`\n🔑 Clé détectée (longueur: ${cleanKey.length} caractères, début: ${cleanKey.slice(0, 8)}...)`);
+console.log(
+  `\n🔑 Clé détectée (longueur: ${cleanKey.length} caractères, début: ${cleanKey.slice(0, 8)}...)`
+);
 
-const testMessage = "Présente Wassim AHMED et ses compétences principales en 2 phrases.";
+const testMessage =
+  "Présente Wassim AHMED et ses compétences principales en 2 phrases.";
 const systemPrompt = `You are the official AI Portfolio Assistant for Wassim AHMED. Answer professionally in French.`;
 
 const models = [
@@ -35,7 +35,7 @@ const models = [
 
 async function testModel(model) {
   console.log(`\n📡 Test du modèle : [${model}]...`);
-  
+
   const payload = JSON.stringify({
     systemInstruction: {
       parts: [{ text: systemPrompt }],
@@ -68,13 +68,18 @@ async function testModel(model) {
     if (response.ok) {
       const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
       console.log(`✅ SUCCÈS avec ${model} (HTTP ${status}) !`);
-      console.log(`\n💬 Réponse reçue de l'IA :\n------------------------------------------`);
+      console.log(
+        `\n💬 Réponse reçue de l'IA :\n------------------------------------------`
+      );
       console.log(text?.trim());
       console.log(`------------------------------------------`);
       return true;
     } else {
       console.error(`❌ ÉCHEC avec ${model} (HTTP ${status})`);
-      console.error(`Détail de l'erreur Google :`, JSON.stringify(data, null, 2));
+      console.error(
+        `Détail de l'erreur Google :`,
+        JSON.stringify(data, null, 2)
+      );
       return false;
     }
   } catch (err) {
@@ -87,11 +92,15 @@ async function run() {
   for (const model of models) {
     const success = await testModel(model);
     if (success) {
-      console.log(`\n🎉 Votre clé API Gemini fonctionne parfaitement avec ${model} !`);
+      console.log(
+        `\n🎉 Votre clé API Gemini fonctionne parfaitement avec ${model} !`
+      );
       process.exit(0);
     }
   }
-  console.log("\n⚠️ Aucun modèle n'a pu répondre. Vérifiez le message d'erreur ci-dessus.");
+  console.log(
+    "\n⚠️ Aucun modèle n'a pu répondre. Vérifiez le message d'erreur ci-dessus."
+  );
   process.exit(1);
 }
 
