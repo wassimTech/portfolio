@@ -56,7 +56,7 @@ export function SkillsSection() {
 
         {/* Centered Category Filter Buttons */}
         <div
-          className="flex items-center justify-center gap-2 overflow-x-auto w-full pb-2 scrollbar-none"
+          className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto w-full py-2 px-1 scrollbar-none"
           role="toolbar"
           aria-label={t("sections.skillsTitle")}
         >

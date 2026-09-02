@@ -213,7 +213,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </div>
 
             <div className="lg:col-span-5 space-y-6">
-              <div className="rounded-2xl overflow-hidden border border-border/80 shadow-md">
+              <div className="w-full">
                 <ProjectBanner projectId={project.id} />
               </div>
 

@@ -41,7 +41,7 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
     <article className="glass-panel p-5 sm:p-6 rounded-3xl border border-border hover:border-primary/50 transition-all duration-300 flex flex-col justify-between space-y-4 group h-full hover:shadow-xl hover:shadow-primary/5">
       {/* Top Banner Graphic & Meta */}
       <div className="space-y-3.5">
-        <div className="w-full rounded-2xl overflow-hidden">
+        <div className="w-full">
           <ProjectBanner projectId={project.id} />
         </div>
 
