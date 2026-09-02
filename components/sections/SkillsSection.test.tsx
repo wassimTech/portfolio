@@ -8,7 +8,7 @@ describe("SkillsSection", () => {
     render(<SkillsSection />);
 
     expect(
-      screen.getByRole("heading", { level: 2, name: /matrice de compétences/i })
+      screen.getByRole("heading", { level: 2, name: /compétences/i })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
@@ -24,20 +24,20 @@ describe("SkillsSection", () => {
     ).toBeInTheDocument();
   });
 
-  it("switches category filter tabs and shows only selected category", async () => {
+  it("switches category filter buttons and shows only selected category", async () => {
     const { user } = render(<SkillsSection />);
 
-    const frameworksTab = screen.getByRole("tab", { name: /Frameworks/i });
-    await user.click(frameworksTab);
+    const frameworksBtn = screen.getByRole("button", { name: /Frameworks/i });
+    await user.click(frameworksBtn);
 
-    expect(frameworksTab).toHaveAttribute("aria-selected", "true");
+    expect(frameworksBtn).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByText("NestJS")).toBeInTheDocument();
     expect(screen.getByText("Express")).toBeInTheDocument();
     expect(screen.queryByText("HTML")).not.toBeInTheDocument();
 
-    const allTab = screen.getByRole("tab", { name: /Toutes/i });
-    await user.click(allTab);
-    expect(allTab).toHaveAttribute("aria-selected", "true");
+    const allBtn = screen.getByRole("button", { name: /Toutes/i });
+    await user.click(allBtn);
+    expect(allBtn).toHaveAttribute("aria-pressed", "true");
     expect(screen.getByText("HTML")).toBeInTheDocument();
   });
 });

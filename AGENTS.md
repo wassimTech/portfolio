@@ -13,6 +13,11 @@ We are building a trilingual (Arabic, French & English) modern developer portfol
 The portfolio highlights:
 
 - **Interactive Hero & Bio**: Highlighting full-stack web & cloud architecture expertise and core skills.
+  - The animated typing roles in the Hero section must cycle through **three distinct** entries:
+    1. `personalInfo.title` (e.g. "Développeur Full Stack")
+    2. **"Développeur Web"** (fr) / **"Web Developer"** (en) / **"مطور ويب"** (ar)
+    3. **"Développeur Mobile"** (fr) / **"Mobile Developer"** (en) / **"مطور تطبيقات موبايل"** (ar)
+  - Do **NOT** combine them into a single "Web & Mobile" entry — keep Web and Mobile as two separate roles.
 - **Trilingual Support (AR / FR / EN)**: Complete Arabic (RTL), French (LTR), and English (LTR) toggle with seamless layout flipping (`dir="rtl"` / `dir="ltr"`).
 - **Featured Projects**: Showcase of key projects (Project Workflow Platform, URJOB Recruitment, ZorLife, Bloom, Obydo, Webinarplease) with detailed tech tags, metrics, and role descriptions.
 - **Interactive Experience Timeline**: Timeline of positions (TEKAB.DEV, Sastec, GoMyCode) and education (ENIS Engineer Degree, FSS Prep, Baccalaureate).

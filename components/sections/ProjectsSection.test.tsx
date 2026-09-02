@@ -4,26 +4,28 @@ import { render, screen } from "@/test/test-utils";
 import { ProjectsSection } from "./ProjectsSection";
 
 describe("ProjectsSection", () => {
-  it("renders project section header and filter tabs", () => {
+  it("renders project section header and filter buttons", () => {
     render(<ProjectsSection />);
 
     expect(screen.getByRole("heading", { level: 2 })).toBeInTheDocument();
     expect(
-      screen.getByRole("tablist", { name: /filter projects by category/i })
+      screen.getByRole("group", { name: /mes réalisations/i })
     ).toBeInTheDocument();
   });
 
-  it("filters projects when clicking a category filter tab", async () => {
+  it("filters projects when clicking a category filter button", async () => {
     const { user } = render(<ProjectsSection />);
 
-    const allTab = screen.getByRole("tab", { name: /tous/i });
-    expect(allTab).toHaveAttribute("aria-selected", "true");
+    const allBtn = screen.getByRole("button", { name: /tous/i });
+    expect(allBtn).toHaveAttribute("aria-pressed", "true");
 
-    const mobileTab = screen.getByRole("tab", { name: /mobile/i });
-    await user.click(mobileTab);
+    const mobileBtn = screen.getByRole("button", {
+      name: /applications mobiles/i,
+    });
+    await user.click(mobileBtn);
 
-    expect(mobileTab).toHaveAttribute("aria-selected", "true");
-    expect(allTab).toHaveAttribute("aria-selected", "false");
+    expect(mobileBtn).toHaveAttribute("aria-pressed", "true");
+    expect(allBtn).toHaveAttribute("aria-pressed", "false");
   });
 
   it("opens deep-dive project modal when clicking details button and closes it", async () => {

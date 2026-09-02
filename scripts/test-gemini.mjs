@@ -1,8 +1,6 @@
 // scripts/test-gemini.mjs
 // Test script to debug Google Gemini API connection directly from terminal
 
-import https from "node:https";
-
 const apiKey = process.argv[2] || process.env.GEMINI_API_KEY || "";
 
 console.log("==========================================");

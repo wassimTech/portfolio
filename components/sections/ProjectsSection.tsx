@@ -6,6 +6,7 @@ import { projects } from "@/data/cv";
 import { Project } from "@/types/cv";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectModal } from "@/components/ui/ProjectModal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Code, Layers, Smartphone, Layout } from "lucide-react";
 
 type CategoryFilter = "all" | "fullstack" | "mobile" | "frontend";
@@ -40,46 +41,41 @@ export function ProjectsSection() {
     <section
       id="projects"
       className="py-20 relative bg-background/50 border-t border-border"
-      aria-label="Projects Section"
+      aria-label={t("sections.projectsTitle")}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-            {t("sections.projectsTitle")}
-          </h2>
-          <p className="text-base text-muted-foreground">
-            {t("sections.projectsSubtitle")}
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header with Code Bracket Style */}
+        <SectionHeading
+          title={t("sections.projectsTitle")}
+          subtitle={t("sections.projectsSubtitle")}
+        />
 
-          {/* Category Filter Chips */}
-          <div
-            className="flex flex-wrap justify-center items-center gap-2 pt-4"
-            role="tablist"
-            aria-label="Filter projects by category"
-          >
-            {categories.map((cat) => {
-              const IconComponent = cat.icon;
-              const isActive = activeCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                    isActive
-                      ? "bg-primary text-primary-foreground shadow-md"
-                      : "bg-card text-muted-foreground hover:text-foreground hover:bg-muted border border-border"
-                  }`}
-                >
-                  <IconComponent className="w-4 h-4" aria-hidden="true" />
-                  <span>{t(cat.labelKey)}</span>
-                </button>
-              );
-            })}
-          </div>
+        {/* Category Filter Chips */}
+        <div
+          className="flex flex-wrap justify-center items-center gap-2"
+          role="group"
+          aria-label={t("sections.projectsTitle")}
+        >
+          {categories.map((cat) => {
+            const IconComponent = cat.icon;
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer ${
+                  isActive
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "bg-card text-muted-foreground hover:text-foreground hover:bg-muted border border-border"
+                }`}
+              >
+                <IconComponent className="w-4 h-4" aria-hidden="true" />
+                <span>{t(cat.labelKey)}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Projects Grid */}

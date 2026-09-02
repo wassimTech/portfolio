@@ -3,7 +3,8 @@
     "skipToContent": "Passer au contenu principal",
     "about": "À propos",
     "projects": "Projets",
-    "experience": "Parcours",
+    "qualification": "Qualification",
+    "experience": "Qualification",
     "skills": "Compétences",
     "assistant": "Assistant IA",
     "contact": "Contact",
@@ -19,29 +20,40 @@
     "subtitle": "Conception et développement d'architectures web modernes, d'applications mobiles React Native et de services Cloudflare haute performance.",
     "viewProjects": "Explorer les projets",
     "contactMe": "Me contacter",
-    "viewExperience": "Voir le parcours",
+    "viewExperience": "Qualification",
     "downloadCvPdf": "Télécharger le CV (PDF)",
     "askAi": "Interroger l'IA",
     "experienceYears": "5+ Ans d'Expérience",
     "projectsDelivered": "6+ Projets Majeurs",
     "techQuality": "100% Code Moderne",
-    "cloudPlatform": "Cloudflare & APIs"
+    "cloudPlatform": "Cloudflare & APIs",
+    "scrollDown": "Faire défiler"
   },
   "sections": {
-    "projectsTitle": "Projets Réalisés",
-    "projectsSubtitle": "Une sélection d'applications web modernes, architectures Cloudflare serverless et applications mobiles.",
+    "aboutTitle": "À propos",
+    "aboutSubtitle": "Mon introduction",
+    "servicesTitle": "Services",
+    "servicesSubtitle": "Ce que je propose",
+    "qualificationTitle": "Qualification",
+    "qualificationSubtitle": "Mon parcours personnel",
+    "educationTab": "Formation",
+    "workTab": "Expérience",
+    "projectsTitle": "Mes Réalisations",
+    "projectsSubtitle": "Projets récents",
     "allProjects": "Tous",
     "fullstackProjects": "Fullstack Web",
     "mobileProjects": "Applications Mobiles",
     "frontendProjects": "Frontend",
     "experienceTitle": "Parcours & Expériences",
     "experienceSubtitle": "Mon cheminement professionnel en tant que développeur, chef d'équipe et instructeur.",
-    "skillsTitle": "Matrice de Compétences",
-    "skillsSubtitle": "Technologies et outils maîtrisés au fil de mes projets avec logos officiels.",
+    "skillsTitle": "Mes Compétences",
+    "skillsSubtitle": "Mes compétences techniques",
     "assistantTitle": "Assistant Virtuel IA",
     "assistantSubtitle": "Interrogez l'intelligence artificielle sur mes compétences, mes réalisations et mes architectures Cloudflare & Next.js.",
-    "contactTitle": "Prenons Contact",
-    "contactSubtitle": "Discutons de vos projets, d'architecture web & Cloud, ou d'opportunités de collaboration.",
+    "assistantInstant": "Réponses instantanées",
+    "assistantVerified": "Basé sur le CV & Projets réels",
+    "contactTitle": "Me Contacter",
+    "contactSubtitle": "Prendre contact",
     "viewOnGithub": "Code Source",
     "liveDemo": "Démo En Ligne",
     "viewProjectDetails": "Détails & Réalisations",
@@ -54,7 +66,6 @@
     "teamLabel": "Équipe :",
     "techStack": "Technologies utilisées :"
   },
-
   "skills": {
     "searchPlaceholder": "Filtrer une compétence (ex: Next.js, Cloudflare, NestJS)...",
     "allCategories": "Toutes",
@@ -73,7 +84,15 @@
     "error": "Désolé, une erreur est survenue. Veuillez réessayer.",
     "badge": "En ligne",
     "clear": "Effacer",
-    "heroCta": "Poser une question à l'IA sur mon profil"
+    "heroCta": "Poser une question à l'IA sur mon profil",
+    "teaser": "🤖 Assistant IA : Posez vos questions sur Wassim, ses expériences, formations & compétences !",
+    "teaserTitle": "Assistant CV IA",
+    "teaserStatus": "En ligne • Réponse instantanée",
+    "teaserText": "Bonjour ! Je suis l'IA de Wassim. Posez-moi une question sur son parcours, ses projets ou ses compétences.",
+    "teaserCta": "Discuter avec l'IA",
+    "teaserQuickQuestion1": "Quels sont ses projets clés ?",
+    "teaserQuickQuestion2": "Compétences Cloudflare & Next.js ?",
+    "dismissTeaser": "Fermer l'invitation"
   },
   "downloads": {
     "title": "Télécharger le CV Complet (Wassim AHMED)",
@@ -83,7 +102,6 @@
     "viewOnline": "Visualiser dans le navigateur",
     "markdown": "Format Markdown (.md)"
   },
-
   "contact": {
     "emailLabel": "Email professionnel",
     "phoneLabel": "Téléphone",
@@ -92,6 +110,16 @@
     "emailCopied": "Email copié dans le presse-papier !",
     "copyPhone": "Copier le téléphone",
     "phoneCopied": "Numéro copié !"
+  },
+  "theme": {
+    "colorTheme": "Palette de couleurs",
+    "chooseColor": "Choisir une couleur d'accent",
+    "orange": "Orange Sunset",
+    "emerald": "Émeraude Cyber",
+    "cyan": "Cyan Edge",
+    "violet": "Violet Nebula",
+    "rose": "Rose Rubis",
+    "amber": "Ambre Solaire"
   },
   "footer": {
     "rights": "Tous droits réservés.",

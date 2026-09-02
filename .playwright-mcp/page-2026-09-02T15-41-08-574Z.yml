@@ -1,0 +1,468 @@
+- generic [ref=e2]:
+    - banner [ref=e3]:
+        - navigation [ref=e4]:
+            - link "Shaima Hamila" [ref=e5] [cursor=pointer]:
+                - /url: intro
+            - generic [ref=e6]:
+                - list [ref=e7]:
+                    - listitem [ref=e8] [cursor=pointer]:
+                        - generic [ref=e9]: Home
+                    - listitem [ref=e10] [cursor=pointer]:
+                        - generic [ref=e11]: About
+                    - listitem [ref=e12] [cursor=pointer]:
+                        - generic [ref=e13]: Services
+                    - listitem [ref=e14] [cursor=pointer]:
+                        - generic [ref=e15]: Skills
+                    - listitem [ref=e16] [cursor=pointer]:
+                        - generic [ref=e17]: Qualification
+                    - listitem [ref=e18] [cursor=pointer]:
+                        - generic [ref=e19]: Projects
+                    - listitem [ref=e20] [cursor=pointer]:
+                        - generic [ref=e21]: Contact
+                - text: 
+            - generic [ref=e22]:
+                - generic [ref=e23] [cursor=pointer]: 
+                - text: 
+    - generic [ref=e24]:
+        - generic [ref=e26]:
+            - generic [ref=e27]:
+                - generic [ref=e28]:
+                    - heading "Hi, I'm Shaima Hamila" [level=1] [ref=e29]:
+                        - text: Hi, I'm
+                        - generic [ref=e30]: Shaima Hamila
+                    - heading [level=3] [ref=e31]: "|"
+                    - paragraph [ref=e32]: Transforming ideas into reality with code. I build accessible, responsive, and performant web applications.
+                    - generic [ref=e33]:
+                        - link "Let's Talk " [ref=e34] [cursor=pointer]:
+                            - /url: "#contact"
+                            - text: Let's Talk
+                            - generic [ref=e35]: 
+                        - generic [ref=e36]:
+                            - link "" [ref=e37] [cursor=pointer]:
+                                - /url: https://www.linkedin.com/in/shaimahamila/
+                            - link "" [ref=e39] [cursor=pointer]:
+                                - /url: https://github.com/shaimaHamila
+                            - link "" [ref=e41] [cursor=pointer]:
+                                - /url: https://dribbble.com/shaimahamila
+                            - link "" [ref=e43] [cursor=pointer]:
+                                - /url: https://www.facebook.com/shaimahamila
+                            - link "" [ref=e45] [cursor=pointer]:
+                                - /url: https://www.instagram.com/shaimahamila/
+                - img "Profile" [ref=e49]
+            - link " Scroll Down " [ref=e51] [cursor=pointer]:
+                - /url: "#about"
+                - generic [ref=e52]: 
+                - generic [ref=e53]: Scroll Down
+                - generic [ref=e54]: 
+        - generic [ref=e55]:
+            - generic [ref=e56]:
+                - heading "< About Me / >" [level=2] [ref=e57]
+                - generic [ref=e58]: My introduction
+            - generic [ref=e59]:
+                - img "about me" [ref=e60]
+                - generic [ref=e61]:
+                    - paragraph [ref=e62]: I’m a Software Engineering & Full-stack JS developer with 2 years of experience. I specialize in creating high-quality web applications.
+                    - list [ref=e63]:
+                        - listitem [ref=e64]: 🚀 I deliver client-focused solutions.
+                        - listitem [ref=e65]: ⚡ I'm a web developer Freelancer.
+                        - listitem [ref=e66]: 🔥 I love sharing programming tips.
+                    - generic [ref=e67]:
+                        - generic [ref=e68]:
+                            - generic [ref=e69]: 02+
+                            - generic [ref=e70]: yearsexperience
+                        - generic [ref=e71]:
+                            - generic [ref=e72]: 15+
+                            - generic [ref=e73]: Completedproject
+                        - generic [ref=e74]:
+                            - generic [ref=e75]: 05+
+                            - generic [ref=e76]: Companiesworked
+                    - link "Download CV " [ref=e78] [cursor=pointer]:
+                        - /url: pdf/ShaimaHamilaCV2026.pdf
+                        - text: Download CV
+                        - generic [ref=e79]: 
+        - generic [ref=e80]:
+            - generic [ref=e81]:
+                - heading "< Services / >" [level=2] [ref=e82]
+                - generic [ref=e83]: What I offer
+            - generic [ref=e84]:
+                - generic [ref=e85]:
+                    - generic [ref=e86]:
+                        - generic [ref=e87]: 
+                        - heading "Web Developer" [level=3] [ref=e88]
+                        - paragraph [ref=e89]: I build responsive and dynamic web applications, providing seamless user experiences.
+                    - link "View My Github " [ref=e90] [cursor=pointer]:
+                        - /url: https://github.com/shaimaHamila
+                        - text: View My Github
+                        - generic [ref=e91]: 
+                - generic [ref=e92]:
+                    - generic [ref=e93]:
+                        - generic [ref=e94]: 
+                        - heading "WordPress Developer" [level=3] [ref=e95]
+                        - paragraph [ref=e96]: I develop custom WordPress sites tailored to your needs, ensuring functionality and aesthetics.
+                    - link "View More " [ref=e97] [cursor=pointer]:
+                        - /url: "#projects"
+                        - text: View More
+                        - generic [ref=e98]: 
+                - generic [ref=e99]:
+                    - generic [ref=e100]:
+                        - generic [ref=e101]: 
+                        - heading "UX/UI Designer" [level=3] [ref=e102]
+                        - paragraph [ref=e103]: I build responsive and dynamic web applications, providing seamless user experiences.
+                    - link "View My Dribbble " [ref=e104] [cursor=pointer]:
+                        - /url: https://dribbble.com/shaimaHamila
+                        - text: View My Dribbble
+                        - generic [ref=e105]: 
+        - generic [ref=e106]:
+            - generic [ref=e107]:
+                - heading "< My Skills / >" [level=2] [ref=e108]
+                - generic [ref=e109]: My technical skills
+            - generic [ref=e110]:
+                - generic [ref=e111]:
+                    - generic [ref=e112]: 
+                    - generic [ref=e113]:
+                        - heading "React Ts" [level=3] [ref=e114]
+                        - paragraph [ref=e115]: Frontend
+                - generic [ref=e116]:
+                    - generic [ref=e117]: 
+                    - generic [ref=e118]:
+                        - heading "Angular" [level=3] [ref=e119]
+                        - paragraph [ref=e120]: Frontend
+                - generic [ref=e121]:
+                    - generic [ref=e122]: 
+                    - generic [ref=e123]:
+                        - heading "Redux Toolkit" [level=3] [ref=e124]
+                        - paragraph [ref=e125]: Frontend
+                - generic [ref=e127]:
+                    - heading "Tanstack query" [level=3] [ref=e128]
+                    - paragraph [ref=e129]: Frontend
+                - generic [ref=e130]:
+                    - generic [ref=e131]: 
+                    - generic [ref=e132]:
+                        - heading "Tailwind" [level=3] [ref=e133]
+                        - paragraph [ref=e134]: Frontend
+                - generic [ref=e135]:
+                    - generic [ref=e136]: 
+                    - generic [ref=e137]:
+                        - heading "Bootstrap" [level=3] [ref=e138]
+                        - paragraph [ref=e139]: Frontend
+                - generic [ref=e140]:
+                    - generic [ref=e141]: 
+                    - generic [ref=e142]:
+                        - heading "Ant Design" [level=3] [ref=e143]
+                        - paragraph [ref=e144]: Frontend
+                - generic [ref=e145]:
+                    - generic [ref=e146]: 
+                    - generic [ref=e147]:
+                        - heading "Express Ts" [level=3] [ref=e148]
+                        - paragraph [ref=e149]: Backend
+                - generic [ref=e150]:
+                    - generic [ref=e151]: 
+                    - generic [ref=e152]:
+                        - heading "Nest js" [level=3] [ref=e153]
+                        - paragraph [ref=e154]: Backend
+                - generic [ref=e155]:
+                    - generic [ref=e156]: 
+                    - generic [ref=e157]:
+                        - heading "Spring Boot" [level=3] [ref=e158]
+                        - paragraph [ref=e159]: Backend
+                - generic [ref=e160]:
+                    - generic [ref=e161]: 
+                    - generic [ref=e162]:
+                        - heading "Laravel" [level=3] [ref=e163]
+                        - paragraph [ref=e164]: Backend
+                - generic [ref=e165]:
+                    - generic [ref=e166]: 
+                    - generic [ref=e167]:
+                        - heading ".NET" [level=3] [ref=e168]
+                        - paragraph [ref=e169]: Backend
+                - generic [ref=e170]:
+                    - generic [ref=e171]: 
+                    - generic [ref=e172]:
+                        - heading "Socket.io" [level=3] [ref=e173]
+                        - paragraph [ref=e174]: backend
+                - generic [ref=e175]:
+                    - generic [ref=e176]: 
+                    - generic [ref=e177]:
+                        - heading "Firebase" [level=3] [ref=e178]
+                        - paragraph [ref=e179]: Backend
+                - generic [ref=e180]:
+                    - generic [ref=e181]: 
+                    - generic [ref=e182]:
+                        - heading "MongoDB" [level=3] [ref=e183]
+                        - paragraph [ref=e184]: Backend
+                - generic [ref=e185]:
+                    - generic [ref=e186]: 
+                    - generic [ref=e187]:
+                        - heading "SQL" [level=3] [ref=e188]
+                        - paragraph [ref=e189]: Backend
+                - generic [ref=e190]:
+                    - generic [ref=e191]: 
+                    - generic [ref=e192]:
+                        - heading "Postgresql" [level=3] [ref=e193]
+                        - paragraph [ref=e194]: Backend
+                - generic [ref=e195]:
+                    - generic [ref=e196]: 
+                    - generic [ref=e197]:
+                        - heading "Prisma" [level=3] [ref=e198]
+                        - paragraph [ref=e199]: Backend
+                - generic [ref=e200]:
+                    - generic [ref=e201]: 
+                    - generic [ref=e202]:
+                        - heading "Docker" [level=3] [ref=e203]
+                        - paragraph [ref=e204]: Devops
+                - generic [ref=e205]:
+                    - generic [ref=e206]: 
+                    - generic [ref=e207]:
+                        - heading "Git" [level=3] [ref=e208]
+                        - paragraph [ref=e209]: Devops
+                - generic [ref=e210]:
+                    - generic [ref=e211]: 
+                    - generic [ref=e212]:
+                        - heading "WordPress" [level=3] [ref=e213]
+                        - paragraph [ref=e214]: CMS
+                - generic [ref=e215]:
+                    - generic [ref=e216]: 
+                    - generic [ref=e217]:
+                        - heading "Figma" [level=3] [ref=e218]
+                        - paragraph [ref=e219]: Design
+        - generic [ref=e220]:
+            - generic [ref=e221]:
+                - heading "< Qualification / >" [level=2] [ref=e222]
+                - generic [ref=e223]: My personal journey
+            - generic [ref=e224]:
+                - generic [ref=e225]:
+                    - generic [ref=e226] [cursor=pointer]:
+                        - generic [ref=e227]: 
+                        - text: Education
+                    - generic [ref=e228] [cursor=pointer]:
+                        - generic [ref=e229]: 
+                        - text: Work
+                - generic [ref=e231]:
+                    - generic [ref=e233]:
+                        - heading "Software Engineering Degree" [level=3] [ref=e234]
+                        - generic [ref=e235]: Higher Institute of Computer Science and Multimedia of Sfax
+                        - generic [ref=e236]:
+                            - generic [ref=e237]: 
+                            - text: 2022 - 2025
+                    - generic [ref=e246]:
+                        - heading "License in Computer Science and Multimedia" [level=3] [ref=e247]
+                        - generic [ref=e248]: Higher Institute of Computer Science and Multimedia of Sfax
+                        - generic [ref=e249]:
+                            - generic [ref=e250]: 
+                            - text: 2019 - 2022
+                    - generic [ref=e252]:
+                        - heading "High School Diploma in Mathematics" [level=3] [ref=e253]
+                        - generic [ref=e254]: Farhat Hached High School
+                        - generic [ref=e255]:
+                            - generic [ref=e256]: 
+                            - text: 2018 - 2019
+        - generic [ref=e259]:
+            - generic [ref=e260]:
+                - heading "< My work / >" [level=2] [ref=e261]
+                - generic [ref=e262]: Most recent work
+            - generic [ref=e263]:
+                - generic [ref=e264]:
+                    - img "Finance Management System" [ref=e265] [cursor=pointer]
+                    - generic [ref=e266]:
+                        - heading "Finance Management System" [level=3] [ref=e267]
+                        - paragraph [ref=e268]: A web app to manage financial transactions, subscriptions, and multi-branch and center operations with role-based access. Built with React, Express.js, Prisma, and PostgreSQL.
+                        - link "View Project " [ref=e269] [cursor=pointer]:
+                            - /url: https://dar-coran.com/
+                            - text: View Project
+                            - generic [ref=e270]: 
+                - generic [ref=e271]:
+                    - img "Tracking System Web App" [ref=e272] [cursor=pointer]
+                    - generic [ref=e273]:
+                        - heading "Tracking System Web App" [level=3] [ref=e274]
+                        - paragraph [ref=e275]: A web app for project, ticket, and equipment management with real-time notifications. Built with React, Express, Prisma, and PostgreSQL.
+                        - link "View Project " [ref=e276] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/Tracking_system
+                            - text: View Project
+                            - generic [ref=e277]: 
+                - generic [ref=e278]:
+                    - img "Real time chat app" [ref=e279] [cursor=pointer]
+                    - generic [ref=e280]:
+                        - heading "Real time chat app" [level=3] [ref=e281]
+                        - paragraph [ref=e282]: Built with React, Node.js, and Socket.io for seamless messaging.
+                        - link "View Project " [ref=e283] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/chat-App
+                            - text: View Project
+                            - generic [ref=e284]: 
+                - generic [ref=e285]:
+                    - img "Vanlog Website" [ref=e286] [cursor=pointer]
+                    - generic [ref=e287]:
+                        - heading "Vanlog Website" [level=3] [ref=e288]
+                        - paragraph [ref=e289]: Freelance project for order tracking and managment, developed frontend with React and designed UX/UI.
+                        - link "View Project " [ref=e290] [cursor=pointer]:
+                            - /url: https://vanlog-express.com/
+                            - text: View Project
+                            - generic [ref=e291]: 
+                - generic [ref=e292]:
+                    - img "Kanban Board" [ref=e293] [cursor=pointer]
+                    - generic [ref=e294]:
+                        - heading "Kanban Board" [level=3] [ref=e295]
+                        - paragraph [ref=e296]: A task management system with drag-and-drop support for organizing tasks by status. Built with Laravel and Livewire.
+                        - link "View Project " [ref=e297] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/taskmanage-kanban
+                            - text: View Project
+                            - generic [ref=e298]: 
+                - generic [ref=e299]:
+                    - img "Movie Website" [ref=e300] [cursor=pointer]
+                    - generic [ref=e301]:
+                        - heading "Movie Website" [level=3] [ref=e302]
+                        - paragraph [ref=e303]: A web app to browse, search, and manage movie information. Built with React, Redux, and a mock API.
+                        - link "View Project " [ref=e304] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/MovieWebsite
+                            - text: View Project
+                            - generic [ref=e305]: 
+                - generic [ref=e306]:
+                    - img "Wordpress Website" [ref=e307] [cursor=pointer]
+                    - generic [ref=e308]:
+                        - heading "Wordpress Website" [level=3] [ref=e309]
+                        - paragraph [ref=e310]: I designed and developed this website using WordPress.
+                        - link "View Project " [ref=e311] [cursor=pointer]:
+                            - /url: "#"
+                            - text: View Project
+                            - generic [ref=e312]: 
+                - generic [ref=e313]:
+                    - img "UX/UI Design" [ref=e314] [cursor=pointer]
+                    - generic [ref=e315]:
+                        - heading "UX/UI Design" [level=3] [ref=e316]
+                        - paragraph [ref=e317]: I designed this Landing page.
+                        - link "View Project " [ref=e318] [cursor=pointer]:
+                            - /url: https://dribbble.com/shots/16662009-Asfar-El-Hamd-Logo-Travel-Agency-logo
+                            - text: View Project
+                            - generic [ref=e319]: 
+                - generic [ref=e320]:
+                    - img "Mobile App" [ref=e321] [cursor=pointer]
+                    - generic [ref=e322]:
+                        - heading "Mobile App" [level=3] [ref=e323]
+                        - paragraph [ref=e324]: Developed Fansbook, a mobile app using Ionic/Angular and Firebase.
+                        - link "View Project " [ref=e325] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/fansbook
+                            - text: View Project
+                            - generic [ref=e326]: 
+                - generic [ref=e327]:
+                    - img "React Boilerplate" [ref=e328] [cursor=pointer]
+                    - generic [ref=e329]:
+                        - heading "React Boilerplate" [level=3] [ref=e330]
+                        - paragraph [ref=e331]: React Boilerplate with TypeScript, Redux Toolkit, Axios, Routing, Docker, Prettier.
+                        - link "View Project " [ref=e332] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/React-Boilerplate
+                            - text: View Project
+                            - generic [ref=e333]: 
+                - generic [ref=e334]:
+                    - img "API-Quick-Test" [ref=e335] [cursor=pointer]
+                    - generic [ref=e336]:
+                        - heading "API-Quick-Test" [level=3] [ref=e337]
+                        - paragraph [ref=e338]: Is a user-friendly tool for efficient API testing.
+                        - link "View Project " [ref=e339] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/API-Quick-Test
+                            - text: View Project
+                            - generic [ref=e340]: 
+                - generic [ref=e341]:
+                    - img "Hospital Management" [ref=e342] [cursor=pointer]
+                    - generic [ref=e343]:
+                        - heading "Hospital Management" [level=3] [ref=e344]
+                        - paragraph [ref=e345]: Hospital Management System developed with React and ASP.NET Core EF 8.
+                        - link "View Project " [ref=e346] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/HospitalManagement
+                            - text: View Project
+                            - generic [ref=e347]: 
+                - generic [ref=e348]:
+                    - img "MyFinance" [ref=e349] [cursor=pointer]
+                    - generic [ref=e350]:
+                        - heading "MyFinance" [level=3] [ref=e351]
+                        - paragraph [ref=e352]: Web application developed with .NET Core 3.1 Entity Framework Core ASP.NET Core MVC HTML CSS.
+                        - link "View Project " [ref=e353] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/MyFinance
+                            - text: View Project
+                            - generic [ref=e354]: 
+                - generic [ref=e355]:
+                    - img "Stack-Overflow-Clone" [ref=e356] [cursor=pointer]
+                    - generic [ref=e357]:
+                        - heading "Stack-Overflow-Clone" [level=3] [ref=e358]
+                        - paragraph [ref=e359]: StackOverflow clone built with Angular and Spring Boot, utilizing JWT for security.
+                        - link "View Project " [ref=e360] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/Stack-Overflow-Clone
+                            - text: View Project
+                            - generic [ref=e361]: 
+                - generic [ref=e362]:
+                    - img "RunGroup web app" [ref=e363] [cursor=pointer]
+                    - generic [ref=e364]:
+                        - heading "RunGroup web app" [level=3] [ref=e365]
+                        - paragraph [ref=e366]: RunGroup is a Spring MVC web app designed to manage running clubs and events efficiently.
+                        - link "View Project " [ref=e367] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila/RunGroup
+                            - text: View Project
+                            - generic [ref=e368]: 
+        - generic [ref=e369]:
+            - generic [ref=e370]:
+                - heading "< Contact Me / >" [level=2] [ref=e371]
+                - generic [ref=e372]: Get in touch
+            - generic [ref=e373]:
+                - generic [ref=e374]:
+                    - generic [ref=e375]:
+                        - generic [ref=e376]: 
+                        - generic [ref=e377]:
+                            - heading "Email" [level=3] [ref=e378]
+                            - text: shaima@hamila.uk
+                    - generic [ref=e379]:
+                        - generic [ref=e380]: 
+                        - generic [ref=e381]:
+                            - heading "Location" [level=3] [ref=e382]
+                            - text: Luxembourg
+                - generic [ref=e383]:
+                    - generic [ref=e384]:
+                        - generic [ref=e385]:
+                            - text: Full Name
+                            - textbox "Your name" [ref=e386]
+                        - generic [ref=e387]:
+                            - text: Email
+                            - textbox "name@gmail.com" [ref=e388]
+                    - generic [ref=e389]:
+                        - text: Message
+                        - textbox "Your message ..." [ref=e390]
+                    - button "Send Message " [ref=e392] [cursor=pointer]:
+                        - text: Send Message
+                        - generic [ref=e393]: 
+    - contentinfo [ref=e394]:
+        - generic [ref=e395]:
+            - generic [ref=e396]:
+                - generic [ref=e397]:
+                    - heading "Shaima Hamila" [level=1] [ref=e398]
+                    - paragraph [ref=e399]: Full-stack JS developer
+                    - generic [ref=e400]:
+                        - link "" [ref=e401] [cursor=pointer]:
+                            - /url: https://www.linkedin.com/in/shaimahamila/
+                        - link "" [ref=e403] [cursor=pointer]:
+                            - /url: https://github.com/shaimaHamila
+                        - link "" [ref=e405] [cursor=pointer]:
+                            - /url: https://dribbble.com/shaimahamila
+                        - link "" [ref=e407] [cursor=pointer]:
+                            - /url: https://www.facebook.com/shaimahamila
+                        - link "" [ref=e409] [cursor=pointer]:
+                            - /url: https://www.instagram.com/shaimahamila/
+                - list [ref=e411]:
+                    - listitem [ref=e412]:
+                        - link "Home" [ref=e413] [cursor=pointer]:
+                            - /url: "#intro"
+                    - listitem [ref=e414]:
+                        - link "About" [ref=e415] [cursor=pointer]:
+                            - /url: "#about"
+                    - listitem [ref=e416]:
+                        - link "Services" [ref=e417] [cursor=pointer]:
+                            - /url: "#services"
+                    - listitem [ref=e418]:
+                        - link "Skills" [ref=e419] [cursor=pointer]:
+                            - /url: "#skills"
+                    - listitem [ref=e420]:
+                        - link "Qualification" [ref=e421] [cursor=pointer]:
+                            - /url: "#qualification"
+                    - listitem [ref=e422]:
+                        - link "Projects" [ref=e423] [cursor=pointer]:
+                            - /url: "#projects"
+                    - listitem [ref=e424]:
+                        - link "ContactMe" [ref=e425] [cursor=pointer]:
+                            - /url: "#contact"
+            - paragraph [ref=e426]: © 2026-Designed and Developed by Shaima Hamila ❤️

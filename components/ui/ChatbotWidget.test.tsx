@@ -107,4 +107,38 @@ describe("ChatbotWidget", () => {
       screen.getByText(/bonjour ! je suis l'assistant ia/i)
     ).toBeInTheDocument();
   });
+
+  it("shows teaser bubble by default and opens modal when clicked", async () => {
+    const { user } = render(<ChatbotWidget initialOpen={false} />);
+
+    expect(
+      screen.getByText(/assistant ia : posez vos questions sur wassim/i)
+    ).toBeInTheDocument();
+
+    const teaser = screen.getByText(
+      /assistant ia : posez vos questions sur wassim/i
+    );
+    await user.click(teaser);
+
+    expect(
+      screen.getByRole("dialog", { name: /assistant cv ia/i })
+    ).toBeInTheDocument();
+  });
+
+  it("dismisses teaser when clicking dismiss button", async () => {
+    const { user } = render(<ChatbotWidget initialOpen={false} />);
+
+    expect(
+      screen.getByRole("button", { name: /fermer l'invitation/i })
+    ).toBeInTheDocument();
+
+    const dismissBtn = screen.getByRole("button", {
+      name: /fermer l'invitation/i,
+    });
+    await user.click(dismissBtn);
+
+    expect(
+      screen.queryByText(/assistant ia : posez vos questions sur wassim/i)
+    ).not.toBeInTheDocument();
+  });
 });

@@ -67,7 +67,8 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     listeners.forEach((listener) => listener());
   }, []);
 
-  const dir: "ltr" | "rtl" = "ltr";
+  // Derive text direction from locale — ready for Arabic (RTL) when locale is extended
+  const dir: "ltr" | "rtl" = (locale as string) === "ar" ? "rtl" : "ltr";
 
   useEffect(() => {
     document.documentElement.lang = locale;

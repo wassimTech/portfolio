@@ -4,6 +4,8 @@ import Image from "next/image";
 interface TechIconProps {
   name: string;
   className?: string;
+  alt?: string;
+  ariaHidden?: boolean;
 }
 
 interface LogoDef {
@@ -95,7 +97,12 @@ const logoMap: Record<string, LogoDef> = {
   devfactory: { src: "/logos/npm-icon.svg" },
 };
 
-export function TechIcon({ name, className = "w-7 h-7" }: TechIconProps) {
+export function TechIcon({
+  name,
+  className = "w-7 h-7",
+  alt,
+  ariaHidden,
+}: TechIconProps) {
   const normalized = name.toLowerCase().trim();
 
   let entry = logoMap[normalized];
@@ -106,16 +113,19 @@ export function TechIcon({ name, className = "w-7 h-7" }: TechIconProps) {
     }
   }
 
+  const imageAlt = alt !== undefined ? alt : `${name} logo`;
+
   if (entry) {
     const invertClass = entry.needsInvert ? "dark:invert" : "";
 
     return (
       <div
         className={`relative inline-flex items-center justify-center ${className}`}
+        aria-hidden={ariaHidden}
       >
         <Image
           src={entry.src}
-          alt={`${name} logo`}
+          alt={imageAlt}
           width={28}
           height={28}
           className={`w-full h-full object-contain transition-transform duration-200 ${invertClass}`}

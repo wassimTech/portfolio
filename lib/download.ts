@@ -56,36 +56,27 @@ export async function downloadBlobFile(
       throw new Error("Received 0-byte blob");
     }
 
-    return new Promise<boolean>((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.URL?.createObjectURL === "function"
+    ) {
+      const blobUrl = URL.createObjectURL(blob);
+      triggerDirectAnchorDownload(blobUrl, filename);
+      setTimeout(() => {
         try {
-          const dataUrl = reader.result as string;
-          triggerDirectAnchorDownload(dataUrl, filename);
-          resolve(true);
-        } catch (linkError) {
-          console.warn(
-            "Link click failed, falling back to direct route:",
-            linkError
-          );
-          triggerDirectAnchorDownload(
-            `/api/download?file=${encodeURIComponent(filename)}`,
-            filename
-          );
-          resolve(false);
+          URL.revokeObjectURL(blobUrl);
+        } catch {
+          // ignore
         }
-      };
+      }, 1000);
+      return true;
+    }
 
-      reader.onerror = () => {
-        triggerDirectAnchorDownload(
-          `/api/download?file=${encodeURIComponent(filename)}`,
-          filename
-        );
-        resolve(false);
-      };
-
-      reader.readAsDataURL(blob);
-    });
+    triggerDirectAnchorDownload(
+      `/api/download?file=${encodeURIComponent(filename)}`,
+      filename
+    );
+    return true;
   } catch (error) {
     console.warn("Download fallback to /api/download:", error);
     triggerDirectAnchorDownload(

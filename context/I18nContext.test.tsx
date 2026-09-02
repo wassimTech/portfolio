@@ -44,6 +44,11 @@ describe("I18nContext", () => {
     expect(screen.getByTestId("locale")).toHaveTextContent("en");
     expect(screen.getByTestId("dir")).toHaveTextContent("ltr");
     expect(screen.getByTestId("translation")).toHaveTextContent("About");
+
+    await user.click(screen.getByRole("button", { name: "Set French" }));
+
+    expect(screen.getByTestId("locale")).toHaveTextContent("fr");
+    expect(screen.getByTestId("translation")).toHaveTextContent("À propos");
   });
 
   it("falls back to French translation or key path when key is not found", () => {

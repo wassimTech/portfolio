@@ -30,17 +30,18 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
   const displayedTechs = project.technologies.slice(0, MAX_TAGS_ON_CARD);
   const extraTechCount = project.technologies.length - MAX_TAGS_ON_CARD;
 
-  const newTabNotice = locale === "fr" ? "nouvel onglet" : "opens in new tab";
+  const newTabNotice =
+    (locale as string) === "fr"
+      ? "nouvel onglet"
+      : (locale as string) === "ar"
+        ? "يفتح في نافذة جديدة"
+        : "opens in new tab";
 
   return (
     <article className="glass-panel p-5 sm:p-6 rounded-3xl border border-border hover:border-primary/50 transition-all duration-300 flex flex-col justify-between space-y-4 group h-full hover:shadow-xl hover:shadow-primary/5">
       {/* Top Banner Graphic & Meta */}
       <div className="space-y-3.5">
-        <div
-          onClick={() => onSelectProject(project)}
-          className="w-full cursor-pointer rounded-2xl overflow-hidden"
-          role="presentation"
-        >
+        <div className="w-full rounded-2xl overflow-hidden">
           <ProjectBanner projectId={project.id} />
         </div>
 
@@ -78,17 +79,23 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
           {displayedTechs.map((tech) => (
             <li
               key={tech}
-              className="px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-medium border border-border/50"
+              className="px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-semibold border border-border"
             >
               {tech}
             </li>
           ))}
           {extraTechCount > 0 && (
             <li
-              className="px-1.5 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-bold border border-border/50"
-              aria-label={`+${extraTechCount} ${locale === "fr" ? "autres technologies" : "more technologies"}`}
+              className="px-1.5 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-bold border border-border"
+              aria-label={`+${extraTechCount} ${
+                (locale as string) === "fr"
+                  ? "autres technologies"
+                  : (locale as string) === "ar"
+                    ? "تقنية إضافية"
+                    : "more technologies"
+              }`}
             >
-              +{extraTechCount}
+              <span aria-hidden="true">+{extraTechCount}</span>
             </li>
           )}
         </ul>

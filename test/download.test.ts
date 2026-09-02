@@ -28,7 +28,7 @@ describe("downloadBlobFile", () => {
     vi.restoreAllMocks();
   });
 
-  it("fetches file and triggers data URI download successfully", async () => {
+  it("fetches file and triggers object URL download successfully", async () => {
     const mockBlob = new Blob(["mock pdf content"], {
       type: "application/pdf",
     });
@@ -41,19 +41,10 @@ describe("downloadBlobFile", () => {
       .spyOn(HTMLAnchorElement.prototype, "click")
       .mockImplementation(() => {});
 
-    // Mock FileReader
-    class MockFileReader {
-      result: string | ArrayBuffer | null =
-        "data:application/pdf;base64,bW9jaw==";
-      onloadend: (() => void) | null = null;
-      readAsDataURL() {
-        this.result = "data:application/pdf;base64,bW9jaw==";
-        if (this.onloadend) {
-          this.onloadend();
-        }
-      }
-    }
-    vi.stubGlobal("FileReader", MockFileReader);
+    globalThis.URL.createObjectURL = vi
+      .fn()
+      .mockReturnValue("blob:http://localhost/test-uuid");
+    globalThis.URL.revokeObjectURL = vi.fn();
 
     const result = await downloadBlobFile(
       "/CV-Wassim-AHMED-FR.pdf",
@@ -63,6 +54,7 @@ describe("downloadBlobFile", () => {
     expect(result).toBe(true);
     expect(globalThis.fetch).toHaveBeenCalledWith("/CV-Wassim-AHMED-FR.pdf");
     expect(clickSpy).toHaveBeenCalled();
+    expect(globalThis.URL.createObjectURL).toHaveBeenCalledWith(mockBlob);
   });
 
   it("falls back to direct anchor download if fetch fails", async () => {

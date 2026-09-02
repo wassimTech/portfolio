@@ -37,7 +37,11 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
     const previouslyFocused = document.activeElement as HTMLElement | null;
 
     if (!dialog.open) {
-      dialog.showModal();
+      try {
+        dialog.showModal();
+      } catch {
+        // Dialog may already be open or in an invalid state — ignore
+      }
     }
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -121,7 +125,6 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         e.preventDefault();
         onClose();
       }}
-      aria-modal="true"
       aria-labelledby="project-modal-title"
       className="m-auto fixed inset-0 z-50 p-3 sm:p-6 md:p-8 bg-transparent max-w-none max-h-none w-full h-full flex items-center justify-center border-none outline-none backdrop:bg-black/70 backdrop:backdrop-blur-md open:animate-in open:fade-in open:zoom-in-95 duration-200"
     >
@@ -189,8 +192,8 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   />
                   <span>{t("sections.keyAccomplishments")}</span>
                 </h4>
-                <div className="p-4 sm:p-5 rounded-2xl bg-muted/40 border border-border/70 space-y-3">
-                  <ul className="space-y-3 text-xs sm:text-sm text-foreground/90">
+                <div className="p-4 sm:p-5 rounded-2xl bg-muted/40 border border-border space-y-3">
+                  <ul className="space-y-3 text-xs sm:text-sm text-foreground">
                     {tasks.map((task, index) => (
                       <li
                         key={`${project.id}-task-${index}`}
@@ -225,7 +228,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   {project.technologies.map((tech) => (
                     <span
                       key={`${project.id}-tech-${tech}`}
-                      className="px-3 py-1 rounded-xl bg-secondary text-secondary-foreground text-xs font-medium border border-border/60 hover:border-primary/40 transition-colors"
+                      className="px-3 py-1 rounded-xl bg-secondary text-secondary-foreground text-xs font-semibold border border-border hover:border-primary/40 transition-colors"
                     >
                       {tech}
                     </span>

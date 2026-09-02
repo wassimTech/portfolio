@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { useI18n } from "@/context/I18nContext";
 import { skillCategories } from "@/data/cv";
 import { TechIcon } from "@/components/ui/TechIcon";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   Code2,
   Layers,
@@ -44,34 +45,29 @@ export function SkillsSection() {
     <section
       id="skills"
       className="py-20 relative bg-background/50 border-t border-border"
-      aria-label="Skills Section"
+      aria-label={t("sections.skillsTitle")}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl sm:text-5xl font-black text-foreground tracking-tight">
-            {t("sections.skillsTitle")}
-          </h2>
-          <p className="text-sm sm:text-base text-muted-foreground">
-            {t("sections.skillsSubtitle")}
-          </p>
-        </div>
+        {/* Section Header with Code Bracket Style */}
+        <SectionHeading
+          title={t("sections.skillsTitle")}
+          subtitle={t("sections.skillsSubtitle")}
+        />
 
-        {/* Centered Category Filter Tabs */}
+        {/* Centered Category Filter Buttons */}
         <div
           className="flex items-center justify-center gap-2 overflow-x-auto w-full pb-2 scrollbar-none"
-          role="tablist"
-          aria-label="Skills Category Filter"
+          role="toolbar"
+          aria-label={t("sections.skillsTitle")}
         >
           <button
             type="button"
-            role="tab"
-            aria-selected={selectedCategory === "all"}
+            aria-pressed={selectedCategory === "all"}
             onClick={() => setSelectedCategory("all")}
             className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring whitespace-nowrap cursor-pointer ${
               selectedCategory === "all"
                 ? "bg-primary text-primary-foreground shadow-sm"
-                : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/40"
+                : "bg-card border border-border text-muted-foreground dark:text-foreground/80 hover:text-foreground hover:border-primary/40"
             }`}
           >
             {t("skills.allCategories")}
@@ -83,13 +79,12 @@ export function SkillsSection() {
               <button
                 key={cat.id}
                 type="button"
-                role="tab"
-                aria-selected={isActive}
+                aria-pressed={isActive}
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring whitespace-nowrap cursor-pointer ${
                   isActive
                     ? "bg-primary text-primary-foreground shadow-sm"
-                    : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/40"
+                    : "bg-card border border-border text-muted-foreground dark:text-foreground/80 hover:text-foreground hover:border-primary/40"
                 }`}
               >
                 {catTitle}
@@ -98,7 +93,7 @@ export function SkillsSection() {
           })}
         </div>
 
-        {/* Homogeneous Categories Grid */}
+        {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           {filteredCategories.map((category) => {
             const IconComponent = getCategoryIcon(category.id);
@@ -111,7 +106,7 @@ export function SkillsSection() {
             return (
               <div
                 key={category.id}
-                className={`glass-panel p-6 sm:p-7 rounded-3xl border border-border hover:border-primary/40 transition-all space-y-6 group flex flex-col justify-between ${spanClass}`}
+                className={`glass-panel p-6 sm:p-7 rounded-3xl border border-border hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 space-y-6 group flex flex-col justify-between ${spanClass}`}
               >
                 {/* Category Header */}
                 <div className="flex items-center justify-between border-b border-border pb-4">
@@ -123,7 +118,7 @@ export function SkillsSection() {
                       {title}
                     </h3>
                   </div>
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border/50">
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border">
                     {category.skills.length}
                   </span>
                 </div>
@@ -141,9 +136,14 @@ export function SkillsSection() {
                       className="flex flex-col items-center justify-center p-3 sm:p-3.5 rounded-2xl bg-card border border-border hover:border-primary/60 hover:bg-muted/50 hover:shadow-xs transition-all duration-200 group/item text-center space-y-2 cursor-default relative aspect-square"
                     >
                       <div className="w-8 h-8 flex items-center justify-center text-foreground group-hover/item:scale-110 transition-transform duration-200">
-                        <TechIcon name={skill.name} className="w-7 h-7" />
+                        <TechIcon
+                          name={skill.name}
+                          className="w-7 h-7"
+                          alt=""
+                          ariaHidden={true}
+                        />
                       </div>
-                      <span className="text-xs font-semibold text-muted-foreground group-hover/item:text-foreground transition-colors truncate max-w-full">
+                      <span className="text-xs font-semibold text-muted-foreground dark:text-foreground/75 group-hover/item:text-foreground transition-colors truncate max-w-full">
                         {skill.name}
                       </span>
                     </div>

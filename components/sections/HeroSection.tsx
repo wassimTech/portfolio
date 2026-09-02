@@ -1,24 +1,68 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import { useI18n } from "@/context/I18nContext";
 import { personalInfo } from "@/data/cv";
-import {
-  ArrowRight,
-  Mail,
-  Layers,
-  Code2,
-  Cloud,
-  CheckCircle,
-  Briefcase,
-} from "lucide-react";
+import { Send, ArrowRight, Layers, Code2, Cloud } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 
 export function HeroSection() {
   const { locale, t } = useI18n();
 
-  const title = personalInfo.title[locale] || personalInfo.title.fr;
+  const roles = useMemo(
+    () => [
+      personalInfo.title[locale] || personalInfo.title.fr,
+      (locale as string) === "fr"
+        ? "Développeur Web"
+        : (locale as string) === "ar"
+          ? "مطور ويب"
+          : "Web Developer",
+      (locale as string) === "fr"
+        ? "Développeur Mobile"
+        : (locale as string) === "ar"
+          ? "مطور تطبيقات موبايل"
+          : "Mobile Developer",
+    ],
+    [locale]
+  );
+
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const fullText = roles[currentRoleIndex];
+    const typingSpeed = isDeleting ? 40 : 80;
+
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        if (displayText.length < fullText.length) {
+          setDisplayText(fullText.slice(0, displayText.length + 1));
+        } else {
+          // Pause before starting to delete
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        if (displayText.length > 0) {
+          setDisplayText(fullText.slice(0, displayText.length - 1));
+        } else {
+          setIsDeleting(false);
+          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, currentRoleIndex, roles]);
+
   const bio = personalInfo.bio[locale] || personalInfo.bio.fr;
+  const newTabNotice =
+    (locale as string) === "fr"
+      ? "nouvel onglet"
+      : (locale as string) === "ar"
+        ? "يفتح في نافذة جديدة"
+        : "opens in new tab";
 
   const stats = [
     {
@@ -41,18 +85,18 @@ export function HeroSection() {
   return (
     <section
       id="about"
-      className="relative pt-8 sm:pt-14 pb-16 overflow-hidden"
-      aria-label="Hero Section"
+      className="relative pt-10 sm:pt-16 pb-12 overflow-hidden flex flex-col justify-between"
+      aria-label="Hero Introduction"
     >
       {/* Background ambient lighting */}
       <div className="absolute top-10 start-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-40 end-10 w-80 h-80 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14 w-full">
         {/* Top Hero Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Big Punchy Typography */}
-          <div className="lg:col-span-8 text-start space-y-6">
+          <div className="lg:col-span-7 text-start space-y-6">
             {/* Availability Badge */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-card border border-border text-foreground text-xs font-semibold shadow-xs">
               <span className="relative flex h-2.5 w-2.5">
@@ -62,94 +106,128 @@ export function HeroSection() {
               <span>{t("hero.badge")}</span>
             </div>
 
-            {/* Giant Punchline */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-foreground tracking-tight leading-[1.08]">
-                <span>{t("hero.punchlineMain")}</span>{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent-foreground">
-                  {t("hero.punchlineHighlight")}
-                </span>
-              </h1>
-              <h2 className="text-lg sm:text-xl font-bold text-primary pt-2">
-                {personalInfo.name} — {title}
-              </h2>
+            {/* Greeting & Giant Name */}
+            <div className="space-y-1.5">
+              <p className="text-xl sm:text-2xl font-bold text-foreground">
+                {t("hero.greeting")}{" "}
+                <span className="text-primary">{personalInfo.name}</span>
+              </p>
+
+              {/* Typewriter Dynamic Title */}
+              <div className="min-h-[2.5rem] sm:min-h-[3.2rem] flex items-center">
+                {/*
+                  aria-label provides the full stable role text to screen readers.
+                  The visual spans are aria-hidden so ATs don't announce each character
+                  as the typewriter animation progresses (WCAG 4.1.3 / 1.3.1).
+                */}
+                <h1
+                  aria-label={roles[currentRoleIndex]}
+                  className="text-3xl sm:text-5xl lg:text-6xl font-black text-foreground tracking-tight"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-accent-foreground"
+                  >
+                    {displayText}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="inline-block w-0.5 h-8 sm:h-11 bg-primary ms-1 animate-pulse"
+                  />
+                </h1>
+              </div>
             </div>
 
             {/* Subtitle / Bio summary */}
-            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              {t("hero.subtitle")}
+            <p className="text-sm sm:text-base text-muted-foreground max-w-xl leading-relaxed">
+              {bio}
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-3.5 pt-2">
               <a
+                href="#contact"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 active:scale-98 transition-all shadow-lg shadow-primary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <span>{t("hero.contactMe")}</span>
+                <Send className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
+              </a>
+
+              <a
                 href="#projects"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:opacity-90 active:scale-98 transition-all shadow-lg shadow-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-2.5 px-5 py-3.5 rounded-xl bg-card border border-border text-foreground font-semibold text-sm hover:bg-muted active:scale-98 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <span>{t("hero.viewProjects")}</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-card border border-border text-foreground font-semibold text-sm hover:bg-muted active:scale-98 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <Mail className="w-4 h-4 text-primary" aria-hidden="true" />
-                <span>{t("hero.contactMe")}</span>
-              </a>
-
-              <a
-                href="#experience"
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl bg-muted text-muted-foreground hover:text-foreground text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <Briefcase
-                  className="w-4 h-4 text-primary"
+                <ArrowRight
+                  className="w-4 h-4 rtl:rotate-180 text-primary"
                   aria-hidden="true"
                 />
-                <span>{t("hero.viewExperience")}</span>
               </a>
+
+              {/* Social Quick Links */}
+              <div className="flex items-center gap-2 ms-2">
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`LinkedIn (${newTabNotice})`}
+                  className="p-3 rounded-xl bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <LinkedinIcon className="w-4 h-4" aria-hidden="true" />
+                </a>
+                {personalInfo.github && (
+                  <a
+                    href={personalInfo.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`GitHub (${newTabNotice})`}
+                    className="p-3 rounded-xl bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <GithubIcon className="w-4 h-4" aria-hidden="true" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Sleek Portrait / Profile Card */}
-          <div className="lg:col-span-4 flex justify-center lg:justify-end">
-            <div className="relative group w-72 sm:w-80 aspect-square rounded-3xl p-2 bg-gradient-to-b from-primary/30 via-border to-border/40 border border-border shadow-2xl">
-              <div className="relative w-full h-full rounded-2xl overflow-hidden bg-card">
-                <Image
-                  src="/avatar.jpg"
-                  alt={`${personalInfo.name} - ${title}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 320px"
-                  className="object-cover object-top filter contrast-105 group-hover:scale-105 transition-transform duration-500"
-                  priority
-                />
+          {/* Right Column: Orbital Avatar / Profile Card */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+              {/* Orbital Outer Rings */}
+              <div
+                className="absolute inset-0 rounded-full border border-primary/20 animate-[spin_25s_linear_infinite]"
+                style={{ transform: "rotateX(60deg)" }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-4 rounded-full border border-dashed border-primary/30 animate-[spin_35s_linear_infinite_reverse]"
+                style={{ transform: "rotateY(60deg)" }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-[-10px] rounded-full border border-primary/15 animate-[spin_45s_linear_infinite]"
+                aria-hidden="true"
+              />
 
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-
-                {/* Bottom Card Badge */}
-                <div className="absolute bottom-3 start-3 end-3 p-3 rounded-xl glass-panel border border-border text-start">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-extrabold text-foreground">
-                        {personalInfo.name}
-                      </p>
-                      <p className="text-xs font-semibold text-primary">
-                        {title}
-                      </p>
-                    </div>
-                    <span className="p-1 rounded-full bg-primary/20 text-primary">
-                      <CheckCircle className="w-4 h-4" aria-hidden="true" />
-                    </span>
-                  </div>
+              {/* Central Glowing Avatar */}
+              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-full p-2 bg-gradient-to-tr from-primary/80 via-primary/30 to-border border border-primary/40 shadow-2xl shadow-primary/20">
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-card">
+                  <Image
+                    src="/avatar.jpg"
+                    alt={`${personalInfo.name} - Full Stack Developer`}
+                    fill
+                    sizes="(max-width: 768px) 200px, 240px"
+                    className="object-cover object-top filter contrast-105 hover:scale-105 transition-transform duration-500"
+                    priority
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 3-Column Horizontal Stats Strip */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-4 border-t border-border/70">
+        {/* 3-Column Stats Strip */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-2 border-t border-border/70">
           {stats.map((stat, index) => {
             const IconComponent = stat.icon;
             return (
@@ -171,40 +249,6 @@ export function HeroSection() {
               </div>
             );
           })}
-        </div>
-
-        {/* Big Name & Biography Block */}
-        <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-border grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-start">
-          <div className="md:col-span-5 space-y-1">
-            <span className="inline-block text-xs font-bold uppercase tracking-wider text-primary">
-              Full Stack Engineer
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-foreground">
-              Wassim AHMED
-            </h2>
-            <p className="text-xs text-muted-foreground">
-              {personalInfo.location[locale] || personalInfo.location.fr}
-            </p>
-          </div>
-          <div className="md:col-span-7 space-y-3 border-t md:border-t-0 md:border-s border-border md:ps-8 pt-4 md:pt-0">
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-              {bio}
-            </p>
-            <div className="flex flex-wrap gap-2 pt-1">
-              <span className="px-2.5 py-1 rounded-md bg-accent text-accent-foreground text-xs font-semibold">
-                Next.js & React
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-accent text-accent-foreground text-xs font-semibold">
-                NestJS & Hono.js
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-accent text-accent-foreground text-xs font-semibold">
-                React Native (iOS/Android)
-              </span>
-              <span className="px-2.5 py-1 rounded-md bg-accent text-accent-foreground text-xs font-semibold">
-                Cloudflare Workers & R2/D1
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

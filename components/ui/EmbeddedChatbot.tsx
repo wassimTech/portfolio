@@ -1,40 +1,22 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useI18n } from "@/context/I18nContext";
-import { chatSuggestions } from "@/data/cv";
-import { ChatMessage } from "@/types/cv";
-import { generateLocalChatResponse } from "@/lib/chat-engine";
-import {
-  Sparkles,
-  Send,
-  Bot,
-  RotateCcw,
-  User,
-  MessageSquare,
-} from "lucide-react";
-
-let nextId = 0;
-function createId(prefix: string): string {
-  nextId += 1;
-  return `${prefix}-${nextId}`;
-}
+import { useChatSession } from "@/hooks/useChatSession";
+import { ChatMessageBubble } from "@/components/ui/ChatMessageBubble";
+import { Sparkles, Send, Bot, RotateCcw, MessageSquare } from "lucide-react";
 
 export function EmbeddedChatbot() {
-  const { locale, t } = useI18n();
-  const [messages, setMessages] = useState<ChatMessage[]>(() => [
-    {
-      id: createId("welcome"),
-      role: "assistant",
-      content: t("chatbot.welcome"),
-      timestamp: 1,
-    },
-  ]);
-  const [inputValue, setInputValue] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [activeSuggestions, setActiveSuggestions] = useState<string[]>(() =>
-    chatSuggestions.map((s) => s.query[locale] || s.query.fr)
-  );
+  const { t } = useI18n();
+  const {
+    messages,
+    inputValue,
+    setInputValue,
+    isLoading,
+    activeSuggestions,
+    sendMessage,
+    clearChat,
+  } = useChatSession();
 
   const feedContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -56,131 +38,6 @@ export function EmbeddedChatbot() {
     }
     scrollToBottom();
   }, [messages, scrollToBottom]);
-
-  const handleSendMessage = async (textToSend?: string) => {
-    const messageText = (textToSend || inputValue).trim();
-    if (!messageText || isLoading) return;
-
-    const userMessage: ChatMessage = {
-      id: createId("user"),
-      role: "user",
-      content: messageText,
-      timestamp: 2,
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue("");
-    setIsLoading(true);
-
-    try {
-      let replyContent = "";
-      let suggestions: string[] = [];
-
-      try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            message: messageText,
-            locale,
-          }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          replyContent = data.response;
-          suggestions = data.suggestions;
-        } else {
-          // In local dev (next dev) without Cloudflare Pages proxy or if endpoint returns non-200
-          const localFallback = generateLocalChatResponse(messageText, locale);
-          replyContent = localFallback.response;
-          suggestions = localFallback.suggestions;
-        }
-      } catch (fetchErr) {
-        console.warn(
-          "API unavailable, falling back to local chat engine:",
-          fetchErr
-        );
-        const localFallback = generateLocalChatResponse(messageText, locale);
-        replyContent = localFallback.response;
-        suggestions = localFallback.suggestions;
-      }
-
-      const assistantMessage: ChatMessage = {
-        id: createId("assistant"),
-        role: "assistant",
-        content: replyContent || t("chatbot.error"),
-        timestamp: 3,
-      };
-
-      setMessages((prev) => [...prev, assistantMessage]);
-      if (suggestions && Array.isArray(suggestions) && suggestions.length > 0) {
-        setActiveSuggestions(suggestions);
-      }
-    } catch (error) {
-      console.error("Chat request error:", error);
-      const errorMessage: ChatMessage = {
-        id: createId("error"),
-        role: "assistant",
-        content: t("chatbot.error"),
-        timestamp: 4,
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleClearChat = () => {
-    const welcomeText = t("chatbot.welcome");
-    const initialSuggestions = chatSuggestions.map(
-      (s) => s.query[locale] || s.query.fr
-    );
-    setMessages([
-      {
-        id: createId("welcome"),
-        role: "assistant",
-        content: welcomeText,
-        timestamp: 1,
-      },
-    ]);
-    setActiveSuggestions(initialSuggestions);
-  };
-
-  const formatMessageText = (content: string) => {
-    const lines = content.split("\n");
-    return lines.map((line, idx) => {
-      const parts = line.split(/(\*\*.*?\*\*|`.*?`)/g);
-
-      return (
-        <p
-          key={idx}
-          className={line.startsWith("- ") ? "ms-3 my-1 list-item" : "my-1"}
-        >
-          {parts.map((part, pIdx) => {
-            if (part.startsWith("**") && part.endsWith("**")) {
-              return (
-                <strong key={pIdx} className="font-extrabold text-foreground">
-                  {part.slice(2, -2)}
-                </strong>
-              );
-            }
-            if (part.startsWith("`") && part.endsWith("`")) {
-              return (
-                <code
-                  key={pIdx}
-                  className="px-1.5 py-0.5 rounded-md bg-background/80 text-primary font-mono text-xs"
-                >
-                  {part.slice(1, -1)}
-                </code>
-              );
-            }
-            return part;
-          })}
-        </p>
-      );
-    });
-  };
 
   return (
     <div
@@ -213,9 +70,9 @@ export function EmbeddedChatbot() {
 
         <button
           type="button"
-          onClick={handleClearChat}
+          onClick={clearChat}
           aria-label={t("chatbot.clear")}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-background text-foreground border border-border text-xs font-semibold hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-background text-foreground border border-border text-xs font-semibold hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
         >
           <RotateCcw
             className="w-3.5 h-3.5 text-muted-foreground"
@@ -232,37 +89,9 @@ export function EmbeddedChatbot() {
         aria-live="polite"
         aria-busy={isLoading}
       >
-        {messages.map((msg) => {
-          const isAssistant = msg.role === "assistant";
-          return (
-            <div
-              key={msg.id}
-              className={`flex gap-2.5 ${isAssistant ? "justify-start" : "justify-end"}`}
-            >
-              {isAssistant && (
-                <div className="w-7 h-7 shrink-0 rounded-lg bg-primary/10 text-primary flex items-center justify-center mt-0.5">
-                  <Bot className="w-4 h-4" aria-hidden="true" />
-                </div>
-              )}
-
-              <div
-                className={`max-w-[85%] p-3.5 rounded-2xl leading-relaxed ${
-                  isAssistant
-                    ? "bg-muted/80 text-foreground border border-border/60 rounded-tl-xs"
-                    : "bg-primary text-primary-foreground font-medium rounded-tr-xs shadow-sm"
-                }`}
-              >
-                {formatMessageText(msg.content)}
-              </div>
-
-              {!isAssistant && (
-                <div className="w-7 h-7 shrink-0 rounded-lg bg-accent text-accent-foreground flex items-center justify-center mt-0.5">
-                  <User className="w-4 h-4" aria-hidden="true" />
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {messages.map((msg) => (
+          <ChatMessageBubble key={msg.id} message={msg} />
+        ))}
 
         {isLoading && (
           <div className="flex gap-2.5 justify-start items-center text-muted-foreground text-xs">
@@ -292,8 +121,8 @@ export function EmbeddedChatbot() {
               <button
                 key={idx}
                 type="button"
-                onClick={() => handleSendMessage(sug)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground hover:bg-muted text-xs font-medium transition-colors border border-border/50 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                onClick={() => sendMessage(sug)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground hover:bg-muted text-xs font-medium transition-colors border border-border/50 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
               >
                 <MessageSquare
                   className="w-3.5 h-3.5 text-primary shrink-0"
@@ -310,7 +139,7 @@ export function EmbeddedChatbot() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSendMessage();
+          sendMessage();
         }}
         className="p-4 bg-muted/50 border-t border-border flex items-center gap-2.5"
       >
@@ -327,10 +156,10 @@ export function EmbeddedChatbot() {
           type="submit"
           disabled={isLoading || !inputValue.trim()}
           aria-label={t("chatbot.send")}
-          className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:opacity-90 disabled:opacity-50 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm hover:opacity-90 disabled:opacity-50 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
         >
           <span>{t("chatbot.send")}</span>
-          <Send className="w-4 h-4" aria-hidden="true" />
+          <Send className="w-4 h-4 rtl:rotate-180" aria-hidden="true" />
         </button>
       </form>
     </div>

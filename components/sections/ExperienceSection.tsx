@@ -1,113 +1,154 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useI18n } from "@/context/I18nContext";
 import { experiences } from "@/data/cv";
-import { Briefcase, GraduationCap, BookOpen, Calendar } from "lucide-react";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { GraduationCap, Briefcase, Calendar } from "lucide-react";
+
+type QualificationTab = "education" | "work";
 
 export function ExperienceSection() {
   const { locale, t } = useI18n();
+  const [activeTab, setActiveTab] = useState<QualificationTab>("education");
 
-  const getIcon = (type: string) => {
-    switch (type) {
-      case "work":
-        return Briefcase;
-      case "education":
-        return GraduationCap;
-      case "instruction":
-        return BookOpen;
-      default:
-        return Briefcase;
-    }
-  };
+  const educationList = experiences.filter((exp) => exp.type === "education");
+  const workList = experiences.filter(
+    (exp) => exp.type === "work" || exp.type === "instruction"
+  );
+
+  const activeList = activeTab === "education" ? educationList : workList;
 
   return (
     <section
-      id="experience"
-      className="py-20 relative bg-background border-t border-border"
-      aria-label="Experience Timeline Section"
+      id="qualification"
+      className="py-20 sm:py-24 relative bg-background/50 border-t border-border"
+      aria-label={t("sections.qualificationTitle")}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-            {t("sections.experienceTitle")}
-          </h2>
-          <p className="text-base text-muted-foreground">
-            {t("sections.experienceSubtitle")}
-          </p>
+      <div id="experience" className="sr-only" />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header with Code Bracket Style */}
+        <SectionHeading
+          title={t("sections.qualificationTitle")}
+          subtitle={t("sections.qualificationSubtitle")}
+        />
+
+        {/* Qualification Tabs Switcher */}
+        <div
+          className="flex items-center justify-center gap-8 sm:gap-12 mb-12 sm:mb-16"
+          role="tablist"
+          aria-label="Qualification Tabs"
+        >
+          <button
+            type="button"
+            role="tab"
+            id="tab-education"
+            aria-selected={activeTab === "education"}
+            aria-controls="panel-education"
+            onClick={() => setActiveTab("education")}
+            className={`inline-flex items-center gap-2.5 text-lg sm:text-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl px-4 py-2 cursor-pointer ${
+              activeTab === "education"
+                ? "text-primary font-semibold"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <GraduationCap
+              className={`w-6 h-6 transition-transform duration-300 ${
+                activeTab === "education"
+                  ? "text-primary scale-110"
+                  : "text-muted-foreground"
+              }`}
+              aria-hidden="true"
+            />
+            <span>{t("sections.educationTab")}</span>
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            id="tab-work"
+            aria-selected={activeTab === "work"}
+            aria-controls="panel-work"
+            onClick={() => setActiveTab("work")}
+            className={`inline-flex items-center gap-2.5 text-lg sm:text-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl px-4 py-2 cursor-pointer ${
+              activeTab === "work"
+                ? "text-primary font-semibold"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Briefcase
+              className={`w-6 h-6 transition-transform duration-300 ${
+                activeTab === "work"
+                  ? "text-primary scale-110"
+                  : "text-muted-foreground"
+              }`}
+              aria-hidden="true"
+            />
+            <span>{t("sections.workTab")}</span>
+          </button>
         </div>
 
-        {/* Timeline Items */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Line */}
-          <div
-            className="absolute start-4 sm:start-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2"
-            aria-hidden="true"
-          />
-
-          <div className="space-y-12">
-            {experiences.map((exp, index) => {
-              const IconComponent = getIcon(exp.type);
+        {/* Alternating Vertical Timeline matching hamila.uk */}
+        <div
+          id={`panel-${activeTab}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${activeTab}`}
+          className="relative max-w-2xl mx-auto"
+        >
+          <div className="space-y-0">
+            {activeList.map((item, index) => {
               const isEven = index % 2 === 0;
+              const isLast = index === activeList.length - 1;
+              const roleTitle = item.role[locale] || item.role.fr;
 
-              const role = exp.role[locale] || exp.role.fr;
-              const description = exp.description
-                ? exp.description[locale] || exp.description.fr
-                : "";
+              const contentBlock = (
+                <div className="space-y-1 sm:space-y-1.5 pb-8 sm:pb-10 text-start group">
+                  <h3 className="text-base sm:text-lg font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
+                    {roleTitle}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground dark:text-foreground/70 font-normal">
+                    {item.company}
+                  </p>
+                  <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground dark:text-foreground/65 font-normal pt-1">
+                    <Calendar
+                      className="w-3.5 h-3.5 text-muted-foreground/80 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span>{item.period}</span>
+                  </div>
+                </div>
+              );
+
+              const centerNode = (
+                <div className="flex flex-col items-center h-full">
+                  {/* Glowing Rounder Marker */}
+                  <span
+                    className="w-3.5 h-3.5 rounded-full bg-primary shadow-[0_0_12px_var(--primary)] ring-2 ring-background z-10 shrink-0 block transition-transform duration-300 hover:scale-125"
+                    aria-hidden="true"
+                  />
+                  {/* Continuous Vertical Line */}
+                  {!isLast && (
+                    <span
+                      className="w-[1px] bg-primary flex-1 min-h-[5rem] sm:min-h-[6rem] block"
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+              );
 
               return (
                 <div
-                  key={exp.id}
-                  className={`relative flex flex-col sm:flex-row items-start ${
-                    isEven ? "sm:flex-row-reverse" : ""
-                  }`}
+                  key={item.id}
+                  className="grid grid-cols-[1fr_max-content_1fr] gap-x-4 sm:gap-x-8 items-start"
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute start-4 sm:start-1/2 top-0 -translate-x-1/2 flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/20 ring-4 ring-background z-10">
-                    <IconComponent className="w-4 h-4" aria-hidden="true" />
-                  </div>
+                  {/* Left Column */}
+                  {isEven ? contentBlock : <div aria-hidden="true" />}
 
-                  {/* Timeline Card */}
-                  <div className="ms-12 sm:ms-0 sm:w-1/2 sm:px-8 w-full">
-                    <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-border hover:border-primary/50 transition-all text-start space-y-3.5 group">
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
-                        <span className="text-xs font-bold text-primary">
-                          {exp.company}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-xs text-secondary-foreground font-semibold bg-secondary px-2.5 py-1 rounded-md border border-border/50">
-                          <Calendar
-                            className="w-3.5 h-3.5 text-primary"
-                            aria-hidden="true"
-                          />
-                          <span>{exp.period}</span>
-                        </span>
-                      </div>
+                  {/* Center Column (Rounder + Line) */}
+                  {centerNode}
 
-                      <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                        {role}
-                      </h3>
-
-                      {description && (
-                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                          {description}
-                        </p>
-                      )}
-
-                      {exp.technologies && (
-                        <div className="flex flex-wrap gap-1.5 pt-2">
-                          {exp.technologies.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-medium border border-border/50"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+                  {/* Right Column */}
+                  {!isEven ? contentBlock : <div aria-hidden="true" />}
                 </div>
               );
             })}

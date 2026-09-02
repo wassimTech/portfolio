@@ -50,9 +50,6 @@ export function generateLocalChatResponse(
       "coucou",
       "bonsoir",
       "yo",
-      "marhaba",
-      "ahlan",
-      "salam",
     ])
   ) {
     if (isEn) {

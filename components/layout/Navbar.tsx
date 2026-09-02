@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useI18n } from "@/context/I18nContext";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { ColorThemePicker } from "@/components/layout/ColorThemePicker";
 import { Menu, X, FileText, Code2 } from "lucide-react";
 import { getCvDownloadInfo } from "@/lib/download";
 
@@ -49,16 +50,17 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md px-2 py-1"
+                className="text-sm font-medium text-muted-foreground dark:text-foreground/75 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md px-2 py-1"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Controls: Language, Theme & CV */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Controls: Language, Color Theme, Dark/Light Theme & CV */}
+          <div className="hidden md:flex items-center gap-2.5">
             <LanguageSwitcher />
+            <ColorThemePicker />
             <ThemeToggle />
             <a
               href={cvInfo.href}
@@ -70,13 +72,15 @@ export function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button & Quick Theme Toggle */}
           <div className="flex items-center gap-2 md:hidden">
+            <ColorThemePicker />
             <ThemeToggle />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav-menu"
               aria-label="Toggle Navigation Menu"
               className="p-2 rounded-lg bg-muted text-foreground hover:bg-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
@@ -92,8 +96,16 @@ export function Navbar() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-border bg-background px-4 pt-2 pb-6 space-y-4">
-          <nav className="flex flex-col space-y-2">
+        <div
+          id="mobile-nav-menu"
+          role="region"
+          aria-label="Mobile Navigation"
+          className="md:hidden border-b border-border bg-background px-4 pt-2 pb-6 space-y-4"
+        >
+          <nav
+            aria-label="Mobile Navigation Links"
+            className="flex flex-col space-y-2"
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -108,9 +120,19 @@ export function Navbar() {
           <div className="pt-2 border-t border-border flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <span className="text-xs text-muted-foreground font-medium">
-                Language
+                {locale === "fr"
+                  ? "Langue"
+                  : (locale as string) === "ar"
+                    ? "اللغة"
+                    : "Language"}
               </span>
               <LanguageSwitcher />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-muted-foreground font-medium">
+                {t("theme.colorTheme")}
+              </span>
+              <ColorThemePicker variant="inline" />
             </div>
             <a
               href={cvInfo.href}

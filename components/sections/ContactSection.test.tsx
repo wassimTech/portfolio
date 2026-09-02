@@ -11,9 +11,10 @@ describe("ContactSection", () => {
     expect(screen.getByRole("heading", { level: 2 })).toBeInTheDocument();
     expect(screen.getByText(personalInfo.email)).toBeInTheDocument();
     expect(screen.getByText(personalInfo.phone)).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: /linkedin profile/i })
-    ).toHaveAttribute("href", personalInfo.linkedin);
+    expect(screen.getByRole("link", { name: /linkedin/i })).toHaveAttribute(
+      "href",
+      personalInfo.linkedin
+    );
   });
 
   it("shows confirmation state when email copy button is clicked", async () => {
@@ -26,9 +27,9 @@ describe("ContactSection", () => {
     await user.click(copyEmailButton);
 
     expect(spy).toHaveBeenCalledWith(personalInfo.email);
-    expect(
-      screen.getByText(/email copié dans le presse-papier/i)
-    ).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent(
+      /email copié dans le presse-papier/i
+    );
   });
 
   it("shows confirmation state when phone copy button is clicked", async () => {
@@ -41,6 +42,6 @@ describe("ContactSection", () => {
     await user.click(copyPhoneButton);
 
     expect(spy).toHaveBeenCalledWith(personalInfo.phone);
-    expect(screen.getByText(/numéro copié !/i)).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent(/numéro copié/i);
   });
 });

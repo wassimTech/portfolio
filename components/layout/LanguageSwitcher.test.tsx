@@ -20,7 +20,7 @@ describe("LanguageSwitcher", () => {
     expect(frButton).toHaveAttribute("aria-pressed", "true");
     expect(enButton).toHaveAttribute("aria-pressed", "false");
 
-    // Verify SVG flags are present inside buttons
+    // Verify SVG flags are present inside all buttons
     const svgs = container.querySelectorAll("button svg");
     expect(svgs.length).toBe(2);
     svgs.forEach((svg) => {
@@ -28,7 +28,7 @@ describe("LanguageSwitcher", () => {
     });
   });
 
-  it("updates the active language when clicking EN locale", async () => {
+  it("updates the active language when clicking EN and FR locales", async () => {
     const { user } = render(<LanguageSwitcher />);
 
     const enButton = screen.getByRole("button", {

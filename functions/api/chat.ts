@@ -5,11 +5,65 @@ interface Env {
   GEMINI_API_KEY?: string;
 }
 
+// In-memory sliding rate limiter per IP (max 20 requests / 60 seconds)
+const rateLimitMap = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const MAX_REQUESTS_PER_WINDOW = 20;
+const MAX_MESSAGE_LENGTH = 500;
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = rateLimitMap.get(ip) || [];
+  const recentTimestamps = timestamps.filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS
+  );
+
+  if (recentTimestamps.length >= MAX_REQUESTS_PER_WINDOW) {
+    rateLimitMap.set(ip, recentTimestamps);
+    return false;
+  }
+
+  recentTimestamps.push(now);
+  rateLimitMap.set(ip, recentTimestamps);
+
+  // Clean up stale entries periodically
+  if (rateLimitMap.size > 1000) {
+    for (const [key, times] of rateLimitMap.entries()) {
+      if (times.every((t) => now - t >= RATE_LIMIT_WINDOW_MS)) {
+        rateLimitMap.delete(key);
+      }
+    }
+  }
+
+  return true;
+}
+
 export async function onRequestPost(context: {
   request: Request;
   env: Env;
 }): Promise<Response> {
   try {
+    const clientIp =
+      context.request.headers.get("cf-connecting-ip") ||
+      context.request.headers.get("x-forwarded-for") ||
+      "unknown-client";
+
+    if (!checkRateLimit(clientIp)) {
+      return new Response(
+        JSON.stringify({
+          error:
+            "Too many requests. Please slow down and try again in a minute.",
+        }),
+        {
+          status: 429,
+          headers: {
+            "Content-Type": "application/json",
+            "Retry-After": "60",
+          },
+        }
+      );
+    }
+
     const body = (await context.request.json()) as {
       message?: string;
       locale?: string;
@@ -23,6 +77,9 @@ export async function onRequestPost(context: {
       });
     }
 
+    // Input sanitization & character length bound
+    const sanitizedMessage = message.trim().slice(0, MAX_MESSAGE_LENGTH);
+
     const safeLocale: Locale = locale === "en" ? "en" : "fr";
     const rawApiKey = context.env?.GEMINI_API_KEY;
     const geminiApiKey = rawApiKey?.replace(/^["']|["']$/g, "").trim();
@@ -33,11 +90,10 @@ export async function onRequestPost(context: {
       )} | key_len: ${geminiApiKey ? geminiApiKey.length : 0}`
     );
 
-    let lastErrorDetail = "";
-
     if (geminiApiKey) {
       try {
         const langName = safeLocale === "en" ? "English" : "French";
+
         const systemPrompt = `You are the official AI Portfolio Assistant for Wassim AHMED, a Senior Full Stack Developer & Team Leader.
 Answer user questions accurately, engagingly, and professionally based on his verified background:
 - 5+ years experience in Next.js, React, Vue.js, NestJS, Hono.js, React Native, Cloudflare Workers/R2/D1, Prisma, Docker, PostgreSQL, Three.js, GitLab CI/CD.
@@ -72,7 +128,7 @@ Respond in ${langName} with clean markdown formatting.`;
                   contents: [
                     {
                       role: "user",
-                      parts: [{ text: message }],
+                      parts: [{ text: sanitizedMessage }],
                     },
                   ],
                   generationConfig: {
@@ -98,7 +154,10 @@ Respond in ${langName} with clean markdown formatting.`;
                 console.log(
                   `[Chat API] Successfully generated dynamic response with ${model}`
                 );
-                const fallback = generateLocalChatResponse(message, safeLocale);
+                const fallback = generateLocalChatResponse(
+                  sanitizedMessage,
+                  safeLocale
+                );
                 return new Response(
                   JSON.stringify({
                     response: replyText.trim(),
@@ -108,25 +167,18 @@ Respond in ${langName} with clean markdown formatting.`;
                     status: 200,
                     headers: {
                       "Content-Type": "application/json",
-                      "X-Chat-Source": model,
-                      "X-Key-Detected": "true",
                     },
                   }
                 );
               }
             } else {
               const errorText = await geminiRes.text();
-              lastErrorDetail = `HTTP ${geminiRes.status}: ${errorText.slice(
-                0,
-                200
-              )}`;
               console.error(
                 `[Chat API] Gemini model ${model} returned error status ${geminiRes.status}:`,
-                errorText
+                errorText.slice(0, 200)
               );
             }
           } catch (modelErr) {
-            lastErrorDetail = String(modelErr);
             console.warn(
               `[Chat API] Gemini model ${model} threw error:`,
               modelErr
@@ -134,7 +186,6 @@ Respond in ${langName} with clean markdown formatting.`;
           }
         }
       } catch (externalError) {
-        lastErrorDetail = String(externalError);
         console.warn(
           "[Chat API] External LLM error, falling back to local engine:",
           externalError
@@ -146,16 +197,11 @@ Respond in ${langName} with clean markdown formatting.`;
       );
     }
 
-    const result = generateLocalChatResponse(message, safeLocale);
+    const result = generateLocalChatResponse(sanitizedMessage, safeLocale);
     return new Response(JSON.stringify(result), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "X-Chat-Source": "local-engine",
-        "X-Key-Detected": geminiApiKey ? "true" : "false",
-        "X-Debug-Detail": lastErrorDetail
-          ? encodeURIComponent(lastErrorDetail.slice(0, 100))
-          : "no-key-or-all-fallback",
       },
     });
   } catch (error) {
