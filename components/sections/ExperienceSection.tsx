@@ -106,12 +106,12 @@ export function ExperienceSection() {
                   <h3 className="text-base sm:text-lg font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
                     {roleTitle}
                   </h3>
-                  <p className="text-xs sm:text-sm text-muted-foreground dark:text-foreground/70 font-normal">
+                  <p className="text-xs sm:text-sm text-muted-foreground font-normal">
                     {item.company}
                   </p>
-                  <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground dark:text-foreground/65 font-normal pt-1">
+                  <div className="inline-flex items-center gap-1.5 text-xs text-muted-foreground font-normal pt-1">
                     <Calendar
-                      className="w-3.5 h-3.5 text-muted-foreground/80 shrink-0"
+                      className="w-3.5 h-3.5 text-muted-foreground shrink-0"
                       aria-hidden="true"
                     />
                     <span>{item.period}</span>

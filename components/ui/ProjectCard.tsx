@@ -50,7 +50,7 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
           <span className="px-2.5 py-1 rounded-md bg-accent border border-primary/25 text-accent-foreground dark:bg-primary/15 dark:text-primary text-xs font-bold uppercase tracking-wider">
             {categoryLabel}
           </span>
-          <span className="shrink-0 px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-semibold flex items-center gap-1.5 border border-border/50">
+          <span className="shrink-0 px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-semibold flex items-center gap-1.5 border border-border">
             <Calendar className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
             <span>{project.period}</span>
           </span>

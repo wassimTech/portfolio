@@ -125,6 +125,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         e.preventDefault();
         onClose();
       }}
+      aria-modal="true"
       aria-labelledby="project-modal-title"
       className="m-auto fixed inset-0 z-50 p-3 sm:p-6 md:p-8 bg-transparent max-w-none max-h-none w-full h-full flex items-center justify-center border-none outline-none backdrop:bg-black/70 backdrop:backdrop-blur-md open:animate-in open:fade-in open:zoom-in-95 duration-200"
     >

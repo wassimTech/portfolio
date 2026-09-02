@@ -70,7 +70,7 @@ export function ContactSection() {
                 <Mail className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-muted-foreground dark:text-foreground/70 uppercase tracking-wider">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   {t("contact.emailLabel")}
                 </p>
                 <p className="text-sm font-bold text-foreground break-all">
@@ -107,7 +107,7 @@ export function ContactSection() {
                 <Phone className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-muted-foreground dark:text-foreground/70 uppercase tracking-wider">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   {t("contact.phoneLabel")}
                 </p>
                 <p className="text-sm font-bold text-foreground">
@@ -144,7 +144,7 @@ export function ContactSection() {
                 <MapPin className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-muted-foreground dark:text-foreground/70 uppercase tracking-wider">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                   {t("contact.locationLabel")}
                 </p>
                 <p className="text-sm font-bold text-foreground">{location}</p>

@@ -13,7 +13,8 @@
     --secondary: #f4f4f5;
     --secondary-foreground: #18181b;
     --muted: #f4f4f5;
-    --muted-foreground: #52525b;
+    /* #334155 on #ffffff = 9.2:1 contrast — WCAG AAA compliant */
+    --muted-foreground: #334155;
     --border: #e4e4e7;
     --input: #e4e4e7;
     --radius: 0.875rem;
@@ -89,18 +90,18 @@
   /* ---------------------------------------------------- */
   .dark {
     --background: #09090b;
-    --foreground: #f5f5f7;
+    --foreground: #ffffff;
     --card: #1a1a1f;
-    --card-foreground: #f5f5f7;
+    --card-foreground: #ffffff;
     --popover: #1a1a1f;
-    --popover-foreground: #f5f5f7;
+    --popover-foreground: #ffffff;
     --secondary: #2c2c35;
-    --secondary-foreground: #f0f0f5;
+    --secondary-foreground: #ffffff;
     --muted: #1e1e24;
-    /* #e4e4ec on #1a1a1f card = ~13:1 contrast — solid WCAG AA+ for all body text */
-    --muted-foreground: #e4e4ec;
-    --border: #3a3a44;
-    --input: #3a3a44;
+    /* #e2e8f0 on #1a1a1f card = 13.6:1, on #09090b = 15.8:1 — far exceeds WCAG AAA (7:1) */
+    --muted-foreground: #e2e8f0;
+    --border: #3f3f46;
+    --input: #3f3f46;
 
     /* Default Color Theme: Orange Sunset (Dark) */
     --primary: #f97316;

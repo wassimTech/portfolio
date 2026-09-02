@@ -67,7 +67,7 @@ export function SkillsSection() {
             className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring whitespace-nowrap cursor-pointer ${
               selectedCategory === "all"
                 ? "bg-primary text-primary-foreground shadow-sm"
-                : "bg-card border border-border text-muted-foreground dark:text-foreground/80 hover:text-foreground hover:border-primary/40"
+                : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/40"
             }`}
           >
             {t("skills.allCategories")}
@@ -84,7 +84,7 @@ export function SkillsSection() {
                 className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring whitespace-nowrap cursor-pointer ${
                   isActive
                     ? "bg-primary text-primary-foreground shadow-sm"
-                    : "bg-card border border-border text-muted-foreground dark:text-foreground/80 hover:text-foreground hover:border-primary/40"
+                    : "bg-card border border-border text-muted-foreground hover:text-foreground hover:border-primary/40"
                 }`}
               >
                 {catTitle}
@@ -143,7 +143,7 @@ export function SkillsSection() {
                           ariaHidden={true}
                         />
                       </div>
-                      <span className="text-xs font-semibold text-muted-foreground dark:text-foreground/75 group-hover/item:text-foreground transition-colors truncate max-w-full">
+                      <span className="text-xs font-semibold text-muted-foreground group-hover/item:text-foreground transition-colors truncate max-w-full">
                         {skill.name}
                       </span>
                     </div>
