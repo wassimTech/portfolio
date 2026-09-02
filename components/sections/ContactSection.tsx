@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useI18n } from "@/context/I18nContext";
 import { personalInfo } from "@/data/cv";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ContactCard } from "@/components/ui/ContactCard";
 import { Mail, Phone, MapPin, Copy, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 
@@ -32,13 +33,21 @@ export function ContactSection() {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         await navigator.clipboard.writeText(text);
       }
+    } catch (err) {
+      console.warn("Clipboard copy failed:", err);
+    } finally {
       setCopiedType(type);
       if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
       copyTimeoutRef.current = setTimeout(() => setCopiedType(null), 3000);
-    } catch (err) {
-      console.warn("Clipboard copy failed:", err);
     }
   };
+
+  const primaryBtnClass =
+    "flex-1 inline-flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-primary text-primary-foreground font-bold text-xs sm:text-sm shadow-md shadow-primary/20 hover:opacity-95 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] transition-all border border-primary/40 dark:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+  const secondaryBtnClass =
+    "flex-1 inline-flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-secondary/90 hover:bg-muted dark:bg-zinc-800 dark:hover:bg-zinc-700 text-secondary-foreground dark:text-zinc-100 font-bold text-xs sm:text-sm transition-all border border-border dark:border-zinc-500/70 dark:hover:border-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-pointer";
+  const copiedBtnClass =
+    "flex-1 inline-flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-primary/15 dark:bg-primary/25 text-primary dark:text-primary-foreground font-extrabold text-xs sm:text-sm transition-all border border-primary/50 dark:border-primary/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-pointer";
 
   return (
     <section
@@ -64,117 +73,112 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {/* Email Card */}
-          <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-border flex flex-col justify-between space-y-5 text-start hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-            <div className="flex items-center gap-3.5">
-              <div className="p-3.5 rounded-2xl bg-primary/10 text-primary">
-                <Mail className="w-6 h-6" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("contact.emailLabel")}
-                </p>
-                <p className="text-sm font-bold text-foreground break-all">
-                  {personalInfo.email}
-                </p>
-              </div>
-            </div>
+          <ContactCard
+            icon={Mail}
+            label={t("contact.emailLabel")}
+            value={personalInfo.email}
+          >
+            <a
+              href={`mailto:${personalInfo.email}`}
+              aria-label={`${t("contact.sendEmail")} (${personalInfo.email})`}
+              className={primaryBtnClass}
+            >
+              <Mail className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>{t("contact.sendEmail")}</span>
+            </a>
             <button
               type="button"
               onClick={() => handleCopy(personalInfo.email, "email")}
               aria-label={t("contact.copyEmail")}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-secondary text-secondary-foreground hover:bg-muted text-xs font-bold transition-all border border-border/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+              className={
+                copiedType === "email" ? copiedBtnClass : secondaryBtnClass
+              }
             >
               {copiedType === "email" ? (
                 <>
-                  <Check className="w-4 h-4 text-primary" aria-hidden="true" />
-                  <span className="text-primary">
-                    {t("contact.emailCopied")}
-                  </span>
+                  <Check className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <span>{t("contact.copied")}</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-primary" aria-hidden="true" />
-                  <span>{t("contact.copyEmail")}</span>
+                  <Copy
+                    className="w-4 h-4 text-primary shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{t("contact.copy")}</span>
                 </>
               )}
             </button>
-          </div>
+          </ContactCard>
 
           {/* Phone Card */}
-          <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-border flex flex-col justify-between space-y-5 text-start hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-            <div className="flex items-center gap-3.5">
-              <div className="p-3.5 rounded-2xl bg-primary/10 text-primary">
-                <Phone className="w-6 h-6" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("contact.phoneLabel")}
-                </p>
-                <p className="text-sm font-bold text-foreground">
-                  {personalInfo.phone}
-                </p>
-              </div>
-            </div>
+          <ContactCard
+            icon={Phone}
+            label={t("contact.phoneLabel")}
+            value={personalInfo.phone}
+          >
+            <a
+              href={`tel:${personalInfo.phone.replace(/\s+/g, "")}`}
+              aria-label={`${t("contact.callPhone")} (${personalInfo.phone})`}
+              className={primaryBtnClass}
+            >
+              <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>{t("contact.callPhone")}</span>
+            </a>
             <button
               type="button"
               onClick={() => handleCopy(personalInfo.phone, "phone")}
               aria-label={t("contact.copyPhone")}
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-secondary text-secondary-foreground hover:bg-muted text-xs font-bold transition-all border border-border/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+              className={
+                copiedType === "phone" ? copiedBtnClass : secondaryBtnClass
+              }
             >
               {copiedType === "phone" ? (
                 <>
-                  <Check className="w-4 h-4 text-primary" aria-hidden="true" />
-                  <span className="text-primary">
-                    {t("contact.phoneCopied")}
-                  </span>
+                  <Check className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <span>{t("contact.copied")}</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-primary" aria-hidden="true" />
-                  <span>{t("contact.copyPhone")}</span>
+                  <Copy
+                    className="w-4 h-4 text-primary shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{t("contact.copy")}</span>
                 </>
               )}
             </button>
-          </div>
+          </ContactCard>
 
           {/* Location & Social Card */}
-          <div className="glass-panel p-6 sm:p-7 rounded-3xl border border-border flex flex-col justify-between space-y-5 text-start hover:border-primary/50 hover:-translate-y-1 transition-all duration-300">
-            <div className="flex items-center gap-3.5">
-              <div className="p-3.5 rounded-2xl bg-primary/10 text-primary">
-                <MapPin className="w-6 h-6" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                  {t("contact.locationLabel")}
-                </p>
-                <p className="text-sm font-bold text-foreground">{location}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 pt-2">
+          <ContactCard
+            icon={MapPin}
+            label={t("contact.locationLabel")}
+            value={location}
+          >
+            <a
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`LinkedIn (${newTabNotice})`}
+              className={primaryBtnClass}
+            >
+              <LinkedinIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>LinkedIn</span>
+            </a>
+            {personalInfo.github && (
               <a
-                href={personalInfo.linkedin}
+                href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`LinkedIn (${newTabNotice})`}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-primary text-primary-foreground hover:opacity-90 text-xs font-bold transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring shadow-md shadow-primary/20"
+                aria-label={`GitHub (${newTabNotice})`}
+                className={secondaryBtnClass}
               >
-                <LinkedinIcon className="w-4 h-4" aria-hidden="true" />
-                <span>LinkedIn</span>
+                <GithubIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
+                <span>GitHub</span>
               </a>
-              {personalInfo.github && (
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`GitHub (${newTabNotice})`}
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-3 rounded-xl bg-secondary text-secondary-foreground hover:bg-muted text-xs font-bold transition-colors border border-border/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <GithubIcon className="w-4 h-4" aria-hidden="true" />
-                  <span>GitHub</span>
-                </a>
-              )}
-            </div>
-          </div>
+            )}
+          </ContactCard>
         </div>
       </div>
     </section>

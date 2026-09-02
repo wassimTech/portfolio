@@ -109,7 +109,11 @@
     "copyEmail": "Copier l'email",
     "emailCopied": "Email copié dans le presse-papier !",
     "copyPhone": "Copier le téléphone",
-    "phoneCopied": "Numéro copié !"
+    "phoneCopied": "Numéro copié !",
+    "sendEmail": "Envoyer",
+    "callPhone": "Appeler",
+    "copy": "Copier",
+    "copied": "Copié !"
   },
   "theme": {
     "colorTheme": "Palette de couleurs",

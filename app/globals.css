@@ -103,67 +103,67 @@
     --border: #3f3f46;
     --input: #3f3f46;
 
-    /* Default Color Theme: Orange Sunset (Dark) */
-    --primary: #f97316;
-    --primary-foreground: #09090b;
+    /* Default Color Theme: Orange Sunset (Dark) - WCAG AA compliant (>= 4.5:1) with white text */
+    --primary: #c2410c;
+    --primary-foreground: #ffffff;
     --accent: #241812;
     --accent-foreground: #fdba74;
-    --ring: #f97316;
-    --primary-rgb: 249, 115, 22;
+    --ring: #ea580c;
+    --primary-rgb: 194, 65, 12;
   }
 
   .dark[data-color-theme="orange"] {
-    --primary: #f97316;
-    --primary-foreground: #09090b;
+    --primary: #c2410c;
+    --primary-foreground: #ffffff;
     --accent: #241812;
     --accent-foreground: #fdba74;
-    --ring: #f97316;
-    --primary-rgb: 249, 115, 22;
+    --ring: #ea580c;
+    --primary-rgb: 194, 65, 12;
   }
 
   .dark[data-color-theme="emerald"] {
-    --primary: #10b981;
-    --primary-foreground: #09090b;
+    --primary: #047857;
+    --primary-foreground: #ffffff;
     --accent: #07261a;
     --accent-foreground: #6ee7b7;
-    --ring: #10b981;
-    --primary-rgb: 16, 185, 129;
+    --ring: #059669;
+    --primary-rgb: 4, 120, 87;
   }
 
   .dark[data-color-theme="cyan"] {
-    --primary: #06b6d4;
-    --primary-foreground: #09090b;
+    --primary: #0e7490;
+    --primary-foreground: #ffffff;
     --accent: #082531;
     --accent-foreground: #67e8f9;
-    --ring: #06b6d4;
-    --primary-rgb: 6, 182, 212;
+    --ring: #0891b2;
+    --primary-rgb: 14, 116, 144;
   }
 
   .dark[data-color-theme="violet"] {
-    --primary: #8b5cf6;
-    --primary-foreground: #09090b;
+    --primary: #7c3aed;
+    --primary-foreground: #ffffff;
     --accent: #22123d;
     --accent-foreground: #c4b5fd;
     --ring: #8b5cf6;
-    --primary-rgb: 139, 92, 246;
+    --primary-rgb: 124, 58, 237;
   }
 
   .dark[data-color-theme="rose"] {
-    --primary: #f43f5e;
-    --primary-foreground: #09090b;
+    --primary: #e11d48;
+    --primary-foreground: #ffffff;
     --accent: #2d0a14;
     --accent-foreground: #fda4af;
     --ring: #f43f5e;
-    --primary-rgb: 244, 63, 94;
+    --primary-rgb: 225, 29, 72;
   }
 
   .dark[data-color-theme="amber"] {
-    --primary: #f59e0b;
-    --primary-foreground: #09090b;
+    --primary: #b45309;
+    --primary-foreground: #ffffff;
     --accent: #2b1c06;
     --accent-foreground: #fde68a;
-    --ring: #f59e0b;
-    --primary-rgb: 245, 158, 11;
+    --ring: #d97706;
+    --primary-rgb: 180, 83, 9;
   }
 }
 

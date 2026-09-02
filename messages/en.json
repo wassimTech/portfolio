@@ -109,7 +109,11 @@
     "copyEmail": "Copy Email",
     "emailCopied": "Email copied to clipboard!",
     "copyPhone": "Copy Phone",
-    "phoneCopied": "Phone number copied!"
+    "phoneCopied": "Phone number copied!",
+    "sendEmail": "Email",
+    "callPhone": "Call",
+    "copy": "Copy",
+    "copied": "Copied!"
   },
   "theme": {
     "colorTheme": "Color Palette",
