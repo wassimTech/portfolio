@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useI18n } from "@/context/I18nContext";
 import { useChatSession } from "@/hooks/useChatSession";
 import { ChatMessageBubble } from "@/components/ui/ChatMessageBubble";
+import { Badge } from "@/components/ui/Badge";
 import { Send, X, Bot, RotateCcw, MessageSquare } from "lucide-react";
 
 interface ChatbotWidgetProps {
@@ -187,9 +188,9 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
                   <h3 className="text-sm font-extrabold text-foreground">
                     {t("chatbot.title")}
                   </h3>
-                  <span className="px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
+                  <Badge variant="success" shape="pill" size="sm">
                     {t("chatbot.badge")}
-                  </span>
+                  </Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">
                   {t("chatbot.subtitle")}
@@ -257,10 +258,10 @@ export function ChatbotWidget({ initialOpen = false }: ChatbotWidgetProps) {
                     key={idx}
                     type="button"
                     onClick={() => sendMessage(sug)}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-muted text-xs font-medium transition-colors border border-border/50 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground hover:bg-muted dark:hover:bg-zinc-800 text-xs font-medium transition-colors border border-border dark:border-zinc-700 hover:border-primary/50 dark:hover:border-accent-foreground/50 text-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer"
                   >
                     <MessageSquare
-                      className="w-3 h-3 text-primary"
+                      className="w-3 h-3 text-primary dark:text-accent-foreground shrink-0"
                       aria-hidden="true"
                     />
                     <span className="truncate max-w-[280px]">{sug}</span>

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
 import { ProjectBanner } from "@/components/ui/ProjectBanner";
+import { Badge } from "@/components/ui/Badge";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -132,16 +133,20 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
       <div className="relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl bg-card border border-border shadow-2xl overflow-hidden">
         <div className="flex items-center justify-between px-6 sm:px-8 py-5 border-b border-border bg-card/80 backdrop-blur-md sticky top-0 z-10">
           <div className="flex flex-wrap items-center gap-2.5">
-            <span className="px-3 py-1 rounded-lg bg-accent border border-primary/25 text-accent-foreground dark:bg-primary/15 dark:text-primary text-xs font-bold uppercase tracking-wider">
+            <Badge
+              variant="accent"
+              size="md"
+              className="uppercase tracking-wider font-bold"
+            >
               {categoryLabel}
-            </span>
-            <span className="px-3 py-1 rounded-lg bg-secondary text-secondary-foreground text-xs font-semibold flex items-center gap-1.5 border border-border/50">
+            </Badge>
+            <Badge variant="secondary" size="md" className="shrink-0">
               <Calendar
-                className="w-3.5 h-3.5 text-primary"
+                className="w-3.5 h-3.5 text-primary dark:text-accent-foreground shrink-0"
                 aria-hidden="true"
               />
               <span>{project.period}</span>
-            </span>
+            </Badge>
           </div>
 
           <button
@@ -227,12 +232,14 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   aria-label={t("sections.techStack")}
                 >
                   {project.technologies.map((tech) => (
-                    <span
+                    <Badge
                       key={`${project.id}-tech-${tech}`}
-                      className="px-3 py-1 rounded-xl bg-secondary text-secondary-foreground text-xs font-semibold border border-border hover:border-primary/40 transition-colors"
+                      variant="secondary"
+                      size="md"
+                      className="hover:border-primary/50 dark:hover:border-accent-foreground/50 transition-colors"
                     >
                       {tech}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               </div>

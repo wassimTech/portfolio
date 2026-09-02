@@ -6,6 +6,7 @@ import { useI18n } from "@/context/I18nContext";
 import { ExternalLink, Users, Calendar, ArrowRight } from "lucide-react";
 import { GithubIcon } from "@/components/ui/icons";
 import { ProjectBanner } from "@/components/ui/ProjectBanner";
+import { Badge } from "@/components/ui/Badge";
 
 interface ProjectCardProps {
   project: Project;
@@ -47,13 +48,20 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
 
         {/* Category & Period */}
         <div className="flex items-center justify-between gap-2 pt-0.5">
-          <span className="px-2.5 py-1 rounded-md bg-accent border border-primary/25 text-accent-foreground dark:bg-primary/15 dark:text-primary text-xs font-bold uppercase tracking-wider">
+          <Badge
+            variant="accent"
+            size="md"
+            className="uppercase tracking-wider font-bold"
+          >
             {categoryLabel}
-          </span>
-          <span className="shrink-0 px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground text-xs font-semibold flex items-center gap-1.5 border border-border">
-            <Calendar className="w-3.5 h-3.5 text-primary" aria-hidden="true" />
+          </Badge>
+          <Badge variant="secondary" size="md" className="shrink-0">
+            <Calendar
+              className="w-3.5 h-3.5 text-primary dark:text-accent-foreground shrink-0"
+              aria-hidden="true"
+            />
             <span>{project.period}</span>
-          </span>
+          </Badge>
         </div>
 
         {/* Title & Role */}
@@ -77,25 +85,28 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
           aria-label={t("sections.techStack")}
         >
           {displayedTechs.map((tech) => (
-            <li
-              key={tech}
-              className="px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-semibold border border-border"
-            >
-              {tech}
+            <li key={tech}>
+              <Badge variant="secondary" size="sm">
+                {tech}
+              </Badge>
             </li>
           ))}
           {extraTechCount > 0 && (
-            <li
-              className="px-1.5 py-0.5 rounded-md bg-secondary text-secondary-foreground text-xs font-bold border border-border"
-              aria-label={`+${extraTechCount} ${
-                (locale as string) === "fr"
-                  ? "autres technologies"
-                  : (locale as string) === "ar"
-                    ? "تقنية إضافية"
-                    : "more technologies"
-              }`}
-            >
-              <span aria-hidden="true">+{extraTechCount}</span>
+            <li>
+              <Badge
+                variant="secondary"
+                size="sm"
+                className="font-bold px-1.5"
+                aria-label={`+${extraTechCount} ${
+                  (locale as string) === "fr"
+                    ? "autres technologies"
+                    : (locale as string) === "ar"
+                      ? "تقنية إضافية"
+                      : "more technologies"
+                }`}
+              >
+                <span aria-hidden="true">+{extraTechCount}</span>
+              </Badge>
             </li>
           )}
         </ul>

@@ -10,6 +10,7 @@ import {
   Sparkles,
   Activity,
 } from "lucide-react";
+import { Badge } from "@/components/ui/Badge";
 
 interface ProjectBannerProps {
   projectId: string;
@@ -81,10 +82,14 @@ export function ProjectBanner({ projectId }: ProjectBannerProps) {
       </div>
 
       {/* Bottom Tag Badge */}
-      <div className="absolute bottom-3 start-3 px-2.5 py-1 rounded-lg bg-background/80 backdrop-blur-sm border border-border text-xs font-mono text-foreground flex items-center gap-1.5 shadow-xs">
-        <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+      <Badge
+        variant="outline"
+        size="sm"
+        className="absolute bottom-3 start-3 bg-background/85 backdrop-blur-sm font-mono shadow-xs"
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-primary dark:bg-accent-foreground animate-pulse" />
         <span>{config.tag}</span>
-      </div>
+      </Badge>
     </div>
   );
 }

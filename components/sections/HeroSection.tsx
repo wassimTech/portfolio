@@ -6,6 +6,7 @@ import { useI18n } from "@/context/I18nContext";
 import { personalInfo } from "@/data/cv";
 import { Send, ArrowRight, Layers, Code2, Cloud } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { Badge } from "@/components/ui/Badge";
 
 export function HeroSection() {
   const { locale, t } = useI18n();
@@ -98,13 +99,18 @@ export function HeroSection() {
           {/* Left Column: Big Punchy Typography */}
           <div className="lg:col-span-7 text-start space-y-6">
             {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-card border border-border text-foreground text-xs font-semibold shadow-xs">
+            <Badge
+              variant="outline"
+              shape="pill"
+              size="lg"
+              className="gap-2.5 shadow-xs"
+            >
               <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary dark:bg-accent-foreground opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary dark:bg-accent-foreground" />
               </span>
               <span>{t("hero.badge")}</span>
-            </div>
+            </Badge>
 
             {/* Greeting, Name & Role as semantic H1 landmark (WCAG 1.3.1 / 2.4.6) */}
             <h1 className="space-y-1.5">

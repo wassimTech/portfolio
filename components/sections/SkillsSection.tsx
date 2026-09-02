@@ -5,6 +5,7 @@ import { useI18n } from "@/context/I18nContext";
 import { skillCategories } from "@/data/cv";
 import { TechIcon } from "@/components/ui/TechIcon";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Badge } from "@/components/ui/Badge";
 import {
   Code2,
   Layers,
@@ -118,9 +119,14 @@ export function SkillsSection() {
                       {title}
                     </h3>
                   </div>
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-secondary text-secondary-foreground border border-border">
+                  <Badge
+                    variant="secondary"
+                    shape="pill"
+                    size="md"
+                    className="font-bold"
+                  >
                     {category.skills.length}
-                  </span>
+                  </Badge>
                 </div>
 
                 {/* Squircles Tech Grid */}
