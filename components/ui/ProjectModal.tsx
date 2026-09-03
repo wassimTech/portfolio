@@ -227,21 +227,22 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   <Cpu className="w-4 h-4 text-primary" aria-hidden="true" />
                   <span>{t("sections.techStack")}</span>
                 </h4>
-                <div
-                  className="flex flex-wrap gap-2"
+                <ul
+                  className="flex flex-wrap gap-2 list-none p-0 m-0"
                   aria-label={t("sections.techStack")}
                 >
                   {project.technologies.map((tech) => (
-                    <Badge
-                      key={`${project.id}-tech-${tech}`}
-                      variant="secondary"
-                      size="md"
-                      className="hover:border-primary/50 dark:hover:border-accent-foreground/50 transition-colors"
-                    >
-                      {tech}
-                    </Badge>
+                    <li key={`${project.id}-tech-${tech}`}>
+                      <Badge
+                        variant="secondary"
+                        size="md"
+                        className="hover:border-primary/50 dark:hover:border-accent-foreground/50 transition-colors"
+                      >
+                        {tech}
+                      </Badge>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
               <div className="p-4 rounded-2xl bg-muted/40 border border-border/70 flex items-center gap-3 text-xs text-muted-foreground">

@@ -93,18 +93,16 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
           ))}
           {extraTechCount > 0 && (
             <li>
-              <Badge
-                variant="secondary"
-                size="sm"
-                className="font-bold px-1.5"
-                aria-label={`+${extraTechCount} ${
-                  (locale as string) === "fr"
-                    ? "autres technologies"
-                    : (locale as string) === "ar"
-                      ? "تقنية إضافية"
-                      : "more technologies"
-                }`}
-              >
+              <Badge variant="secondary" size="sm" className="font-bold px-1.5">
+                <span className="sr-only">
+                  {`+${extraTechCount} ${
+                    (locale as string) === "fr"
+                      ? "autres technologies"
+                      : (locale as string) === "ar"
+                        ? "تقنية إضافية"
+                        : "more technologies"
+                  }`}
+                </span>
                 <span aria-hidden="true">+{extraTechCount}</span>
               </Badge>
             </li>
