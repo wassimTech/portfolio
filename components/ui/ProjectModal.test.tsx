@@ -3,9 +3,16 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor } from "@/test/test-utils";
 import { ProjectModal } from "./ProjectModal";
 import { projects } from "@/data/cv";
+import { Project } from "@/types/cv";
 
 describe("ProjectModal accessibility and interaction", () => {
   const sampleProject = projects[0];
+
+  const projectWithUrls: Project = {
+    ...sampleProject,
+    demoUrl: "https://demo.example.com",
+    githubUrl: "https://github.com/example/repo",
+  };
 
   it("does not render when isOpen is false or project is null", () => {
     const { rerender } = render(
@@ -81,6 +88,48 @@ describe("ProjectModal accessibility and interaction", () => {
     });
   });
 
+  it("scrolls to top on Home key and to bottom on End key", async () => {
+    const { container, user } = render(
+      <ProjectModal project={sampleProject} isOpen={true} onClose={vi.fn()} />
+    );
+
+    const scrollableDiv = container.querySelector(
+      ".overflow-y-auto"
+    ) as HTMLDivElement;
+    const scrollToMock = vi.fn();
+    scrollableDiv.scrollTo = scrollToMock;
+
+    await user.keyboard("{Home}");
+    expect(scrollToMock).toHaveBeenCalledWith({ top: 0, behavior: "auto" });
+
+    await user.keyboard("{End}");
+    expect(scrollToMock).toHaveBeenCalledWith({
+      top: scrollableDiv.scrollHeight,
+      behavior: "auto",
+    });
+  });
+
+  it("does not intercept arrow keys if focus is within a select element", async () => {
+    const { container, user } = render(
+      <ProjectModal project={sampleProject} isOpen={true} onClose={vi.fn()} />
+    );
+
+    const scrollableDiv = container.querySelector(
+      ".overflow-y-auto"
+    ) as HTMLDivElement;
+    const scrollByMock = vi.fn();
+    scrollableDiv.scrollBy = scrollByMock;
+
+    const select = document.createElement("select");
+    document.body.appendChild(select);
+    select.focus();
+
+    await user.keyboard("{ArrowDown}");
+    expect(scrollByMock).not.toHaveBeenCalled();
+
+    document.body.removeChild(select);
+  });
+
   it("forwards wheel events on header/backdrop to the scroll container", () => {
     const { container } = render(
       <ProjectModal project={sampleProject} isOpen={true} onClose={vi.fn()} />
@@ -91,7 +140,6 @@ describe("ProjectModal accessibility and interaction", () => {
       ".overflow-y-auto"
     ) as HTMLDivElement;
 
-    // Simulate wheel event on dialog backdrop
     const wheelEvent = new WheelEvent("wheel", {
       bubbles: true,
       cancelable: true,
@@ -100,5 +148,41 @@ describe("ProjectModal accessibility and interaction", () => {
     dialog.dispatchEvent(wheelEvent);
 
     expect(scrollableDiv.scrollTop).toBe(100);
+  });
+
+  it("renders project details, accomplishments, tech badges, and action links", () => {
+    render(
+      <ProjectModal project={projectWithUrls} isOpen={true} onClose={vi.fn()} />
+    );
+
+    expect(screen.getByText(projectWithUrls.title)).toBeInTheDocument();
+    projectWithUrls.technologies.forEach((tech) => {
+      expect(screen.getByText(tech)).toBeInTheDocument();
+    });
+
+    const demoLink = screen.getByRole("link", { name: /démo en ligne/i });
+    expect(demoLink).toBeInTheDocument();
+    expect(demoLink).toHaveAttribute("target", "_blank");
+    expect(demoLink).toHaveAttribute("rel", "noopener noreferrer");
+    expect(demoLink.getAttribute("aria-label")).toContain("nouvel onglet");
+
+    const githubLink = screen.getByRole("link", { name: /code source/i });
+    expect(githubLink).toBeInTheDocument();
+    expect(githubLink).toHaveAttribute("target", "_blank");
+  });
+
+  it("renders english notice for external links when locale is english", () => {
+    render(
+      <ProjectModal
+        project={projectWithUrls}
+        isOpen={true}
+        onClose={vi.fn()}
+      />,
+      { initialLocale: "en" }
+    );
+
+    const demoLink = screen.getByRole("link", { name: /live demo/i });
+    expect(demoLink).toBeInTheDocument();
+    expect(demoLink.getAttribute("aria-label")).toContain("opens in new tab");
   });
 });
