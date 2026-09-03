@@ -281,10 +281,13 @@ export function generateLocalChatResponse(
       return {
         response:
           `**URJOB** is an AI-assisted recruitment platform built for recruiters and consultants:\n\n` +
+          `- **Official Showcase Website**: [https://urjob.ai/index.html?lang=fr](https://urjob.ai/index.html?lang=fr)\n` +
+          `- **Live Production Application**: [https://app.urjob.ai/](https://app.urjob.ai/)\n` +
           `- **AI Matching**: Automated parsing of resumes and job descriptions using intelligent matching algorithms.\n` +
           `- **Full Stack Architecture**: High-performance **NestJS** backend APIs with caching and query optimization, PostgreSQL database with **Prisma** and **Supabase**.\n` +
           `- **Frontend Evolution**: Interactive Kanban pipeline, and progressive migration from **Vue.js** to **Next.js** for maximum performance and SEO.\n` +
-          `- **DevOps**: Docker containerization, GitLab CI/CD pipelines, and secure storage on **Cloudflare R2**.`,
+          `- **DevOps**: Docker containerization, GitLab CI/CD pipelines, and secure storage on **Cloudflare R2**.\n` +
+          `- **Confidentiality**: Private client repository under NDA.`,
         suggestions: [
           "Tell me about his mobile projects (ZorLife & Bloom)",
           "What are his backend and NestJS skills?",
@@ -296,10 +299,13 @@ export function generateLocalChatResponse(
     return {
       response:
         `**URJOB** est une plateforme de recrutement assistée par IA destinée aux recruteurs et consultants :\n\n` +
+        `- **Site vitrine officiel** : [https://urjob.ai/index.html?lang=fr](https://urjob.ai/index.html?lang=fr)\n` +
+        `- **Application en production** : [https://app.urjob.ai/](https://app.urjob.ai/)\n` +
         `- **Matching IA** : Analyse automatique des CVs et des offres d'emploi via des algorithmes de scoring et d'évaluation IA.\n` +
         `- **Architecture Full Stack** : Backend **NestJS** ultra-performant avec mise en cache, base de données PostgreSQL gérée avec **Prisma** et **Supabase**.\n` +
         `- **Évolution Frontend** : Interface Kanban temps réel, et migration progressive de **Vue.js** vers **Next.js** pour booster les performances et le SEO.\n` +
-        `- **DevOps & Cloud** : Conteneurisation Docker, pipelines GitLab CI/CD et stockage sécurisé sur **Cloudflare R2**.`,
+        `- **DevOps & Cloud** : Conteneurisation Docker, pipelines GitLab CI/CD et stockage sécurisé sur **Cloudflare R2**.\n` +
+        `- **Confidentialité** : Code source sur dépôt privé sous contrat NDA.`,
       suggestions: [
         "Parle-moi de ses projets mobiles (ZorLife & Bloom)",
         "Quelles sont ses compétences NestJS et Prisma ?",
@@ -332,38 +338,44 @@ export function generateLocalChatResponse(
     if (isEn) {
       return {
         response:
-          `As **Team Leader**, Wassim spearheaded two major mobile & multi-platform projects:\n\n` +
+          `As **Team Leader**, Wassim spearheaded two major mobile & multi-platform projects (private codebases under NDA):\n\n` +
           `1. **ZorLife (Wellness & Gamification Mobile App)**:\n` +
+          `   - **Client Endorsement**: Publicly recommended on [LinkedIn](https://www.linkedin.com/posts/mariamadjogbenou_zorlife-activity-7313940077758279680-n9l6?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7YqQkB-jgHi_FrRStxuXs3TibUxplAg2w) by LudiKare founder **Mariama Adjogbenou** citing Wassim AHMED for technical development.\n` +
+          `   - **Showcase & App Stores**: [https://bit.ly/ZorLife-app](https://bit.ly/ZorLife-app)\n` +
+          `   - **Store Availability**: Available on App Store and Google Play in France and Switzerland (not available on Tunisian app stores).\n` +
           `   - **Role**: Team Leader (coordinating 3 developers & 1 3D designer).\n` +
-          `   - **Tech**: React Native, Redux, Hono.js, Cloudflare D1 & Workers, Three.js / react-native-filament 3D, Stripe payments, Firebase tracking.\n` +
-          `   - **Deployment**: Published to **App Store** and **Google Play** with live OTA updates.\n\n` +
-          `2. **Bloom (Photo Keepsakes Mobile App & Admin Dashboard)**:\n` +
+          `   - **Tech**: React Native, Redux, Hono.js, Cloudflare D1 & Workers, Three.js / react-native-filament 3D, Stripe, Firebase.\n\n` +
+          `2. **Bloom / Chillhood (Photo Keepsakes Mobile App & Dashboard)**:\n` +
+          `   - **Public Video Reel**: [Instagram Demo](https://www.instagram.com/reels/DEAd26fitCM/) showing the photo book creation app.\n` +
+          `   - **Store Availability**: Deployed for the French market (not available on Tunisian stores, which is why the full Instagram video demo is provided).\n` +
           `   - **Role**: Team Leader.\n` +
-          `   - **Tech**: React Native (Mobile), Vue.js (Admin Dashboard), NestJS backend, Python image processing, Expo Notifications, Stripe & Chronopost integrations.\n` +
-          `   - **Deployment**: Published to stores, automated via Docker & GitLab CI/CD.`,
+          `   - **Tech**: React Native (Mobile), Vue.js (Admin Dashboard), NestJS, Python image processing, Stripe & Chronopost.`,
         suggestions: [
           "What are his Cloudflare Workers & D1 skills?",
-          "What frontend frameworks does he master?",
-          "Tell me about his education and degrees",
+          "Tell me about the URJOB AI platform",
+          "What are his backend and NestJS skills?",
         ],
       };
     }
 
     return {
       response:
-        `En tant que **Team Leader**, Wassim a dirigé avec succès deux projets mobiles et multi-plateformes majeurs :\n\n` +
+        `En tant que **Team Leader**, Wassim a dirigé avec succès deux projets mobiles et multi-plateformes majeurs (dépôts privés sous NDA) :\n\n` +
         `1. **ZorLife (Application Mobile Bien-être & Gamification)** :\n` +
+        `   - **Recommandation Client** : Salué publiquement sur [LinkedIn](https://www.linkedin.com/posts/mariamadjogbenou_zorlife-activity-7313940077758279680-n9l6?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7YqQkB-jgHi_FrRStxuXs3TibUxplAg2w) par **Mariama Adjogbenou** (fondatrice de LudiKare / ZorLife) pour le développement technique de l'application.\n` +
+        `   - **Site vitrine & Stores** : [https://bit.ly/ZorLife-app](https://bit.ly/ZorLife-app)\n` +
+        `   - **Disponibilité des stores** : Disponible sur App Store et Google Play en France et en Suisse (non disponible sur les stores en Tunisie).\n` +
         `   - **Rôle** : Team Leader (coordination de 3 développeurs et 1 designer 3D).\n` +
-        `   - **Technologies** : React Native, Redux, Hono.js, Cloudflare D1 & Workers, 3D (Three.js & react-native-filament), paiements Stripe, Firebase tracking.\n` +
-        `   - **Déploiement** : Publication sur **App Store** et **Google Play** et gestion des mises à jour temps réel.\n\n` +
-        `2. **Bloom (Application Mobile & Dashboard Administrateur)** :\n` +
+        `   - **Technologies** : React Native, Redux, Hono.js, Cloudflare D1 & Workers, 3D (Three.js & react-native-filament), Stripe, Firebase.\n\n` +
+        `2. **Bloom / Chillhood (Application Mobile & Dashboard Administrateur)** :\n` +
+        `   - **Démonstration Vidéo** : [Reel public Instagram](https://www.instagram.com/reels/DEAd26fitCM/) présentant l'application en conditions réelles.\n` +
+        `   - **Disponibilité** : Déployée pour le marché français (non disponible sur les stores en Tunisie, d'où la démo vidéo Instagram partagée).\n` +
         `   - **Rôle** : Team Leader.\n` +
-        `   - **Technologies** : React Native (Mobile), Vue.js (Dashboard Admin), NestJS, traitement d'images en Python, notifications Expo, Stripe & Chronopost.\n` +
-        `   - **Déploiement** : Publication sur les stores et pipelines GitLab CI/CD.`,
+        `   - **Technologies** : React Native, Vue.js, NestJS, traitement d'images Python, Stripe & Chronopost.`,
       suggestions: [
         "Quelles sont ses compétences Cloudflare et Hono.js ?",
-        "Quels frameworks frontend maîtrise-t-il ?",
-        "Quelle est sa formation scolaire ?",
+        "Parle-moi de la plateforme de recrutement URJOB",
+        "Comment contacter Wassim ?",
       ],
     };
   }
@@ -385,8 +397,8 @@ export function generateLocalChatResponse(
       return {
         response:
           `Additional featured web projects delivered by Wassim:\n\n` +
-          `- **Obydo (Web App for Unsold Inventory Management)**: Built with Vue.js, Vuex, Vuetify, Pusher (real-time auctions), and Mongopay payments integration.\n` +
-          `- **Webinarplease at Sastec (Video Conferencing Platform)**: Developed interactive UI with React & Redux, real-time interactive polls/chat with Firebase, and WebRTC integration for screen-sharing and audio/video streaming.`,
+          `- **Obydo (Web App for Unsold Inventory Management)**: Built with Vue.js, Vuex, Vuetify, Pusher (real-time auctions), and Mangopay payments. Official showcase: [https://www.obydo.fr/](https://www.obydo.fr/) (production app under NDA).\n` +
+          `- **Webinarplease at Sastec (Video Conferencing Platform)**: Developed interactive UI with React & Redux, real-time polls/chat with Firebase, and WebRTC integration. Studio: [https://devfactory.studio/](https://devfactory.studio/).`,
         suggestions: [
           "What was his instructor experience at GoMyCode?",
           "What are his core technical skills?",
@@ -398,8 +410,8 @@ export function generateLocalChatResponse(
     return {
       response:
         `Autres projets web notables développés par Wassim :\n\n` +
-        `- **Obydo (Application Web de Gestion des Invendus)** : Développé en Vue.js, Vuex, Vuetify, Pusher (enchères en temps réel) et passerelle de paiement Mongopay.\n` +
-        `- **Webinarplease chez Sastec (Application de Visioconférence)** : Interface interactive en React & Redux, chat et sondages temps réel avec Firebase, et intégration WebRTC pour le flux audio/vidéo et le partage d'écran.`,
+        `- **Obydo (Application Web de Gestion des Invendus)** : Développé en Vue.js, Vuex, Vuetify, Pusher (enchères en temps réel) et paiement Mangopay. Site vitrine officiel : [https://www.obydo.fr/](https://www.obydo.fr/) (plateforme métier privée sous NDA).\n` +
+        `- **Webinarplease chez Sastec (Application de Visioconférence)** : Interface interactive en React & Redux, chat et sondages temps réel avec Firebase, et WebRTC pour le flux vidéo et partage d'écran. Studio : [https://devfactory.studio/](https://devfactory.studio/).`,
       suggestions: [
         "Quelle a été son expérience d'instructeur chez GoMyCode ?",
         "Quelles sont ses compétences techniques globales ?",
@@ -563,7 +575,62 @@ export function generateLocalChatResponse(
     };
   }
 
-  // 12. Default / General Overview
+  // 12. NDA / Confidentiality / Client Links
+  if (
+    hasWord(query, [
+      "nda",
+      "confidentiel",
+      "confidentialite",
+      "confidentiality",
+      "prive",
+      "private",
+      "depot",
+      "depots",
+      "repo",
+      "repos",
+      "preuves",
+      "liens publics",
+      "public links",
+    ])
+  ) {
+    if (isEn) {
+      return {
+        response:
+          `**Project Confidentiality & Verified Public Links**:\n\n` +
+          `Due to strict client Non-Disclosure Agreements (NDA), all source code repositories are private. Direct production application access cannot always be shared due to private corporate environments. Here are the public links and demonstrations available:\n\n` +
+          `- **URJOB**: Official showcase website [https://urjob.ai/index.html?lang=fr](https://urjob.ai/index.html?lang=fr) and production app [https://app.urjob.ai/](https://app.urjob.ai/)\n` +
+          `- **ZorLife**: Client recommendation by founder Mariama Adjogbenou on [LinkedIn](https://www.linkedin.com/posts/mariamadjogbenou_zorlife-activity-7313940077758279680-n9l6?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7YqQkB-jgHi_FrRStxuXs3TibUxplAg2w) and app stores [https://bit.ly/ZorLife-app](https://bit.ly/ZorLife-app) (available on stores in France & Switzerland, not available in Tunisia)\n` +
+          `- **Bloom / Chillhood**: Video demonstration reel on [Instagram](https://www.instagram.com/reels/DEAd26fitCM/) (mobile app deployed in France, not available in Tunisia)\n` +
+          `- **Obydo**: Official showcase website [https://www.obydo.fr/](https://www.obydo.fr/) (internal auction platform restricted under NDA)\n` +
+          `- **DevFactory Studio & Webinarplease**: Official studio website [https://devfactory.studio/](https://devfactory.studio/) (internal platforms restricted under NDA)\n` +
+          `- **Personal GitHub**: [github.com/wassimTech](${personalInfo.github})`,
+        suggestions: [
+          "Tell me about the URJOB AI platform",
+          "What was his role on ZorLife?",
+          "What is his core tech stack?",
+        ],
+      };
+    }
+
+    return {
+      response:
+        `**Confidentialité des Projets (NDA) & Liens Publics Vérifiés** :\n\n` +
+        `En raison d'accords de confidentialité stricts (NDA), l'ensemble des dépôts de code professionnels sont privés. De même, l'accès direct aux applications en production n'est pas toujours communicable pour des raisons d'accès internes réservés aux entreprises. Voici les accès et démonstrations publics disponibles :\n\n` +
+        `- **URJOB** : Site vitrine officiel [https://urjob.ai/index.html?lang=fr](https://urjob.ai/index.html?lang=fr) et application en production [https://app.urjob.ai/](https://app.urjob.ai/)\n` +
+        `- **ZorLife** : Recommandation client sur [LinkedIn](https://www.linkedin.com/posts/mariamadjogbenou_zorlife-activity-7313940077758279680-n9l6?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7YqQkB-jgHi_FrRStxuXs3TibUxplAg2w) par Mariama Adjogbenou et page des stores [https://bit.ly/ZorLife-app](https://bit.ly/ZorLife-app) (disponible sur les stores en France et en Suisse, non disponible en Tunisie)\n` +
+        `- **Bloom / Chillhood** : Démonstration vidéo sur [Instagram](https://www.instagram.com/reels/DEAd26fitCM/) (app déployée en France, non disponible sur les stores en Tunisie)\n` +
+        `- **Obydo** : Site vitrine officiel [https://www.obydo.fr/](https://www.obydo.fr/) (plateforme métier d'enchères privée sous NDA)\n` +
+        `- **DevFactory Studio & Webinarplease** : Site studio officiel [https://devfactory.studio/](https://devfactory.studio/) (plateformes et code confidentiels)\n` +
+        `- **GitHub personnel** : [github.com/wassimTech](${personalInfo.github})`,
+      suggestions: [
+        "Parle-moi de la plateforme URJOB",
+        "Quel était son rôle sur ZorLife ?",
+        "Quelles sont ses compétences techniques ?",
+      ],
+    };
+  }
+
+  // 13. Default / General Overview
   if (isEn) {
     return {
       response:

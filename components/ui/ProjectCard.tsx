@@ -3,8 +3,16 @@
 import React from "react";
 import { Project } from "@/types/cv";
 import { useI18n } from "@/context/I18nContext";
-import { ExternalLink, Users, Calendar, ArrowRight } from "lucide-react";
-import { GithubIcon } from "@/components/ui/icons";
+import {
+  ExternalLink,
+  Users,
+  Calendar,
+  ArrowRight,
+  Globe,
+  Play,
+  Award,
+} from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { ProjectBanner } from "@/components/ui/ProjectBanner";
 import { Badge } from "@/components/ui/Badge";
 
@@ -48,13 +56,28 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
 
         {/* Category & Period */}
         <div className="flex items-center justify-between gap-2 pt-0.5">
-          <Badge
-            variant="accent"
-            size="md"
-            className="uppercase tracking-wider font-bold"
-          >
-            {categoryLabel}
-          </Badge>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <Badge
+              variant="accent"
+              size="md"
+              className="uppercase tracking-wider font-bold"
+            >
+              {categoryLabel}
+            </Badge>
+            {project.testimonial && (
+              <Badge
+                variant="accent"
+                size="sm"
+                className="font-bold shrink-0 shadow-2xs text-xs"
+              >
+                <Award
+                  className="w-3.5 h-3.5 text-accent-foreground shrink-0"
+                  aria-hidden="true"
+                />
+                <span>{t("sections.clientReview")}</span>
+              </Badge>
+            )}
+          </div>
           <Badge variant="secondary" size="md" className="shrink-0">
             <Calendar
               className="w-3.5 h-3.5 text-primary dark:text-accent-foreground shrink-0"
@@ -121,12 +144,13 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
             <span className="truncate text-start">{project.team}</span>
           </div>
 
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
             {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                title={t("sections.viewOnGithub")}
                 aria-label={`${t("sections.viewOnGithub")} : ${project.title} (${newTabNotice})`}
                 className="p-2 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-lg bg-muted text-foreground hover:bg-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
@@ -138,10 +162,50 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                title={t("sections.liveDemo")}
                 aria-label={`${t("sections.liveDemo")} : ${project.title} (${newTabNotice})`}
                 className="p-2 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              </a>
+            )}
+            {project.websiteUrl && (
+              <a
+                href={project.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={t("sections.viewWebsite")}
+                aria-label={`${t("sections.viewWebsite")} : ${project.title} (${newTabNotice})`}
+                className="p-2 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-lg bg-muted text-foreground hover:bg-border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Globe className="w-4 h-4 text-primary" aria-hidden="true" />
+              </a>
+            )}
+            {project.videoUrl && (
+              <a
+                href={project.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={t("sections.viewVideoDemo")}
+                aria-label={`${t("sections.viewVideoDemo")} : ${project.title} (${newTabNotice})`}
+                className="p-2 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-lg bg-gradient-to-tr from-pink-500/10 to-purple-500/10 text-pink-500 hover:from-pink-500/20 hover:to-purple-500/20 transition-all border border-pink-500/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Play
+                  className="w-4 h-4 fill-pink-500 text-pink-500"
+                  aria-hidden="true"
+                />
+              </a>
+            )}
+            {project.testimonial && (
+              <a
+                href={project.testimonial.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={t("sections.viewClientReview")}
+                aria-label={`${t("sections.viewClientReview")} : ${project.title} (${newTabNotice})`}
+                className="p-2 min-w-[34px] min-h-[34px] flex items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors border border-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <LinkedinIcon className="w-4 h-4" aria-hidden="true" />
               </a>
             )}
           </div>

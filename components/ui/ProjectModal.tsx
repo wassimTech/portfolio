@@ -10,6 +10,7 @@ import {
   ProjectModalOverview,
   ProjectModalAccomplishments,
   ProjectModalSidebar,
+  ProjectModalTestimonial,
 } from "@/components/ui/project-modal";
 
 export interface ProjectModalProps {
@@ -84,6 +85,16 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 overviewLabel={t("sections.projectOverview")}
               />
 
+              {project.testimonial && (
+                <ProjectModalTestimonial
+                  testimonial={project.testimonial}
+                  locale={locale}
+                  testimonialLabel={t("sections.clientReviewTitle")}
+                  viewOnLinkedInLabel={t("sections.viewOnLinkedIn")}
+                  newTabNotice={newTabNotice}
+                />
+              )}
+
               <ProjectModalAccomplishments
                 projectId={project.id}
                 tasks={tasks}
@@ -100,9 +111,24 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 teamLabel={t("sections.teamLabel")}
                 techStackLabel={t("sections.techStack")}
                 demoUrl={project.demoUrl}
+                websiteUrl={project.websiteUrl}
+                videoUrl={project.videoUrl}
                 githubUrl={project.githubUrl}
+                testimonialUrl={project.testimonial?.url}
+                testimonialLabel={t("sections.viewClientReview")}
+                isConfidential={project.isConfidential}
+                confidentialityNotice={project.confidentialityNotice?.[locale]}
+                availabilityNotice={project.availabilityNotice?.[locale]}
+                availabilityLabel={t("sections.availabilityLabel")}
                 liveDemoLabel={t("sections.liveDemo")}
+                websiteLabel={t("sections.viewWebsite")}
+                videoDemoLabel={t("sections.viewVideoDemo")}
                 viewOnGithubLabel={t("sections.viewOnGithub")}
+                confidentialBadgeLabel={t("sections.confidentialBadge")}
+                confidentialNoticeLabel={t("sections.confidentialNotice")}
+                confidentialNoticeShowcaseOnlyLabel={t(
+                  "sections.confidentialNoticeShowcaseOnly"
+                )}
                 newTabNotice={newTabNotice}
               />
             </div>

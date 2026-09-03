@@ -12,6 +12,14 @@ export interface LocalizedArray {
   ar?: string[];
 }
 
+export interface ProjectTestimonial {
+  author: string;
+  role: LocalizedString;
+  quote: LocalizedString;
+  url: string;
+  platform?: "linkedin" | "twitter" | "web";
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -25,6 +33,12 @@ export interface Project {
   featured?: boolean;
   githubUrl?: string;
   demoUrl?: string;
+  websiteUrl?: string;
+  videoUrl?: string;
+  isConfidential?: boolean;
+  confidentialityNotice?: LocalizedString;
+  availabilityNotice?: LocalizedString;
+  testimonial?: ProjectTestimonial;
 }
 
 export interface Experience {

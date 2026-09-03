@@ -56,4 +56,81 @@ describe("ProjectCard Accessibility & Rendering", () => {
 
     expect(onSelect).toHaveBeenCalledWith(sampleProject);
   });
+
+  it("renders verified client review badge and action buttons when available", () => {
+    // Find ZorLife project which has demoUrl and testimonial
+    const zorlifeProject = projects.find((p) => p.id === "zorlife-mobile-app");
+    expect(zorlifeProject).toBeDefined();
+
+    if (zorlifeProject) {
+      render(
+        <ProjectCard project={zorlifeProject} onSelectProject={vi.fn()} />
+      );
+
+      // Client review badge is displayed
+      expect(screen.getByText(/Avis Client/i)).toBeInTheDocument();
+
+      // Demo link and LinkedIn review link are rendered
+      const links = screen.getAllByRole("link");
+      const linkedInLink = links.find((l) =>
+        l.getAttribute("href")?.includes("linkedin.com")
+      );
+      expect(linkedInLink).toBeDefined();
+      expect(linkedInLink).toHaveAttribute("target", "_blank");
+    }
+  });
+
+  it("renders video demo action button for projects with videoUrl", () => {
+    const bloomProject = projects.find((p) => p.id === "bloom-photo-memories");
+    expect(bloomProject).toBeDefined();
+
+    if (bloomProject) {
+      render(<ProjectCard project={bloomProject} onSelectProject={vi.fn()} />);
+
+      const links = screen.getAllByRole("link");
+      const videoLink = links.find((l) =>
+        l.getAttribute("href")?.includes("instagram.com")
+      );
+      expect(videoLink).toBeDefined();
+      expect(videoLink).toHaveAttribute("target", "_blank");
+    }
+  });
+
+  it("renders website link for projects with websiteUrl", () => {
+    const obydoProject = projects.find(
+      (p) => p.id === "obydo-unfold-management"
+    );
+    expect(obydoProject).toBeDefined();
+
+    if (obydoProject) {
+      render(<ProjectCard project={obydoProject} onSelectProject={vi.fn()} />);
+
+      const links = screen.getAllByRole("link");
+      const websiteLink = links.find((l) =>
+        l.getAttribute("href")?.includes("obydo.fr")
+      );
+      expect(websiteLink).toBeDefined();
+      expect(websiteLink).toHaveAttribute("target", "_blank");
+    }
+  });
+
+  it("renders both live app and showcase website links for URJOB on card", () => {
+    const urjobProject = projects.find((p) => p.id === "urjob-ai-recruitment");
+    expect(urjobProject).toBeDefined();
+
+    if (urjobProject) {
+      render(<ProjectCard project={urjobProject} onSelectProject={vi.fn()} />);
+
+      const links = screen.getAllByRole("link");
+      const appLink = links.find(
+        (l) => l.getAttribute("href") === "https://app.urjob.ai/"
+      );
+      expect(appLink).toBeDefined();
+
+      const websiteLink = links.find((l) =>
+        l.getAttribute("href")?.includes("urjob.ai/index.html")
+      );
+      expect(websiteLink).toBeDefined();
+    }
+  });
 });

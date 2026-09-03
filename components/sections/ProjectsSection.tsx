@@ -7,7 +7,7 @@ import { Project } from "@/types/cv";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectModal } from "@/components/ui/ProjectModal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Code, Layers, Smartphone, Layout } from "lucide-react";
+import { Code, Layers, Smartphone, Layout, ShieldCheck } from "lucide-react";
 
 type CategoryFilter = "all" | "fullstack" | "mobile" | "frontend";
 
@@ -43,7 +43,7 @@ export function ProjectsSection() {
       className="py-20 relative bg-background/50 border-t border-border"
       aria-label={t("sections.projectsTitle")}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* Section Header with Code Bracket Style */}
         <SectionHeading
           title={t("sections.projectsTitle")}
@@ -76,6 +76,21 @@ export function ProjectsSection() {
               </button>
             );
           })}
+        </div>
+
+        {/* Professional Transparency & NDA Notice */}
+        <div className="max-w-3xl mx-auto p-4 sm:p-5 rounded-2xl bg-card/60 backdrop-blur-md border border-border flex items-start gap-3.5 text-start shadow-sm">
+          <div className="p-2 rounded-xl bg-primary/10 text-primary shrink-0 mt-0.5">
+            <ShieldCheck className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <div className="space-y-1">
+            <h4 className="text-xs sm:text-sm font-bold text-foreground flex items-center gap-2">
+              <span>{t("sections.confidentialityBannerTitle")}</span>
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              {t("sections.confidentialityBannerText")}
+            </p>
+          </div>
         </div>
 
         {/* Projects Grid */}

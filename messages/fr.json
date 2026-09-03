@@ -64,7 +64,20 @@
     "roleLabel": "Rôle & Responsabilité :",
     "periodLabel": "Période :",
     "teamLabel": "Équipe :",
-    "techStack": "Technologies utilisées :"
+    "techStack": "Technologies utilisées :",
+    "viewWebsite": "Site Vitrine",
+    "viewCompanySite": "Site Studio",
+    "viewVideoDemo": "Démo Vidéo (Instagram)",
+    "viewClientReview": "Avis Client (LinkedIn)",
+    "clientReview": "Avis Client Vérifié",
+    "clientReviewTitle": "Recommandation & Témoignage Client :",
+    "viewOnLinkedIn": "Consulter sur LinkedIn",
+    "confidentialNotice": "Projet sous clause de confidentialité (NDA) : le lien direct de l'application ne peut pas toujours être partagé, seul le site vitrine officiel ou la démonstration publique est accessible.",
+    "confidentialNoticeShowcaseOnly": "Application privée sous clause de confidentialité (NDA) : le lien direct de production ne peut pas être partagé, seul le site vitrine officiel est accessible.",
+    "confidentialBadge": "Dépôt privé (NDA)",
+    "confidentialityBannerTitle": "Réalisations Clients & Confidentialité (NDA)",
+    "confidentialityBannerText": "L'ensemble des dépôts professionnels a été développé pour des clients sous clause de confidentialité (NDA). Selon les projets, découvrez les accès publics vérifiés : l'application en production (ex : URJOB), les sites vitrines officiels et stores (ex : ZorLife, Obydo, DevFactory), ou la démonstration vidéo (ex : Bloom).",
+    "availabilityLabel": "Disponibilité des stores :"
   },
   "skills": {
     "searchPlaceholder": "Filtrer une compétence (ex: Next.js, Cloudflare, NestJS)...",

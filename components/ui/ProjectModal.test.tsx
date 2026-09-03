@@ -185,4 +185,121 @@ describe("ProjectModal accessibility and interaction", () => {
     expect(demoLink).toBeInTheDocument();
     expect(demoLink.getAttribute("aria-label")).toContain("opens in new tab");
   });
+
+  it("renders client testimonial, author, and LinkedIn link when project has testimonial", () => {
+    const zorlife = projects.find((p) => p.id === "zorlife-mobile-app");
+    expect(zorlife).toBeDefined();
+    expect(zorlife?.testimonial).toBeDefined();
+
+    if (zorlife) {
+      render(
+        <ProjectModal project={zorlife} isOpen={true} onClose={vi.fn()} />
+      );
+
+      expect(screen.getByText("Mariama Adjogbenou")).toBeInTheDocument();
+      expect(
+        screen.getByText(/Un immense merci à la team DevFactory Studio/i)
+      ).toBeInTheDocument();
+
+      const linkedInButtons = screen
+        .getAllByRole("link")
+        .filter((l) => l.getAttribute("href")?.includes("linkedin.com"));
+      expect(linkedInButtons.length).toBeGreaterThan(0);
+
+      // Verify store availability notice for ZorLife
+      expect(
+        screen.getByText(/non disponible sur les stores en Tunisie/i)
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("renders both live app and showcase website buttons for URJOB", () => {
+    const urjob = projects.find((p) => p.id === "urjob-ai-recruitment");
+    expect(urjob).toBeDefined();
+
+    if (urjob) {
+      render(<ProjectModal project={urjob} isOpen={true} onClose={vi.fn()} />);
+
+      const links = screen.getAllByRole("link");
+      const appLink = links.find(
+        (l) => l.getAttribute("href") === "https://app.urjob.ai/"
+      );
+      expect(appLink).toBeDefined();
+
+      const showcaseLink = links.find((l) =>
+        l.getAttribute("href")?.includes("urjob.ai/index.html")
+      );
+      expect(showcaseLink).toBeDefined();
+
+      // URJOB specific confidentiality notice mentions both app and showcase site
+      expect(
+        screen.getByText(
+          /L'application en production \(app\.urjob\.ai\) et le site vitrine officiel/i
+        )
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("renders custom confidentiality notice when provided", () => {
+    const customConfidentialProject: Project = {
+      ...sampleProject,
+      isConfidential: true,
+      confidentialityNotice: {
+        fr: "Notice personnalisée de confidentialité pour ce projet.",
+        en: "Custom confidentiality notice for this project.",
+        ar: "إشعار خصوصية مخصص لهذا المشروع.",
+      },
+      websiteUrl: "https://example.com/showcase",
+      videoUrl: "https://instagram.com/reel/123",
+    };
+
+    render(
+      <ProjectModal
+        project={customConfidentialProject}
+        isOpen={true}
+        onClose={vi.fn()}
+      />
+    );
+
+    expect(screen.getByText(/Dépôt privé \(NDA\)/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /Notice personnalisée de confidentialité pour ce projet\./i
+      )
+    ).toBeInTheDocument();
+
+    const links = screen.getAllByRole("link");
+    const showcaseLink = links.find(
+      (l) => l.getAttribute("href") === "https://example.com/showcase"
+    );
+    expect(showcaseLink).toBeDefined();
+
+    const videoLink = links.find(
+      (l) => l.getAttribute("href") === "https://instagram.com/reel/123"
+    );
+    expect(videoLink).toBeDefined();
+  });
+
+  it("renders fallback confidentiality notice when confidentialityNotice is not provided", () => {
+    const fallbackConfidentialProject: Project = {
+      ...sampleProject,
+      isConfidential: true,
+      confidentialityNotice: undefined,
+      demoUrl: undefined,
+      websiteUrl: "https://example.com/showcase",
+    };
+
+    render(
+      <ProjectModal
+        project={fallbackConfidentialProject}
+        isOpen={true}
+        onClose={vi.fn()}
+      />
+    );
+
+    expect(screen.getByText(/Dépôt privé \(NDA\)/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/seul le site vitrine officiel est accessible/i)
+    ).toBeInTheDocument();
+  });
 });

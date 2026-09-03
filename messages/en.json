@@ -64,7 +64,20 @@
     "roleLabel": "Role & Responsibility:",
     "periodLabel": "Period:",
     "teamLabel": "Team:",
-    "techStack": "Technologies Used:"
+    "techStack": "Technologies Used:",
+    "viewWebsite": "Showcase Website",
+    "viewCompanySite": "Studio Website",
+    "viewVideoDemo": "Video Demo (Instagram)",
+    "viewClientReview": "Client Review (LinkedIn)",
+    "clientReview": "Verified Client Review",
+    "clientReviewTitle": "Client Recommendation & Feedback:",
+    "viewOnLinkedIn": "View on LinkedIn",
+    "confidentialNotice": "Project under NDA: direct application access cannot always be shared, only the official showcase website or public demo is accessible.",
+    "confidentialNoticeShowcaseOnly": "Private app under NDA: direct production access cannot be shared, only the official showcase website is accessible.",
+    "confidentialBadge": "Private Repo (NDA)",
+    "confidentialityBannerTitle": "Client Projects & NDA Confidentiality",
+    "confidentialityBannerText": "All professional codebases were engineered for clients under Non-Disclosure Agreements (NDA). Depending on the project, explore verified public access points: live production applications (e.g., URJOB), official showcase websites & app stores (e.g., ZorLife, Obydo, DevFactory), or video demonstrations (e.g., Bloom).",
+    "availabilityLabel": "Store availability:"
   },
   "skills": {
     "searchPlaceholder": "Filter skill (e.g. Next.js, Cloudflare, NestJS)...",

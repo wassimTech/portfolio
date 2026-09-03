@@ -105,6 +105,13 @@ export const projects: Project[] = [
       "Shadcn UI",
     ],
     team: "PO, Scrum Master, Designer, Tech Lead, 3 développeurs full stack",
+    websiteUrl: "https://devfactory.studio/",
+    isConfidential: true,
+    confidentialityNotice: {
+      fr: "Code source et plateforme sous clause de confidentialité (dépôt privé). L'accès à la plateforme interne étant restreint, seul le site officiel de DevFactory Studio est communicable.",
+      ar: "الكود المصدري والمنصة محميان باتفاقية سرية (مستودع خاص). نظرًا لخصوصية المنصة الداخلية، يتم مشاركة موقع DevFactory Studio الرسمي فقط.",
+      en: "Source code and platform under Non-Disclosure Agreement (private repository). Internal platform access is private, only the official DevFactory Studio website is shared.",
+    },
   },
   {
     id: "urjob-ai-recruitment",
@@ -117,6 +124,14 @@ export const projects: Project[] = [
     period: "2022 - 2025",
     category: "fullstack",
     featured: true,
+    demoUrl: "https://app.urjob.ai/",
+    websiteUrl: "https://urjob.ai/index.html?lang=fr",
+    isConfidential: true,
+    confidentialityNotice: {
+      fr: "Code source sous clause de confidentialité (dépôt privé). L'application en production (app.urjob.ai) et le site vitrine officiel (urjob.ai) sont tous deux librement accessibles ci-dessous.",
+      ar: "الكود المصدري محمي باتفاقية سرية (مستودع خاص). كل من تطبيق الإنتاج (app.urjob.ai) والموقع التعريفي الرسمي (urjob.ai) متاحان للاطلاع أدناه.",
+      en: "Source code under Non-Disclosure Agreement (private repository). Both the live production application (app.urjob.ai) and official showcase website (urjob.ai) are freely accessible below.",
+    },
     description: {
       fr: "Plateforme de recrutement assistée par intelligence artificielle, destinée aux consultants et aux recruteurs. Elle automatise l’ensemble du processus de recrutement, de l’analyse des CV et des offres jusqu’au matching et à la sélection des profils avec tests techniques et pipeline Kanban.",
       ar: "منصة توظيف ذكية مدعومة بالذكاء الاصطناعي للمطابقة التلقائية بين السير الذاتية وعروض العمل، واختبارات فنية ومسار كانبان في الوقت الفعلي.",
@@ -223,6 +238,33 @@ export const projects: Project[] = [
       "Firebase",
     ],
     team: "PO, Scrum Master, Designer, Tech Lead, 3 développeurs full stack",
+    websiteUrl: "https://bit.ly/ZorLife-app",
+    isConfidential: true,
+    confidentialityNotice: {
+      fr: "Code source sous clause de confidentialité (dépôt privé). Retrouvez le lien vers le site vitrine et les stores (disponible en France et Suisse, non disponible en Tunisie), ainsi que la recommandation officielle de la cliente.",
+      ar: "الكود المصدري محمي باتفاقية سرية (مستودع خاص). يتوفر رابط الموقع التعريفي والمتاجر (في فرنسا وسويسرا، وغير متاح في تونس)، إلى جانب التوصية الرسمية لمؤسسة المشروع.",
+      en: "Source code under Non-Disclosure Agreement (private repository). Access the showcase site and app stores link (available in France & Switzerland, not in Tunisia), along with the founder's official endorsement.",
+    },
+    availabilityNotice: {
+      fr: "Application mobile disponible sur l'App Store et Google Play en France et en Suisse (non disponible sur les stores en Tunisie).",
+      ar: "تطبيق جوال متاح على آب ستور وجوجل بلاي في فرنسا وسويسرا (غير متوفر على المتاجر في تونس).",
+      en: "Mobile app available on App Store and Google Play in France and Switzerland (not available on Tunisian stores).",
+    },
+    testimonial: {
+      author: "Mariama Adjogbenou",
+      role: {
+        fr: "Fondatrice LudiKare & ZorLife",
+        ar: "مؤسسة LudiKare & ZorLife",
+        en: "Founder of LudiKare & ZorLife",
+      },
+      quote: {
+        fr: "Un immense merci à la team DevFactory Studio qui m’a accompagnée sur le développement technique de l’application, notamment Olivier Zuratas et Wassim AHMED. Vos précieux retours nous ont permis de perfectionner cette première version.",
+        ar: "شكر جزيل لفريق DevFactory Studio الذي رافقني في التطوير التقني للتطبيق، وخاصة أوليفييه زوراتاس ووسيم أحمد. لقد مكنتنا ملاحظاتكم القيمة من إتقان هذا الإصدار الأول.",
+        en: "A huge thank you to the DevFactory Studio team who supported me on the technical development of the application, notably Olivier Zuratas and Wassim AHMED. Your valuable feedback allowed us to perfect this first version.",
+      },
+      url: "https://www.linkedin.com/posts/mariamadjogbenou_zorlife-activity-7313940077758279680-n9l6?utm_source=share&utm_medium=member_desktop&rcm=ACoAAB7YqQkB-jgHi_FrRStxuXs3TibUxplAg2w",
+      platform: "linkedin",
+    },
   },
   {
     id: "bloom-photo-memories",
@@ -235,6 +277,18 @@ export const projects: Project[] = [
     period: "2022 - 2024",
     category: "mobile",
     featured: false,
+    videoUrl: "https://www.instagram.com/reels/DEAd26fitCM/",
+    isConfidential: true,
+    confidentialityNotice: {
+      fr: "Code source sous clause de confidentialité (dépôt privé). L'application n'étant pas disponible sur les stores en Tunisie, seule la démonstration vidéo complète sur Instagram est partagée.",
+      ar: "الكود المصدري محمي باتفاقية سرية (مستودع خاص). نظرًا لعدم توفر التطبيق على المتاجر في تونس، يتم مشاركة فيديو العرض التوضيحي الكامل على إنستغرام.",
+      en: "Source code under Non-Disclosure Agreement (private repository). Since the app is not available on Tunisian stores, only the complete Instagram video demonstration is shared.",
+    },
+    availabilityNotice: {
+      fr: "Application mobile déployée pour le marché français (non disponible sur les stores en Tunisie). Démonstration vidéo complète partagée sur Instagram.",
+      ar: "تطبيق جوال منشور للسوق الفرنسي (غير متوفر في تونس). تم توفير عرض توضيحي كامل عبر فيديو إنستغرام.",
+      en: "Mobile app deployed for the French market (not available on Tunisian stores). Full video demonstration shared on Instagram.",
+    },
     description: {
       fr: "Solution complète de création de souvenirs personnalisés (livres et boîtes) avec éditeur d’images glisser-déposer en React Native, commande Stripe / Chronopost et tableau de bord administrateur en Vue.js.",
       ar: "حل متكامل لإنشاء كتب وصناديق الصور التذكارية مع محرر صور بالسحب والإفلات، ودفع Stripe، وشحن Chronopost، ولوحة تحكم للمشرفين.",
@@ -300,6 +354,13 @@ export const projects: Project[] = [
     period: "2021 - 2022",
     category: "frontend",
     featured: false,
+    websiteUrl: "https://www.obydo.fr/",
+    isConfidential: true,
+    confidentialityNotice: {
+      fr: "Code source et application métier sous clause de confidentialité (NDA). L'accès direct à l'application de production étant réservé aux entreprises clientes, seul le site vitrine officiel est partagé.",
+      ar: "الكود المصدري ومنظومة الأعمال محميان باتفاقية سرية (NDA). نظرًا لأن استخدام التطبيق محصور بالشركات، يتم مشاركة الموقع التعريفي الرسمي فقط.",
+      en: "Source code and business application under Non-Disclosure Agreement (NDA). Direct production access is reserved for client companies, only the official showcase website is shared.",
+    },
     description: {
       fr: "Application web conçue pour aider les entreprises à gérer leurs invendus (vendre aux enchères, donner ou recycler) dans le respect des lois françaises avec paiement sécurisé Mangopay.",
       ar: "تطبيق ويب لمساعدة الشركات على إدارة المنتجات غير المباعة (مزادات، تبرع، أو تدوير) وفق القوانين الفرنسية مع دفع Mangopay.",
@@ -348,6 +409,13 @@ export const projects: Project[] = [
     period: "Juin 2021 - Août 2021",
     category: "frontend",
     featured: false,
+    websiteUrl: "https://devfactory.studio/",
+    isConfidential: true,
+    confidentialityNotice: {
+      fr: "Code source et infrastructure WebRTC sous clause de confidentialité (NDA). Seul le site officiel de DevFactory Studio est partagé.",
+      ar: "الكود المصدري وبنية WebRTC محميان باتفاقية سرية (NDA). يتم فقط مشاركة موقع DevFactory Studio الرسمي.",
+      en: "Source code and WebRTC infrastructure under Non-Disclosure Agreement (NDA). Only the official DevFactory Studio website is shared.",
+    },
     description: {
       fr: "Application de visioconférence intégrant le partage d’écran, les commentaires et le chat en direct, les sondages interactifs, et la personnalisation des arrière-plans vidéo via WebRTC.",
       ar: "تطبيق اجتماعات فيديو يتيح مشاركة الشاشة والدردشة المباشرة والتصويت وتخصيص خلفيات الفيديو عبر WebRTC.",
