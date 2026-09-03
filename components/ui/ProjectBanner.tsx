@@ -85,7 +85,7 @@ export function ProjectBanner({ projectId }: ProjectBannerProps) {
       <Badge
         variant="outline"
         size="sm"
-        className="absolute bottom-3 start-3 bg-background/85 backdrop-blur-sm font-mono shadow-xs"
+        className="absolute bottom-3 start-3 bg-background border-border font-mono shadow-xs"
       >
         <span className="h-1.5 w-1.5 rounded-full bg-primary dark:bg-accent-foreground animate-pulse" />
         <span>{config.tag}</span>

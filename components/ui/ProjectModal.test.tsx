@@ -53,5 +53,52 @@ describe("ProjectModal accessibility and interaction", () => {
     const scrollableDiv = container.querySelector(".overflow-y-auto");
     expect(scrollableDiv).toBeInTheDocument();
     expect(scrollableDiv).toHaveAttribute("tabindex", "0");
+    expect(scrollableDiv).toHaveClass("flex-1");
+    expect(scrollableDiv).toHaveClass("min-h-0");
+  });
+
+  it("handles keyboard navigation and scrolls with behavior auto", async () => {
+    const { container, user } = render(
+      <ProjectModal project={sampleProject} isOpen={true} onClose={vi.fn()} />
+    );
+
+    const scrollableDiv = container.querySelector(
+      ".overflow-y-auto"
+    ) as HTMLDivElement;
+    const scrollByMock = vi.fn();
+    scrollableDiv.scrollBy = scrollByMock;
+
+    await user.keyboard("{ArrowDown}");
+    expect(scrollByMock).toHaveBeenCalledWith({ top: 60, behavior: "auto" });
+
+    await user.keyboard("{ArrowUp}");
+    expect(scrollByMock).toHaveBeenCalledWith({ top: -60, behavior: "auto" });
+
+    await user.keyboard("{PageDown}");
+    expect(scrollByMock).toHaveBeenCalledWith({
+      top: scrollableDiv.clientHeight * 0.8,
+      behavior: "auto",
+    });
+  });
+
+  it("forwards wheel events on header/backdrop to the scroll container", () => {
+    const { container } = render(
+      <ProjectModal project={sampleProject} isOpen={true} onClose={vi.fn()} />
+    );
+
+    const dialog = screen.getByRole("dialog");
+    const scrollableDiv = container.querySelector(
+      ".overflow-y-auto"
+    ) as HTMLDivElement;
+
+    // Simulate wheel event on dialog backdrop
+    const wheelEvent = new WheelEvent("wheel", {
+      bubbles: true,
+      cancelable: true,
+      deltaY: 100,
+    });
+    dialog.dispatchEvent(wheelEvent);
+
+    expect(scrollableDiv.scrollTop).toBe(100);
   });
 });
