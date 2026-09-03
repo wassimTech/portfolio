@@ -57,7 +57,7 @@ describe("ProjectCard Accessibility & Rendering", () => {
     expect(onSelect).toHaveBeenCalledWith(sampleProject);
   });
 
-  it("renders verified client review badge and action buttons when available", () => {
+  it("renders client review action button when available", () => {
     // Find ZorLife project which has demoUrl and testimonial
     const zorlifeProject = projects.find((p) => p.id === "zorlife-mobile-app");
     expect(zorlifeProject).toBeDefined();
@@ -67,10 +67,7 @@ describe("ProjectCard Accessibility & Rendering", () => {
         <ProjectCard project={zorlifeProject} onSelectProject={vi.fn()} />
       );
 
-      // Client review badge is displayed
-      expect(screen.getByText(/Avis Client/i)).toBeInTheDocument();
-
-      // Demo link and LinkedIn review link are rendered
+      // LinkedIn review link is rendered
       const links = screen.getAllByRole("link");
       const linkedInLink = links.find((l) =>
         l.getAttribute("href")?.includes("linkedin.com")

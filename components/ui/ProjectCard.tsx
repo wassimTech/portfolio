@@ -10,7 +10,6 @@ import {
   ArrowRight,
   Globe,
   Play,
-  Award,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 import { ProjectBanner } from "@/components/ui/ProjectBanner";
@@ -56,28 +55,13 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
 
         {/* Category & Period */}
         <div className="flex items-center justify-between gap-2 pt-0.5">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <Badge
-              variant="accent"
-              size="md"
-              className="uppercase tracking-wider font-bold"
-            >
-              {categoryLabel}
-            </Badge>
-            {project.testimonial && (
-              <Badge
-                variant="accent"
-                size="sm"
-                className="font-bold shrink-0 shadow-2xs text-xs"
-              >
-                <Award
-                  className="w-3.5 h-3.5 text-accent-foreground shrink-0"
-                  aria-hidden="true"
-                />
-                <span>{t("sections.clientReview")}</span>
-              </Badge>
-            )}
-          </div>
+          <Badge
+            variant="accent"
+            size="md"
+            className="uppercase tracking-wider font-bold"
+          >
+            {categoryLabel}
+          </Badge>
           <Badge variant="secondary" size="md" className="shrink-0">
             <Calendar
               className="w-3.5 h-3.5 text-primary dark:text-accent-foreground shrink-0"
