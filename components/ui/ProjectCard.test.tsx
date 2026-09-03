@@ -14,6 +14,10 @@ describe("ProjectCard Accessibility & Rendering", () => {
     expect(
       screen.getByRole("heading", { level: 3, name: sampleProject.title })
     ).toBeInTheDocument();
+
+    const roleElement = screen.getByText(sampleProject.role.fr);
+    expect(roleElement).toBeInTheDocument();
+    expect(roleElement.className).toContain("text-accent-foreground");
   });
 
   it("renders extra tech badge without prohibited aria-label and provides accessible sr-only text", () => {

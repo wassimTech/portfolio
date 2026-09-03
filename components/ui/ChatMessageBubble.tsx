@@ -30,7 +30,7 @@ export function formatChatMessageContent(content: string): React.ReactNode[] {
             return (
               <code
                 key={pIdx}
-                className="px-1.5 py-0.5 rounded-md bg-background/80 text-primary font-mono text-xs"
+                className="px-1.5 py-0.5 rounded-md bg-muted text-accent-foreground font-mono text-xs border border-border"
               >
                 {part.slice(1, -1)}
               </code>

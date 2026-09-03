@@ -69,7 +69,7 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
           <h3 className="text-lg sm:text-xl font-extrabold text-foreground group-hover:text-primary transition-colors">
             {project.title}
           </h3>
-          <p className="text-xs font-bold text-primary">{role}</p>
+          <p className="text-xs font-bold text-accent-foreground">{role}</p>
         </div>
 
         {/* Concise Description */}
@@ -115,7 +115,7 @@ export function ProjectCard({ project, onSelectProject }: ProjectCardProps) {
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <div className="flex items-center gap-1.5 truncate max-w-[180px]">
             <Users
-              className="w-3.5 h-3.5 text-primary shrink-0"
+              className="w-3.5 h-3.5 text-primary dark:text-accent-foreground shrink-0"
               aria-hidden="true"
             />
             <span className="truncate text-start">{project.team}</span>

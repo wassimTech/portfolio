@@ -172,7 +172,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             >
               {project.title}
             </h3>
-            <p className="text-base font-bold text-primary flex items-center gap-2">
+            <p className="text-base font-bold text-accent-foreground flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 shrink-0" aria-hidden="true" />
               <span>{role}</span>
             </p>

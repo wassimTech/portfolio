@@ -48,14 +48,14 @@ export function ExperienceSection() {
             onClick={() => setActiveTab("education")}
             className={`inline-flex items-center gap-2.5 text-lg sm:text-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl px-4 py-2 cursor-pointer ${
               activeTab === "education"
-                ? "text-primary font-semibold"
+                ? "text-accent-foreground font-semibold"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <GraduationCap
               className={`w-6 h-6 transition-transform duration-300 ${
                 activeTab === "education"
-                  ? "text-primary scale-110"
+                  ? "text-accent-foreground scale-110"
                   : "text-muted-foreground"
               }`}
               aria-hidden="true"
@@ -72,14 +72,14 @@ export function ExperienceSection() {
             onClick={() => setActiveTab("work")}
             className={`inline-flex items-center gap-2.5 text-lg sm:text-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl px-4 py-2 cursor-pointer ${
               activeTab === "work"
-                ? "text-primary font-semibold"
+                ? "text-accent-foreground font-semibold"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
             <Briefcase
               className={`w-6 h-6 transition-transform duration-300 ${
                 activeTab === "work"
-                  ? "text-primary scale-110"
+                  ? "text-accent-foreground scale-110"
                   : "text-muted-foreground"
               }`}
               aria-hidden="true"
