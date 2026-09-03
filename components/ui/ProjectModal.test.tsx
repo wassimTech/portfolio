@@ -2,6 +2,7 @@ import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor } from "@/test/test-utils";
 import { ProjectModal } from "./ProjectModal";
+import { ProjectModalTestimonial } from "./project-modal/ProjectModalTestimonial";
 import { projects } from "@/data/cv";
 import { Project } from "@/types/cv";
 
@@ -210,6 +211,49 @@ describe("ProjectModal accessibility and interaction", () => {
       expect(
         screen.getByText(/non disponible sur les stores en Tunisie/i)
       ).toBeInTheDocument();
+    }
+  });
+
+  it("renders testimonial in English when initialLocale is en", () => {
+    const zorlife = projects.find((p) => p.id === "zorlife-mobile-app");
+    expect(zorlife).toBeDefined();
+
+    if (zorlife) {
+      render(
+        <ProjectModal project={zorlife} isOpen={true} onClose={vi.fn()} />,
+        { initialLocale: "en" }
+      );
+
+      expect(screen.getByText("Mariama Adjogbenou")).toBeInTheDocument();
+      expect(
+        screen.getByText(/A huge thank you to the DevFactory Studio team/i)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/Founder of LudiKare & ZorLife/i)
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("renders testimonial in Arabic when locale is passed as ar to ProjectModalTestimonial", () => {
+    const zorlife = projects.find((p) => p.id === "zorlife-mobile-app");
+    expect(zorlife?.testimonial).toBeDefined();
+
+    if (zorlife?.testimonial) {
+      render(
+        <ProjectModalTestimonial
+          testimonial={zorlife.testimonial}
+          locale="ar"
+          testimonialLabel="توصية العميل"
+          viewOnLinkedInLabel="عرض على LinkedIn"
+          newTabNotice="يفتح في علامة تبويب جديدة"
+        />
+      );
+
+      expect(screen.getByText("Mariama Adjogbenou")).toBeInTheDocument();
+      expect(
+        screen.getByText(/شكر جزيل لفريق DevFactory Studio/i)
+      ).toBeInTheDocument();
+      expect(screen.getByText(/مؤسسة LudiKare & ZorLife/i)).toBeInTheDocument();
     }
   });
 

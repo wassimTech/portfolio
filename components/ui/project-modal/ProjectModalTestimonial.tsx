@@ -20,11 +20,19 @@ export function ProjectModalTestimonial({
   newTabNotice,
 }: ProjectModalTestimonialProps) {
   const quote =
-    testimonial.quote[locale as "fr" | "en"] ||
+    (locale === "ar"
+      ? testimonial.quote.ar
+      : locale === "en"
+        ? testimonial.quote.en
+        : testimonial.quote.fr) ||
     testimonial.quote.fr ||
     testimonial.quote.en;
   const role =
-    testimonial.role[locale as "fr" | "en"] ||
+    (locale === "ar"
+      ? testimonial.role.ar
+      : locale === "en"
+        ? testimonial.role.en
+        : testimonial.role.fr) ||
     testimonial.role.fr ||
     testimonial.role.en;
 
