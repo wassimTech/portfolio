@@ -4,7 +4,7 @@ import React from "react";
 import { useI18n } from "@/context/I18nContext";
 import { EmbeddedChatbot } from "@/components/ui/EmbeddedChatbot";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Bot, Zap, ShieldCheck } from "lucide-react";
+import { Zap, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 
 export function AiAssistantSection() {
@@ -22,14 +22,6 @@ export function AiAssistantSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         {/* Section Header with Code Bracket Style */}
         <div className="text-center space-y-3">
-          <Badge variant="accent" shape="pill" size="lg" className="mb-2">
-            <Bot
-              className="w-4 h-4 text-accent-foreground"
-              aria-hidden="true"
-            />
-            <span>Cloudflare Workers AI & RAG</span>
-          </Badge>
-
           <SectionHeading
             title={t("sections.assistantTitle")}
             subtitle={t("sections.assistantSubtitle")}

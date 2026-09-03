@@ -13,9 +13,7 @@ describe("AiAssistantSection", () => {
     expect(
       screen.getByRole("heading", { level: 2, name: /assistant virtuel ia/i })
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/cloudflare workers ai & rag/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/réponses instantanées/i)).toBeInTheDocument();
     expect(
       screen.getByRole("region", { name: /assistant cv ia/i })
     ).toBeInTheDocument();
