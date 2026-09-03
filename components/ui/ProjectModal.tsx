@@ -162,8 +162,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
         <div
           ref={scrollRef}
-          tabIndex={-1}
-          className="overflow-y-auto p-6 sm:p-8 space-y-8 text-start outline-none"
+          role="region"
+          aria-labelledby="project-modal-title"
+          tabIndex={0}
+          className="overflow-y-auto p-6 sm:p-8 space-y-8 text-start outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
         >
           <div className="space-y-1.5">
             <h3

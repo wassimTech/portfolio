@@ -44,4 +44,14 @@ describe("ProjectModal accessibility and interaction", () => {
     await user.keyboard("{Escape}");
     expect(onClose).toHaveBeenCalledTimes(1);
   });
+
+  it("provides keyboard access to the scrollable container (tabindex 0)", () => {
+    const { container } = render(
+      <ProjectModal project={sampleProject} isOpen={true} onClose={vi.fn()} />
+    );
+
+    const scrollableDiv = container.querySelector(".overflow-y-auto");
+    expect(scrollableDiv).toBeInTheDocument();
+    expect(scrollableDiv).toHaveAttribute("tabindex", "0");
+  });
 });
